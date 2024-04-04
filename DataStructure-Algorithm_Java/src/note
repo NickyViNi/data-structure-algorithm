@@ -1,0 +1,22 @@
+1. Array Methods
+(1) binarySearch(int[] a, int key) => Searches the specified array of ints for the specified value using the binary search algorithm.
+    binarySearch(int[] a, int fromIndex, int toIndex, int key)
+(2) compare(int[] a, int[] b) => Compares two int arrays lexicographically.
+    compare(int[] a, int aFromIndex, int aToIndex, int[] b, int bFromIndex, int bToIndex)
+(3) compareUnsigned(int[] a, int[] b) => Compares two int arrays lexicographically, numerically treating elements as unsigned.
+    compareUnsigned(int[] a, int aFromIndex, int aToIndex, int[] b, int bFromIndex, int bToIndex) => Compares two int arrays lexicographically over the specified ranges, numerically treating elements as unsigned.
+(4) copyOf(int[] original, int newLength) => Copies the specified array, truncating or padding with zeros (if necessary) so the copy has the specified length.
+(5) copyOfRange(int[] original, int from, int to) => Copies the specified range of the specified array into a new array.
+(6) deepEquals(Object[] a1, Object[] a2) => Returns true if the two specified arrays are deeply equal to one another.
+(7) deepHashCode(Object[] a) => Returns a hash code based on the "deep contents" of the specified array.
+(8) deepToString(Object[] a) => Returns a string representation of the "deep contents" of the specified array.
+(9) equals(boolean[] a, boolean[] a2) => Returns true if the two specified arrays of booleans are equal to one another.
+(10) equals(byte[] a, int aFromIndex, int aToIndex, byte[] b, int bFromIndex, int bToIndex) => Returns true if the two specified arrays of bytes, over the specified ranges, are equal to one another.
+(11) fill(double[] a, double val) => Assigns the specified double value to each element of the specified array of doubles.
+(12) fill(float[] a, int fromIndex, int toIndex, float val) => Assigns the specified float value to each element of the specified range of the specified array of floats.
+(13) hashCode(char[] a) => Returns a hash code based on the contents of the specified array.
+(14) mismatch(float[] a, float[] b) => Finds and returns the index of the first mismatch between two float arrays, otherwise return -1 if no mismatch is found.
+(15) mismatch(float[] a, int aFromIndex, int aToIndex, float[] b, int bFromIndex, int bToIndex) => Finds and returns the relative index of the first mismatch between two float arrays over the specified ranges, otherwise return -1 if no mismatch is found.
+(16) sort(byte[] a) => Sorts the specified array into ascending numerical order.
+(17) sort(int[] a, int fromIndex, int toIndex) => Sorts the specified range of the array into ascending order.
+(18) toString(float[] a) Returns a string representation of the contents of the specified array.

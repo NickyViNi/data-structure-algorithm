@@ -1,8 +1,0 @@
-1. Array Methods
-(1) binarySearch(int[] a, int key) => Searches the specified array of ints for the specified value using the binary search algorithm.
-    binarySearch(int[] a, int fromIndex, int toIndex, int key)
-(2) compare(int[] a, int[] b) => Compares two int arrays lexicographically.
-    compare(int[] a, int aFromIndex, int aToIndex, int[] b, int bFromIndex, int bToIndex)
-(3) compareUnsigned(int[] a, int[] b) => Compares two int arrays lexicographically, numerically treating elements as unsigned.
-    compareUnsigned(int[] a, int aFromIndex, int aToIndex, int[] b, int bFromIndex, int bToIndex) => Compares two int arrays lexicographically over the specified ranges, numerically treating elements as unsigned.
-(4)
