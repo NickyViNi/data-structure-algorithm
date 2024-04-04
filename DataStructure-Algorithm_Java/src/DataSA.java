@@ -1,14 +1,14 @@
 import java.util.Scanner;
 
 public class DataSA {
-    public static void main (String[] args) {
+//    public static void main (String[] args) {
 //        swap(12, 35);
 //        acceptUserInput();
-        DataSA data = new DataSA();
-        System.out.println(data.binarySearch(new int[]{1, 3, 5, 6, 7, 9, 10}, 6));
+//        DataSA data = new DataSA();
+//        System.out.println(data.binarySearch(new int[]{1, 3, 5, 6, 7, 9, 10}, 6));
 //        System.out.println(data.add(12, 34));
 //        System.out.println(data.combineStr("Nicky, I love you!"));
-    }
+//    }
 
    public static void swap (int a, int b)  {
         int temp = a;
