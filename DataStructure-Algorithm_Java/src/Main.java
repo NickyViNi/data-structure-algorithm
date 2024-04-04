@@ -6,7 +6,8 @@ public class Main {
         // strArr.setElement(1, "How are you?");
         // strArr.printArray();
         LinkedList ll = new LinkedList(99);
+        ll.append(100);
+        ll.append(200);
         ll.printAll();
-        System.out.println("hhhhh");
     }
 }
