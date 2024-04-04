@@ -27,7 +27,7 @@ public class GenericArray<T> {
 //        intArr.setElement(0, 11);
 //        intArr.setElement(1, 12);
 //        intArr.printArray();
-//
+
 //        GenericArray<String> strArr = new GenericArray<>(5);
 //        strArr.setElement(0, "Hey!");
 //        strArr.setElement(1, "Hao,");
