@@ -33,12 +33,19 @@ public class LinkedList {
         length++;
     }
 
+    public void makeEmpty() {
+        head = null;
+        tail = null;
+        length = 0;
+    }
+
     public int removeLast() {
         if (length == 0) return -1;
         Node removeNode = tail;
         if (length == 1) {
             head = null;
             tail = null;
+            length--;
             return removeNode.value;
         }
 
@@ -52,6 +59,26 @@ public class LinkedList {
         tail.next = null;
         length--;
         return removeNode.value;
+    }
+
+    public void prepend(int value) {
+        //solution 1
+        // Node newNode = new Node(value);
+        // if (length == 0) {
+        //     head = newNode;
+        //     tail = newNode;
+        // } else {
+        //     newNode.next = head;
+        //     head = newNode;
+        // }
+        // length++;
+
+        //solution 2
+        Node newNode = new Node(value);
+        newNode.next = head;
+        head = newNode;
+        length++;
+        if (length == 1) tail = newNode;
     }
 
 
