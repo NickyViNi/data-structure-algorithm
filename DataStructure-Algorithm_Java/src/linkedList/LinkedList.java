@@ -68,7 +68,7 @@ public class LinkedList {
         this.head = this.head.next;
         this.length--;
         if (this.length == 1) this.tail = this.head;
-        removedNode.next = null;
+        removedNode.next = null; // why we need this line?
         return removedNode;
     }
 
@@ -80,8 +80,25 @@ public class LinkedList {
             temp = temp.next;
             i++;
         }
-        temp.next = null;
+        // temp.next = null; do we need this line?
         return temp;
+    }
+
+    public boolean set(int index, int val) {
+        if (this.length == 0 || index > this.length - 1) return false;
+        Node temp = this.head;
+        int i = 0;
+        while (i < index) {
+            temp = temp.next;
+            i++;
+        }
+        temp.value = val;
+        return true;
+    }
+
+    public boolean insert (int index, int val) {
+
+        return true;
     }
 
     public void prepend(int value) {
