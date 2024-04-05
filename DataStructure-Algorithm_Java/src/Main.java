@@ -1,9 +1,12 @@
+import java.util.Random;
 import array.UniqueChar;
 
 public class Main {
     public static void main(String[] args) {
         UniqueChar uniqueString = new UniqueChar();
         System.out.println(uniqueString.uniqueChar("howareyou"));
+        Random random = new Random();
+        random.ints().limit(10).forEach(System.out::println);
 
         // GenericArray<String> strArr = new GenericArray<>(5);
         // strArr.setElement(0, "Hey!");
