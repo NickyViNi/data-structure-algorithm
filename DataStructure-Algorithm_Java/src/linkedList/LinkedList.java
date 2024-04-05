@@ -1,3 +1,4 @@
+package linkedList;
 public class LinkedList {
 
     private Node head;
@@ -59,6 +60,28 @@ public class LinkedList {
         tail.next = null;
         length--;
         return removeNode.value;
+    }
+
+    public Node removeFirst() {
+        if (this.length ==0) return null;
+        Node removedNode = this.head;
+        this.head = this.head.next;
+        this.length--;
+        if (this.length == 1) this.tail = this.head;
+        removedNode.next = null;
+        return removedNode;
+    }
+
+    public Node get(int index) {
+        if (this.length == 0 || index > this.length - 1) return null;
+        Node temp = this.head;
+        int i = 0;
+        while (i < index) {
+            temp = temp.next;
+            i++;
+        }
+        temp.next = null;
+        return temp;
     }
 
     public void prepend(int value) {
