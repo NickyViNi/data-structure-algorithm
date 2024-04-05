@@ -6,7 +6,7 @@ import array.UniqueChar;
 public class Main {
     public static void main(String[] args) {
         PermutationString perStr = new PermutationString();
-        System.out.println(perStr.permutation("happl!", "happy!"));
+        System.out.println(perStr.permutation2("happy!", "hapoy!"));
 
         // UniqueChar uniqueString = new UniqueChar();
         // System.out.println(uniqueString.uniqueChar("howareyou"));
