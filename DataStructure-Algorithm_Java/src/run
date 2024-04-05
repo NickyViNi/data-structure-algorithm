@@ -2,3 +2,4 @@
 javac Main.java
 java Main
 rm *.class
+rm ./array/*.class

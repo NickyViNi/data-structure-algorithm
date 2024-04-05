@@ -3,7 +3,7 @@ import array.UniqueChar;
 public class Main {
     public static void main(String[] args) {
         UniqueChar uniqueString = new UniqueChar();
-        System.out.println(uniqueString.uniqueChar("howareyu"));
+        System.out.println(uniqueString.uniqueChar("howareyou"));
 
         // GenericArray<String> strArr = new GenericArray<>(5);
         // strArr.setElement(0, "Hey!");
