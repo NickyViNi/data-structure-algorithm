@@ -40,14 +40,14 @@ public class LinkedList {
         length = 0;
     }
 
-    public int removeLast() {
-        if (length == 0) return -1;
+    public Node removeLast() {
+        if (length == 0) return null;
         Node removeNode = tail;
         if (length == 1) {
             head = null;
             tail = null;
             length--;
-            return removeNode.value;
+            return removeNode;
         }
 
         Node temp = head;
@@ -59,7 +59,7 @@ public class LinkedList {
         tail = pre;
         tail.next = null;
         length--;
-        return removeNode.value;
+        return removeNode;
     }
 
     public Node removeFirst() {
@@ -73,27 +73,24 @@ public class LinkedList {
     }
 
     public Node get(int index) {
-        if (this.length == 0 || index > this.length - 1) return null;
+        if (this.length == 0 || index < 0 || index > this.length - 1) return null;
         Node temp = this.head;
         int i = 0;
         while (i < index) {
             temp = temp.next;
             i++;
         }
-        // temp.next = null; do we need this line?
+        // temp.next = null;
         return temp;
     }
 
     public boolean set(int index, int val) {
-        if (this.length == 0 || index > this.length - 1) return false;
-        Node temp = this.head;
-        int i = 0;
-        while (i < index) {
-            temp = temp.next;
-            i++;
+        Node targetNode = get(index);
+        if (targetNode != null) {
+            targetNode.value = val;
+            return true;
         }
-        temp.value = val;
-        return true;
+        return false;
     }
 
     public boolean insert (int index, int val) {
