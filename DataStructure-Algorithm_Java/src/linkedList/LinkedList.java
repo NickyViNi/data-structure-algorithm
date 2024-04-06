@@ -97,8 +97,50 @@ public class LinkedList {
     }
 
     public boolean insert (int index, int val) {
-
+        if (index < 0 || index > this.length) return false;
+        Node newNode = new Node(val);
+        Node currNode = this.head.next;
+        Node preNode = this.head;
+        int i = 0;
+        while (i < index) {
+            currNode = currNode.next;
+            preNode = preNode.next;
+            i++;
+        }
+        preNode.next = newNode;
+        newNode.next = currNode;
+        this.length++;
         return true;
+    }
+
+    public Node remove (int index) {
+        if (this.length == 0 || index > this.length - 1) return null;
+        Node currNode = this.head.next;
+        Node preNode = this.head;
+        int i = 0;
+        while (i < index) {
+            currNode = currNode.next;
+            preNode = preNode.next;
+            i++;
+        }
+        preNode.next = currNode.next;
+        currNode.next = null;
+        this.length--;
+        return currNode;
+    }
+
+    public void reverse() {
+        Node currNode = this.head;
+        this.head = this.tail;
+        this.tail = currNode;
+        Node preNode = null;
+        Node nextNode = null;
+        while (currNode != null) {
+            nextNode = currNode.next;
+            currNode.next = preNode;
+            preNode = currNode;
+            currNode = nextNode;
+        }
     }
 
     public void prepend(int value) {
