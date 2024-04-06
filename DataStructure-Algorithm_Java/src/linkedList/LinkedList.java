@@ -63,12 +63,12 @@ public class LinkedList {
     }
 
     public Node removeFirst() {
-        if (this.length ==0) return null;
+        if (this.length == 0) return null;
         Node removedNode = this.head;
         this.head = this.head.next;
         this.length--;
-        if (this.length == 1) this.tail = this.head;
-        removedNode.next = null; // why we need this line?
+        if (this.length == 0) this.tail = null;
+        removedNode.next = null;
         return removedNode;
     }
 
