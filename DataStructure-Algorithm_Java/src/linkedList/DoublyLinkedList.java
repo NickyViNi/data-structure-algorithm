@@ -63,6 +63,41 @@ public class DoublyLinkedList {
         this.length++;
     }
 
+    public Node removeFirst() {
+        if (this.length == 0) return null;
+        Node firstNode = this.head;
+        if (this.length == 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = this.head.next;
+            this.head.prev = null;
+            firstNode.next = null;
+        }
+        this.length--;
+        return firstNode;
+    }
+
+    public Node get(int index) {
+        if (index < 0 || index >= this.length) return null;
+        Node curr;
+        if (index < this.length / 2) {
+            int pointer = 0;
+            curr = this.head;
+            while (pointer < index)
+            curr = curr.next;
+            pointer++;
+        } else {
+            int pointer = this.length - 1;
+            curr = this.tail;
+            while (pointer > index) {
+                curr = curr.prev;
+                pointer--;
+            }
+        }
+        return curr;
+    }
+
     public void getHead() {
         System.out.println("Head: " + this.head.value);
     }
