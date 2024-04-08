@@ -14,4 +14,11 @@ public class DoublyLinkedList {
             this.value = value;
         }
     }
+
+    public DoublyLinkedList(int value) {
+        Node newNode = new Node(value);
+        this.head = newNode;
+        this.tail = newNode;
+        this.length = 1;
+    }
 }
