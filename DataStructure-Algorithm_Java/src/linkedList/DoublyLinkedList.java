@@ -35,6 +35,34 @@ public class DoublyLinkedList {
         this.length++;
     }
 
+    public Node removeLast() {
+        if (this.length == 0) return null;
+        Node removedNode = this.tail;
+        if (this.length == 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.tail = this.tail.prev;
+            removedNode.prev = null;
+            this.tail.next = null;
+        }
+        this.length--;
+        return removedNode;
+    }
+
+    public void prepend(int value) {
+        Node newNode = new Node(value);
+        if (this.length == 0) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+    }
+
     public void getHead() {
         System.out.println("Head: " + this.head.value);
     }
