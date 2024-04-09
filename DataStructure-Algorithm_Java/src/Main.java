@@ -3,10 +3,23 @@ import java.util.Random;
 import array.PermutationString;
 import array.ReplaceSpace;
 import array.UniqueChar;
+import heap.Heap;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(ReplaceSpace.replaceSpace("Mr John Smith   ", 13));
+        Heap heap = new Heap();
+        System.out.println(heap.getHeap());
+        heap.insert(12);
+        System.out.println(heap.getHeap());
+        heap.insert(25);
+        System.out.println(heap.getHeap());
+        heap.insert(8);
+        System.out.println(heap.getHeap());
+        heap.insert(56);
+        System.out.println(heap.getHeap());
+        heap.insert(99);
+        System.out.println(heap.getHeap());
+        // System.out.println(ReplaceSpace.replaceSpace("Mr John Smith   ", 13));
         // PermutationString perStr = new PermutationString();
         // System.out.println(perStr.permutation2("happy!", "hapoy!"));
         // UniqueChar uniqueString = new UniqueChar();

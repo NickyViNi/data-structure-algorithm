@@ -40,4 +40,15 @@ public class Heap {
             currIdx = parent(currIdx);
         }
     }
+
+    public Integer remove() {
+        if (heap.size() == 0) return null;
+        if (heap.size() == 1) return heap.remove(0);
+
+        int maxValue = heap.get(0);
+        heap.set(0, heap.remove(heap.size() - 1));
+        sinkDown();
+
+        return maxValue;
+    }
 }
