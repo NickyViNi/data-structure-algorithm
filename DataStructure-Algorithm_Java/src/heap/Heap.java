@@ -47,8 +47,31 @@ public class Heap {
 
         int maxValue = heap.get(0);
         heap.set(0, heap.remove(heap.size() - 1));
-        sinkDown();
+        sinkDown(0);
 
         return maxValue;
+    }
+
+    private void sinkDown(int index) {
+        int maxIdx = index;
+        while (true) {
+            int leftIdx = leftChild(index);
+            int rightIdx = rightChild(index);
+
+            if (leftIdx < heap.size() && heap.get(leftIdx) > heap.get(maxIdx)) {
+                maxIdx = leftIdx;
+            }
+
+            if (rightIdx < heap.size() && heap.get(rightIdx) > heap.get(maxIdx)) {
+                maxIdx = rightIdx;
+            }
+
+            if (maxIdx != index) {
+                swap(index, maxIdx);
+                index = maxIdx;
+            } else {
+                return;
+            }
+        }
     }
 }
