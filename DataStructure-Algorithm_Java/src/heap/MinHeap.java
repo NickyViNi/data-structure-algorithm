@@ -50,4 +50,24 @@ public class MinHeap {
         sinkDown(0);
         return minVal;
     }
+
+    private void sinkDown(int index) {
+        int minIdx = index;
+        while(true) {
+            int leftIdx = leftChild(minIdx);
+            int rightIdx = rightChild(minIdx);
+            if(leftIdx < heap.size() && heap.get(leftIdx) < heap.get(minIdx)) {
+                minIdx = leftIdx;
+            }
+            if(rightIdx < heap.size() && heap.get(rightIdx) < heap.get(minIdx)) {
+                minIdx = rightIdx;
+            }
+            if(minIdx != index) {
+                swap(minIdx, index);
+                index = minIdx;
+            } else {
+                return;
+            }
+        }
+    }
 }
