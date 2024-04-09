@@ -30,4 +30,14 @@ public class Heap {
         heap.set(index1, heap.get(index2));
         heap.set(index2, temp);
     }
+
+    public void insert(int value) {
+        heap.add(value);
+        int currIdx = heap.size() - 1;
+
+        while (currIdx > 0 && heap.get(currIdx) > heap.get(parent(currIdx))) {
+            swap(currIdx, parent(currIdx));
+            currIdx = parent(currIdx);
+        }
+    }
 }
