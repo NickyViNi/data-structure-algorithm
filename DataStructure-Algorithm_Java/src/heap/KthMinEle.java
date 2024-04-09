@@ -1,5 +1,8 @@
 package heap;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 public class KthMinEle {
         // WRITE THE FINDKTHSMALLEST METHOD HERE //
         public static boolean isSameEleArr(int[] nums) {
@@ -24,7 +27,7 @@ public class KthMinEle {
         //     return kNum;
         // }
 
-        public static int findKthSmallest(int[] nums, int k) {
+        public static int findKthSmallest2(int[] nums, int k) {
             if(nums.length == 1 || isSameEleArr(nums)) return nums[0];
             Heap maxHeap = new Heap();
 
@@ -36,6 +39,22 @@ public class KthMinEle {
             }
 
             return maxHeap.remove();
+        }
+
+        public static Integer findKthSmallest(int[] nums, int k) {
+
+            if(nums.length == 1 || isSameEleArr(nums)) return nums[0];
+
+            PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+
+            for (int i : nums) {
+                maxHeap.add(i);
+                if(maxHeap.size() > k){
+                    maxHeap.poll();
+                }
+            }
+
+            return maxHeap.poll();
         }
 
         public static void main(String[] args) {
