@@ -1,17 +1,30 @@
 package heap;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class MaxEleStream {
     // WRITE THE STREAMMAX METHOD HERE //
     // return: A list of integers: The i-th integer in the list should be the maximum number among the first i numbers in the input array nums (1-indexed).
-    public static List<Integer> streamMax(int[] nums) {
+    public static List<Integer> streamMax1(int[] nums) {
         List<Integer> result = new ArrayList<>(nums.length);
         Heap maxHeap = new Heap();
         for (int num : nums) {
             maxHeap.insert(num);
             result.add(maxHeap.getHeap().get(0));
+        }
+
+        return result;
+    }
+
+    public static List<Integer> streamMax(int[] nums) {
+        List<Integer> result = new ArrayList<>(nums.length);
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+        for (int num : nums) {
+            maxHeap.add(num);
+            result.add(maxHeap.peek());
         }
 
         return result;
