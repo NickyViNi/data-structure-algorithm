@@ -129,6 +129,25 @@ public class DoublyLinkedList {
         return true;
     }
 
+    public Node remove(int index) {
+        if (index < 0 || index >= this.length) return null;
+        if (index == 0) {
+            return removeFirst();
+        }
+        else if (index == this.length - 1) {
+            return removeLast();
+        }
+        else {
+            Node removedNode = get(index);
+            removedNode.next.prev = removedNode.prev;
+            removedNode.prev.next = removedNode.next;
+            removedNode.prev = null;
+            removedNode.next = null;
+            this.length--;
+            return removedNode;
+        }
+    }
+
     public void getHead() {
         System.out.println("Head: " + this.head.value);
     }
