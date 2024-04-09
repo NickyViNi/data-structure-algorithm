@@ -98,6 +98,15 @@ public class DoublyLinkedList {
         return curr;
     }
 
+    public boolean set(int index, int value) {
+        Node temp = get(index);
+        if (temp != null) {
+            temp.value = value;
+            return true;
+        }
+        return false;
+    }
+
     public void getHead() {
         System.out.println("Head: " + this.head.value);
     }
