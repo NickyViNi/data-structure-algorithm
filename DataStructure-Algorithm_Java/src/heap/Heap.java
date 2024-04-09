@@ -2,6 +2,7 @@ package heap;
 import java.util.ArrayList;
 import java.util.List;
 
+//remove or insert time complexity: O(log n)
 public class Heap {
     private List<Integer> heap;
 
