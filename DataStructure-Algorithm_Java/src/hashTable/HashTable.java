@@ -1,5 +1,7 @@
 package hashTable;
 
+import java.util.ArrayList;
+
 public class HashTable {
     // insert or lookup key: O(1)
 	private int size = 7;
@@ -75,5 +77,17 @@ public class HashTable {
             temp = temp.next;
         }
         return 0;
+    }
+
+     public ArrayList<String> keys() {
+        ArrayList<String> allKeys = new ArrayList<>();
+        for (int i = 0; i < this.dataMap.length; i++) {
+            Node temp = this.dataMap[i];
+            while (temp != null) {
+                allKeys.add(temp.key);
+                temp = temp.next;
+            }
+        }
+        return allKeys;
     }
 }
