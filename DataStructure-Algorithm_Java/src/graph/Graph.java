@@ -14,7 +14,7 @@ public class Graph {
         System.out.println(adjList);
     }
 
-	//ADDVERTEX METHOD: O(1) //
+	//T: O(1)
 	public boolean addVertex(String vertex) {
 	    if (this.adjList.get(vertex) == null) {
 	        adjList.put(vertex, new ArrayList<String>());
@@ -22,4 +22,14 @@ public class Graph {
 	    }
 	    return false;
 	}
+
+    //T: O(1)
+    public boolean addEdge(String vertex1, String vertex2) {
+        if (this.adjList.get(vertex1) != null &&  this.adjList.get(vertex2) != null ) {
+            this.adjList.get(vertex1).add(vertex2);
+            this.adjList.get(vertex2).add(vertex1);
+            return true;
+        }
+        return false;
+    }
 }
