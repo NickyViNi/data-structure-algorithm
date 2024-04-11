@@ -41,4 +41,14 @@ public class Graph {
         }
         return false;
 	}
+
+    public boolean removeVertex(String vertex) {
+        if(this.adjList.get(vertex) == null) return false;
+        // for(String vert: adjList.get(vertex)) {
+        //     adjList.get(vert).remove(vertex);
+        // }
+        adjList.get(vertex).forEach(vert -> adjList.get(vert).remove(vertex));
+        adjList.remove(vertex);
+        return true;
+    }
 }
