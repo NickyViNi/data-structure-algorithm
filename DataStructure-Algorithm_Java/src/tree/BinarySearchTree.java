@@ -113,23 +113,25 @@ public class BinarySearchTree {
 
             //recurse down the tree
             if (value < currNode.value) {
+                // If less, go left
                 currNode.left = deleteNode(currNode.left, value);
             } else if (value > currNode.value) {
+                // if more, go right
                 currNode.right = deleteNode(currNode.right, value);
-            } else {
-                if (currNode.left == null && currNode.right == null) {
+            } else { // Value is same as current's value, node to delete
+                if (currNode.left == null && currNode.right == null) { //Node is a leaf node
                     return null;
-                } else if (currNode.left == null) {
+                } else if (currNode.left == null) { // Node has only right child
                     currNode = currNode.right;
-                } else if (currNode.right == null) {
+                } else if (currNode.right == null) { // Node has only left child
                     currNode = currNode.left;
-                } else {
+                } else { // Node has only right child
                     int subTreeMinVal = minValue(currNode.right);
-                    currNode.value = subTreeMinVal;
-                    currNode.right = deleteNode(currNode.right, subTreeMinVal);
+                    currNode.value = subTreeMinVal; // Replace with min in right subtree
+                    currNode.right = deleteNode(currNode.right, subTreeMinVal); // Delete the minimum in right subtree
                 }
             }
-
+            // Return the modified tree
             return currNode;
         }
 
