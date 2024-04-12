@@ -1,5 +1,9 @@
 package tree;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinarySearchTree {
     	// CREATE CLASS VARIABLE (ROOT) AND NODE CLASS
         private Node root;
@@ -136,6 +140,26 @@ public class BinarySearchTree {
         }
 
         public void deleteNode(int value) {
-            this.root = deleteNode(root, value);
+            this.root = deleteNode(this.root, value);
+        }
+
+        public ArrayList<Integer> BFS() {
+            Node currNode = this.root;
+            Queue<Node> queue = new LinkedList<>();
+            ArrayList<Integer> results = new ArrayList<>();
+            queue.add(currNode);
+
+            while(queue.size() > 0) {
+                currNode = queue.remove();
+                results.add(currNode.value);
+                if(currNode.left != null) {
+                    queue.add(currNode.left);
+                }
+                if(currNode.right != null) {
+                    queue.add(currNode.right);
+                }
+            }
+
+            return results;
         }
 }
