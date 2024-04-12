@@ -98,4 +98,12 @@ public class BinarySearchTree {
         public boolean rContains(int value) {
             return rContains(root, value);
         }
+
+        //In a BST, the leftmost node from any given node is always the smallest.
+        public int minValue(Node currNode) {
+            while (currNode.left != null) {
+                currNode = currNode.left;
+            }
+            return currNode.value;
+        }
 }
