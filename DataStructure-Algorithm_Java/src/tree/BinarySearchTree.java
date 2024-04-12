@@ -48,6 +48,27 @@ public class BinarySearchTree {
             }
         }
 
+        //recursion method for Inserting Node
+        private Node rInsert(Node currNode, int value) {
+            if (currNode == null) {
+                return new Node(value);
+            }
+
+            if (value < currNode.value) {
+                currNode.left = rInsert(currNode.left, value);
+            } else if (value > currNode.value) {
+                currNode.right = rInsert(currNode.right, value);
+            }
+
+            return currNode;
+
+        }
+
+        public void rInsert(int value) {
+            if (root == null) root = new Node(value);
+            rInsert(root, value);
+        }
+
         public boolean contains(int value) {
             if (this.root == null) return false;
             Node temp = this.root;
