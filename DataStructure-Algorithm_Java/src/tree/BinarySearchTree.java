@@ -106,4 +106,34 @@ public class BinarySearchTree {
             }
             return currNode.value;
         }
+
+        private Node deleteNode(Node currNode, int value) {
+            //base case
+            if (currNode == null) return null;
+
+            //recurse down the tree
+            if (value < currNode.value) {
+                currNode.left = deleteNode(currNode.left, value);
+            } else if (value > currNode.value) {
+                currNode.right = deleteNode(currNode.right, value);
+            } else {
+                if (currNode.left == null && currNode.right == null) {
+                    return null;
+                } else if (currNode.left == null) {
+                    currNode = currNode.right;
+                } else if (currNode.right == null) {
+                    currNode = currNode.left;
+                } else {
+                    int subTreeMinVal = minValue(currNode.right);
+                    currNode.value = subTreeMinVal;
+                    currNode.right = deleteNode(currNode.right, subTreeMinVal);
+                }
+            }
+
+            return currNode;
+        }
+
+        public void deleteNode(int value) {
+            this.root = deleteNode(root, value);
+        }
 }
