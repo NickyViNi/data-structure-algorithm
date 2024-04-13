@@ -45,6 +45,37 @@ public class Sort {
 	    }
 	}
 
+    // (4) merge sort:
+    public static int[] merge(int[] arr1, int[] arr2) {
+        int[] combineArr = new int[arr1.length + arr2.length];
+        int index = 0, i = 0, j = 0;
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i] < arr2[j]) {
+                combineArr[index] = arr1[i];
+                i++;
+                index++;
+            } else {
+                combineArr[index] = arr2[j];
+                j++;
+                index++;
+            }
+        }
+
+        while (i < arr1.length) {
+            combineArr[index] = arr1[i];
+            i++;
+            index++;
+        }
+
+        while (j < arr2.length) {
+            combineArr[index] = arr2[j];
+            j++;
+            index++;
+        }
+
+        return combineArr;
+    }
+
     public static void main(String[] args) {
         int[] arr = {5, 21, 41, 1, 6, 3};
         insertionSort(arr);
