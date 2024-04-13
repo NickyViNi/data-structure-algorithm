@@ -3,12 +3,13 @@ import java.util.Arrays;
 
 public class Sort {
     public static void main(String[] args) {
-        int[] arr = {5, 21, 41, 1, 6, 3, 2, 0};
-        selectionSort(arr);
+
+        int[] arr = {5, 21, 41, 1, 6, 3, 2, 0, -2};
+        quickSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 
-    public static void swap(int[] array, int idx1, int idx2) {
+    private static void swap(int[] array, int idx1, int idx2) {
         int temp = array[idx1];
         array[idx1] = array[idx2];
         array[idx2] = temp;
@@ -53,7 +54,7 @@ public class Sort {
 	    }
 	}
 
-    // (4) merge sort:
+    // (4) merge sort: Time: O(nlog(n))
     public static int[] merge(int[] arr1, int[] arr2) {
         int[] combineArr = new int[arr1.length + arr2.length];
         int index = 0, i = 0, j = 0;
@@ -92,4 +93,28 @@ public class Sort {
 	    return merge(left, right);
 	}
 
+    //(5) quick sort: O(nlog(n), if the list already sorted, time is O(n^2)
+    private static int pivot(int[] arr, int pivotIdx, int endIdx) {
+	    int swapIdx = pivotIdx;
+	    for (int i = pivotIdx + 1; i <= endIdx; i++) {
+	        if (arr[i] < arr[pivotIdx]) {
+	            swapIdx++;
+	            if (swapIdx != i) swap(arr, swapIdx, i);
+	        }
+	    }
+	    swap(arr, swapIdx, pivotIdx);
+	    return swapIdx;
+	}
+
+    private static void quickSortHelper(int[] arr, int left, int right) {
+	    if (left < right) {
+	        int pivotIndex = pivot(arr, left, right);
+	        quickSortHelper(arr, left, pivotIndex - 1);
+	        quickSortHelper(arr, pivotIndex + 1, right);
+	    }
+	}
+
+    public static void quickSort(int[] arr) {
+        quickSortHelper(arr, 0, arr.length - 1);
+    }
 }
