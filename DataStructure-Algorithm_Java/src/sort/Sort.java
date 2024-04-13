@@ -2,14 +2,24 @@ package sort;
 import java.util.Arrays;
 
 public class Sort {
+    public static void main(String[] args) {
+        int[] arr = {5, 21, 41, 1, 6, 3, 2, 0};
+        selectionSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void swap(int[] array, int idx1, int idx2) {
+        int temp = array[idx1];
+        array[idx1] = array[idx2];
+        array[idx2] = temp;
+    }
+
     // (1): Bubble Sort:
     public static void bubbleSort(int[] nums) {
 	    for (int i = nums.length - 1; i > 0 ; i--) {
 	        for (int j = 0; j < i; j++) {
 	            if (nums[j] > nums[j + 1]) {
-	                int temp = nums[j];
-	                nums[j] = nums[j + 1];
-	                nums[j + 1] = temp;
+	                swap(nums, j, j + 1);
 	            }
 	        }
 	    }
@@ -25,9 +35,7 @@ public class Sort {
                 }
             }
             if (i != minIdx) {
-                int temp = arr[minIdx];
-                arr[minIdx] = arr[i];
-                arr[i] = temp;
+                swap(arr, minIdx, i);
             }
         }
     }
@@ -84,9 +92,4 @@ public class Sort {
 	    return merge(left, right);
 	}
 
-    public static void main(String[] args) {
-        int[] arr = {5, 21, 41, 1, 6, 3};
-        insertionSort(arr);
-        System.out.println(Arrays.toString(arr));
-    }
 }
