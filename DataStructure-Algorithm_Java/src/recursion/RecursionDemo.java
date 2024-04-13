@@ -14,15 +14,21 @@ public class RecursionDemo {
         return n * factorial(n - 1);
     }
 
-    static Integer[] memoization = new Integer[30];
     static int count = 0;
-
     // inefficient  time: O(2^n)
-    public static int fibonacci(int n) {
-        count++;
+    public static int fibonacci1(int n) {
+        count++; // compare test => when n = 15, count = 1973
         if (n == 0 || n == 1) return n;
-        return fibonacci(n - 1) + fibonacci(n - 2);
+        return fibonacci1(n - 1) + fibonacci1(n - 2);
     }
 
-
+    static Integer[] memoization = new Integer[30];
+    //efficient O(2n - 1) => time: O(n)
+    public static int fibonacci(int n) {
+        count++; // compare test => when n = 15, count = 29
+        if(memoization[n] != null) return memoization[n];
+        if(n == 0 || n == 1) return n;
+        return memoization[n] = fibonacci(n - 1) + fibonacci(n - 2);
+        // return memoization[n];
+    }
 }
