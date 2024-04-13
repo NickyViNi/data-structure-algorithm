@@ -76,6 +76,14 @@ public class Sort {
         return combineArr;
     }
 
+    public static int[] mergeSort(int[] arr) {
+	    if (arr.length == 1) return arr;
+	    int minIdx = arr.length / 2;
+	    int[] left = mergeSort(Arrays.copyOfRange(arr, 0, minIdx));
+	    int[] right = mergeSort(Arrays.copyOfRange(arr, minIdx, arr.length));
+	    return merge(left, right);
+	}
+
     public static void main(String[] args) {
         int[] arr = {5, 21, 41, 1, 6, 3};
         insertionSort(arr);
