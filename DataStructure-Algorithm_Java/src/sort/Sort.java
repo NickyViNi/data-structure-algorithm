@@ -1,12 +1,17 @@
 package sort;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Sort {
     public static void main(String[] args) {
 
-        int[] arr = {5, 21, 41, 1, 6, 3, 2, 0, -2};
-        quickSort(arr);
-        System.out.println(Arrays.toString(arr));
+        int[] arr1 = {5, 21, 41, 1, 6, 3, 2, 0, -2, -99};
+        Integer[] arr2 = {5, 21, 41, 1, 6, 3, 2, 0, -2, -99};
+        Arrays.sort(arr1);
+        Arrays.sort(arr2, Collections.reverseOrder()); // use 'Integer' instead of 'int', sort in asdending then reverse
+        // quickSort(arr);
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
     }
 
     private static void swap(int[] array, int idx1, int idx2) {
