@@ -3,6 +3,7 @@ package tree;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BinarySearchTree {
     	// CREATE CLASS VARIABLE (ROOT) AND NODE CLASS
@@ -161,6 +162,25 @@ public class BinarySearchTree {
                 }
             }
 
+            return results;
+        }
+        // Depth First Search: preOrder using Stack
+        public ArrayList<Integer> DFSPreOrder1() {
+            Node currNode = this.root;
+            Stack<Node> stack = new Stack<>();
+            ArrayList<Integer> results = new ArrayList<>();
+            stack.add(currNode);
+
+            while(!stack.isEmpty()) {
+                currNode = stack.pop();
+                results.add(currNode.value);
+                if (currNode.right != null) {
+                    stack.push(currNode.right);
+                }
+                if (currNode.left != null) {
+                    stack.push(currNode.left);
+                }
+            }
             return results;
         }
 

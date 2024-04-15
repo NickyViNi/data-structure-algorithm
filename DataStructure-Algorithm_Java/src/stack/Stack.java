@@ -1,7 +1,7 @@
 package stack;
 
 public class Stack {
-    private Node top;
+    private Node top; // head
     private int height;
 
     class Node {
