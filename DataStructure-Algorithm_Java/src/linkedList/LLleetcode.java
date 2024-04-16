@@ -166,7 +166,7 @@ public class LLleetcode {
         }
     }
 
-    // 83: Remove Duplicates from Sorted List
+    // 83: easy -> Remove Duplicates from Sorted List
     public ListNode deleteDuplicates(ListNode head) {
         ListNode prev = null;
         ListNode curr = head;
@@ -181,5 +181,36 @@ public class LLleetcode {
             curr = curr.next;
         }
         return head;
+    }
+
+    //82: medium -> Remove Duplicates (inculded itself) from Sorted List II
+    public ListNode deleteDuplicatesIncludeItself(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode newHead = null;
+        ListNode newTail = null;
+        ListNode curr = head;
+        int num = Integer.MIN_VALUE;
+        while (curr != null) {
+            if (curr.next != null && curr.val == curr.next.val) {
+                curr = curr.next;
+                num = curr.val;
+                continue;
+            }
+
+            if (num != curr.val) {
+                if (newHead == null) {
+                    newHead = curr;
+                    newTail = curr;
+                } else {
+                    newTail.next = curr;
+                    newTail = curr;
+                }
+            }
+
+            curr = curr.next;
+        }
+        if (newTail != null) newTail.next = null;
+
+        return newHead;
     }
 }
