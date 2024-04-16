@@ -93,8 +93,8 @@ public class LLleetcode {
         return head;
     }
 
-    //86
-    public ListNode partition(ListNode head, int x) {
+    //86 bad solution
+    public ListNode partition1(ListNode head, int x) {
         if (head == null || head.next == null) return head;
         ArrayList<ListNode> less = new ArrayList<>();
         ArrayList<ListNode> great = new ArrayList<>();;
@@ -119,6 +119,32 @@ public class LLleetcode {
             temp.next = head;
             head = temp;
         }
+
+        return head;
+    }
+
+    //86 good solution
+    public ListNode partition(ListNode head, int x) {
+        if (head == null || head.next == null) return head;
+        ListNode lessTail = new ListNode(0);
+        ListNode lessHead = lessTail;
+        ListNode moreTail = new ListNode(0);
+        ListNode moreHead = moreTail;
+        ListNode curr = head;
+
+        while (curr != null) {
+            if (x > curr.val) {
+                lessTail.next = curr;
+                lessTail = curr;
+            } else {
+                moreTail.next = curr;
+                moreTail = curr;
+            }
+            curr = curr.next;
+        }
+        moreTail.next = null;
+        lessTail.next = moreHead.next;
+        head = lessHead.next;
 
         return head;
     }
