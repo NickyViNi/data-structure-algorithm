@@ -73,14 +73,13 @@ public class LinkedList {
     }
 
     public Node get(int index) {
-        if (this.length == 0 || index < 0 || index > this.length - 1) return null;
+        if (this.length == 0 || index < 0 || index >= this.length) return null;
         Node temp = this.head;
         int i = 0;
         while (i < index) {
             temp = temp.next;
             i++;
         }
-        // temp.next = null;
         return temp;
     }
 

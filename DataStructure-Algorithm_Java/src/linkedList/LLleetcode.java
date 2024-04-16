@@ -125,6 +125,7 @@ public class LLleetcode {
     }
 
     //86 medium good solution
+    //Given the head of a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
     public ListNode partition(ListNode head, int x) {
         if (head == null || head.next == null) return head;
         ListNode lessTail = new ListNode(0);
@@ -223,5 +224,46 @@ public class LLleetcode {
             curr = curr.next;
         }
         return decimal;
+    }
+
+    // 92 medium: reverse LL between left to right range:
+    private static ListNode get(ListNode head, int idx) {
+        if (idx == 0) return null;
+        ListNode temp = head;
+        int i = 1;
+        while (temp != null && i < idx) {
+            temp = temp.next;
+            i++;
+        }
+        return temp;
+    }
+
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if (head == null || head.next == null || left >= right) return head;
+
+        ListNode beforeNode = get(head, left - 1);
+        ListNode startNode = (beforeNode == null) ? head : beforeNode.next;
+        ListNode endNode = get(head, right);
+        ListNode afterNode = (endNode == null) ? null : endNode.next;
+
+        ListNode prevNode = null;
+        ListNode currNode = startNode;
+
+        while (currNode != afterNode) {
+            ListNode nextNode = currNode.next;
+            currNode.next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
+        }
+
+        if (beforeNode == null) {
+            head = prevNode;
+        } else {
+            beforeNode.next = prevNode;
+        }
+
+        startNode.next = afterNode;
+
+        return head;
     }
 }
