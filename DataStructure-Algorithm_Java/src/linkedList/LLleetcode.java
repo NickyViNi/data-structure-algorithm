@@ -150,7 +150,7 @@ public class LLleetcode {
         return head;
     }
 
-    //
+    // remove duplicate value of Node
     public void removeDuplicates(ListNode head) {
         HashSet<Integer> set = new HashSet<>();
         ListNode curr = head;
@@ -164,5 +164,22 @@ public class LLleetcode {
             }
             curr = curr.next;
         }
+    }
+
+    // 83: Remove Duplicates from Sorted List
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            if (prev == null) {
+                prev = curr;
+            } else if (prev.val < curr.val) {
+                prev = curr;
+            } else {
+                prev.next = curr.next;
+            }
+            curr = curr.next;
+        }
+        return head;
     }
 }
