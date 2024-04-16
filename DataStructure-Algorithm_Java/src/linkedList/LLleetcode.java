@@ -13,7 +13,7 @@ public class LLleetcode {
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
 
-    //876
+    //876 easy
     public ListNode middleNode(ListNode head) {
         ListNode fast = head;
         ListNode low = head;
@@ -23,7 +23,7 @@ public class LLleetcode {
         }
         return low;
     }
-    //141
+    //141 easy
     public boolean hasCycle(ListNode head) {
         ListNode low = head;
         ListNode fast = head;
@@ -70,7 +70,7 @@ public class LLleetcode {
         return low;
     }
 
-    // 19
+    // 19 medium
     public ListNode removeNthFromEnd(ListNode head, int n) {
         if (head.next == null) return null;
 
@@ -124,7 +124,7 @@ public class LLleetcode {
         return head;
     }
 
-    //86 good solution
+    //86 medium good solution
     public ListNode partition(ListNode head, int x) {
         if (head == null || head.next == null) return head;
         ListNode lessTail = new ListNode(0);
@@ -212,5 +212,16 @@ public class LLleetcode {
         if (newTail != null) newTail.next = null;
 
         return newHead;
+    }
+
+    //1290 easy Convert Binary Number in a Linked List to Integer
+    public int getDecimalValue(ListNode head) {
+        int decimal = 0;
+        ListNode curr = head;
+        while (curr != null) {
+            decimal = 2 * decimal + curr.val;
+            curr = curr.next;
+        }
+        return decimal;
     }
 }
