@@ -155,6 +155,22 @@ public class DoublyLinkedList {
         tail.value = temp;
     }
 
+    public void reverse() {
+	    if (length <= 1) return;
+	    Node temp = head;
+	    head = tail;
+	    tail = temp;
+	    Node curr = tail;
+	    Node prev = null;
+	    while (curr != null) {
+	        Node nextNode = curr.next;
+	        curr.next = prev;
+	        curr.prev = nextNode;
+	        prev = curr;
+	        curr = nextNode;
+	    }
+	}
+
     public void getHead() {
         System.out.println("Head: " + this.head.value);
     }
