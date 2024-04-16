@@ -1,6 +1,7 @@
 package linkedList;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class LLleetcode {
     //definition for singly-linked list.
@@ -147,5 +148,21 @@ public class LLleetcode {
         head = lessHead.next;
 
         return head;
+    }
+
+    //
+    public void removeDuplicates(ListNode head) {
+        HashSet<Integer> set = new HashSet<>();
+        ListNode curr = head;
+        ListNode prev = head;
+        while (curr != null) {
+            if (set.contains(curr.val)) {
+                prev.next = curr.next;
+            } else {
+                set.add(curr.val);
+                prev = curr;
+            }
+            curr = curr.next;
+        }
     }
 }
