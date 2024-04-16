@@ -1,5 +1,6 @@
 package linkedList;
 
+import java.util.ArrayList;
 
 public class LLleetcode {
     //definition for singly-linked list.
@@ -89,6 +90,36 @@ public class LLleetcode {
         } else {
             head = head.next;
         }
+        return head;
+    }
+
+    //86
+    public ListNode partition(ListNode head, int x) {
+        if (head == null || head.next == null) return head;
+        ArrayList<ListNode> less = new ArrayList<>();
+        ArrayList<ListNode> great = new ArrayList<>();;
+        ListNode curr = head;
+        while (curr != null) {
+            if (curr.val < x) {
+                less.add(curr);
+            } else {
+                great.add(curr);
+            }
+            curr = curr.next;
+        }
+        head = null;
+        while (great.size() > 0) {
+            ListNode temp = great.remove(great.size() - 1);
+            temp.next = head;
+            head = temp;
+        }
+
+        while (less.size() > 0) {
+            ListNode temp = less.remove(less.size() - 1);
+            temp.next = head;
+            head = temp;
+        }
+
         return head;
     }
 }
