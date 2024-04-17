@@ -38,4 +38,23 @@ public class StackLeet {
 
         return stack.isEmpty();
     }
+
+    public static void sortStack(StackArrayList<Integer> stack) {
+        if (stack.isEmpty()) return;
+        StackArrayList<Integer> sorted = new StackArrayList<>();
+        sorted.push(stack.pop());
+        while (!stack.isEmpty()) {
+            int sk = stack.pop();
+            while (!sorted.isEmpty() && sk < sorted.peek()) {
+                int sd = sorted.pop();
+                stack.push(sd);
+
+            }
+            sorted.push(sk);
+        }
+
+        while (!sorted.isEmpty()) {
+            stack.push(sorted.pop());
+        }
+    }
 }
