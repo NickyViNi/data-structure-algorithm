@@ -266,4 +266,29 @@ public class LLleetcode {
 
         return head;
     }
+
+    //24: medium:
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
+
+        while (head != null && head.next != null) {
+            ListNode first = head;
+            ListNode second = head.next;
+
+            //swap nodes:
+            prev.next = second;
+            first.next = second.next;
+            second.next = first;
+
+            //update head and prev:
+            head = first.next;
+            prev = first;
+        }
+
+        head = dummy.next;
+        return head;
+    }
 }
