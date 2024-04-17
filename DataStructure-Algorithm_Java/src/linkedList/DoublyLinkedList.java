@@ -184,6 +184,34 @@ public class DoublyLinkedList {
         return idx == 0;
     }
 
+    public void swapPairs() {
+        if (head == null || head.next == null) return;
+        Node dummyNode = new Node(0);
+        dummyNode.next = head;
+        Node prevNode = dummyNode;
+        while (head != null && head.next != null) {
+            Node firstNode = head;
+            Node secondNode = head.next;
+
+            //swap nodes
+            prevNode.next = secondNode;
+            firstNode.next = secondNode.next;
+            secondNode.next = firstNode;
+
+            //update prevous node
+            secondNode.prev = prevNode;
+            firstNode.prev = secondNode;
+            if (firstNode.next != null) firstNode.next.prev = firstNode;
+
+            //update head
+            head = firstNode.next;
+            prevNode = firstNode;
+        }
+        head = dummyNode.next;
+        head.prev = null;
+    }
+
+
     public void getHead() {
         System.out.println("Head: " + this.head.value);
     }
