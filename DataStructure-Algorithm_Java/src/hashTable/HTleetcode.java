@@ -87,4 +87,19 @@ public class HTleetcode {
         return null;
     }
 
+    //387: easy -> first unique character in a string
+    public int firstUniqChar(String str) {
+        int[] letters = new int[26];
+        for (char c : str.toCharArray()) {
+            letters[c - 'a']++;
+        }
+        for ( int i = 0; i < str.length(); i++ ) {
+            if (letters[str.charAt(i) - 'a'] == 1) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
 }
