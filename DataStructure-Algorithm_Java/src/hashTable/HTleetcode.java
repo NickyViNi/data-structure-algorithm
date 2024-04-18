@@ -10,10 +10,13 @@ import java.util.Set;
 public class HTleetcode {
     public static void main(String[] args) {
 
-        int[] array1 = {1, 3, 5};
-        int[] array2 = {2, 4, 6, 5};
+        int[] nums = {1, 2, 3, 2, 1, 4, 5, 4};
+        List<Integer> duplicates = findDuplicates2(nums);
+        System.out.println(duplicates);
 
-        System.out.println(itemInCommon(array1, array2));
+        // int[] array1 = {1, 3, 5};
+        // int[] array2 = {2, 4, 6, 5};
+        // System.out.println(itemInCommon(array1, array2));
     }
 
     public static boolean itemInCommon(int[] arr1, int[] arr2) {
@@ -43,7 +46,7 @@ public class HTleetcode {
         return arrayList;
     }
 
-    public static ArrayList<Integer> findDuplicates2(int[] nums) {
+    public static List<Integer> findDuplicates2(int[] nums) {
 
         // Create a new HashMap to store the count of occurrences
         // of each integer.
