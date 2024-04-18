@@ -73,4 +73,18 @@ public class HTleetcode {
         return duplicates;
     }
 
+    // First Non-Repeating Character
+    public static Character firstNonRepeatingChar(String str) {
+        Map<Character, Integer> map = new HashMap<>();
+        for ( char c : str.toCharArray() ) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        for ( char c : str.toCharArray() ) {
+            if (map.get(c) == 1) {
+                return c;
+            }
+        }
+        return null;
+    }
+
 }
