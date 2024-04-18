@@ -115,4 +115,11 @@ public class HTleetcode {
 
         return new int[]{};
     }
+
+    public static List<Integer> removeDuplicates(List<Integer> list) {
+        Set<Integer> set = new HashSet<>(list);
+        List<Integer> arr = new ArrayList<>(set);
+
+        return arr;
+    }
 }
