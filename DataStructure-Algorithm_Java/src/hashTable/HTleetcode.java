@@ -122,4 +122,15 @@ public class HTleetcode {
 
         return arr;
     }
+
+    public static boolean hasUniqueChars (String str) {
+        Set<Character> set = new HashSet<>();
+        for (char c : str.toCharArray()) {
+            if (set.contains(c)) {
+                return false;
+            }
+            set.add(c);
+        }
+        return true;
+    }
 }
