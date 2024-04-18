@@ -1,6 +1,11 @@
 package hashTable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class HTleetcode {
     public static void main(String[] args) {
@@ -22,6 +27,20 @@ public class HTleetcode {
         }
 
         return false;
+    }
+
+    public static List<Integer> findDuplicates(int[] arr) {
+        Map<Integer, Boolean> hmap = new HashMap<>();
+        Set<Integer> result = new HashSet<>();
+        for (int e : arr) {
+            if (hmap.get(e) == null) {
+                hmap.put(e, true);
+            } else {
+                result.add(e);
+            }
+        }
+        ArrayList<Integer> arrayList = new ArrayList<>(result);
+        return arrayList;
     }
 
 }
