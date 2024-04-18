@@ -162,4 +162,29 @@ public class HTleetcode {
         }
         return result;
     }
+
+    //49 medium: group anagram
+    public static List<List<String>> groupAnagrams(String[] str) {
+
+        HashMap<String, List<String>> anagram = new HashMap<>();
+
+        for (int i = 0; i < str.length; i++) {
+            char[] ch = str[i].toCharArray();
+            Arrays.sort(ch);
+            String sorted = String.valueOf(ch); // new String(ch)
+
+            if (anagram.containsKey(sorted)) {
+                anagram.get(sorted).add(str[i]);
+
+            } else {
+                List<String> group = new ArrayList<>();
+                group.add(str[i]);
+                anagram.put(sorted, group);
+            }
+        }
+
+        List<List<String>> values = new ArrayList<>(anagram.values());
+        return values;
+    }
+
 }
