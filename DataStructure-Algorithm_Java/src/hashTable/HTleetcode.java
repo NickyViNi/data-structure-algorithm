@@ -1,6 +1,7 @@
 package hashTable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,10 +11,18 @@ import java.util.Set;
 public class HTleetcode {
     public static void main(String[] args) {
 
-        int[] nums = {1, 2, 3, 2, 1, 4, 5, 4};
-        List<Integer> duplicates = findDuplicates2(nums);
-        System.out.println(duplicates);
+        int[] arr1 = {1, 2, 3, 4, 5, 3};
+        int[] arr2 = {2, 4, 6, 8, 10, 4};
+        int target = 7;
 
+        List<int[]> pairs = findPairs(arr1, arr2, target);
+        for (int[] pair : pairs) {
+            System.out.println(Arrays.toString(pair));
+        }
+
+        // int[] nums = {1, 2, 3, 2, 1, 4, 5, 4};
+        // List<Integer> duplicates = findDuplicates2(nums);
+        // System.out.println(duplicates);
         // int[] array1 = {1, 3, 5};
         // int[] array2 = {2, 4, 6, 5};
         // System.out.println(itemInCommon(array1, array2));
@@ -132,5 +141,25 @@ public class HTleetcode {
             set.add(c);
         }
         return true;
+    }
+
+    public static List<int[]> findPairs(int[] arr1, int[] arr2, int target) {
+
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>(); // handle duplicate values
+        for (int e: arr1) {
+            set1.add(e);
+        }
+
+        List<int[]> result = new ArrayList<>();
+        for ( int e : arr2) {
+            int num = target - e;
+            if (set1.contains(num) && !set2.contains(e)) {
+                int[] temp = new int[]{num, e};
+                result.add(temp);
+                set2.add(e);
+            }
+        }
+        return result;
     }
 }
