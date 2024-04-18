@@ -1,0 +1,36 @@
+Differentiate between Hashtable, HashMap, and HashSet in Java:
+
+(1) Hashtable:
+Hashtable is part of the Java Collections Framework and implements the Map interface.
+It is synchronized, meaning it's thread-safe, ensuring that it can be accessed by multiple threads without causing inconsistencies.
+Does not allow null keys or values.
+Introduced in JDK 1.0.
+
+(2) HashMap:
+Like Hashtable, HashMap is part of the Java Collections Framework and implements the Map interface.
+Unlike Hashtable, HashMap is not synchronized by default. However, it can be synchronized externally using Collections.synchronizedMap() if synchronization is needed.
+Allows null keys and values.
+Generally faster than Hashtable in a single-threaded environment.
+Introduced in Java 1.2.
+
+(3) HashSet:
+HashSet is also part of the Java Collections Framework and implements the Set interface.
+Represents a collection of unique elements, meaning it does not allow duplicates.
+Does not maintain the insertion order of elements.
+Internally backed by a HashMap, where the elements are stored as keys, and the value associated with each key is a constant placeholder.
+Does not allow null elements.
+Introduced in Java 1.2.
+
+In summary:
+Hashtable and HashMap are both implementations of the Map interface, used for key-value pair mappings.
+Hashtable is synchronized and does not allow null keys or values, while HashMap is not synchronized and allows null keys and values.
+HashSet is an implementation of the Set interface, used for storing unique elements.
+It is internally backed by a HashMap and does not allow duplicate elements or null elements.
+
+
+(2) HashMap: It's a key-value pair mapping data structure where you can store a key along with
+its corresponding value. Keys are unique within the map, and each key is associated with exactly one value.
+(3) HashSet: It's a collection of unique elements, meaning it does not allow duplicates.
+It is implemented using a hash table internally, similar to HashMap, but it only stores elements,
+not key-value pairs. The elements in a HashSet are not stored with associated values like in a HashMap;
+instead, they are stored as individual elements within the set.
