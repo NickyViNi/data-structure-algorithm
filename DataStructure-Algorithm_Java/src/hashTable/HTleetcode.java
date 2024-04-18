@@ -102,4 +102,17 @@ public class HTleetcode {
         return -1;
     }
 
+    //1 easy -> two sum
+    public static int[] twoSum(int[] arr, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            int other = target - arr[i];
+            if (map.containsKey(other)) {
+                return new int[] {map.get(other), i};
+            }
+            map.put(arr[i], i);
+        }
+
+        return new int[]{};
+    }
 }
