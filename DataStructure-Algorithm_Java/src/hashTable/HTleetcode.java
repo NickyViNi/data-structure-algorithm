@@ -222,4 +222,28 @@ public class HTleetcode {
         return subarrayCount;
     }
 
+    //128 medium: Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        int maxLen = 0;
+
+        for (int e : nums) {
+            set.add(e);
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            int currNum = nums[i];
+            int currLen = 0;
+            if (!set.contains(nums[i] + 1)) {
+                while(set.contains(currNum)) {
+                    currNum--;
+                    currLen++;
+                }
+            }
+            if (currLen > maxLen) maxLen = currLen;
+        }
+
+        return maxLen;
+    }
+
 }
