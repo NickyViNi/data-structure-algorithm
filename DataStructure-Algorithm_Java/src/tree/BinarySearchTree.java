@@ -247,7 +247,7 @@ public class BinarySearchTree {
            return results;
         }
 
-        //another way for DFS
+        //another way for DFSInOrder
         private void DFSInOrder(ArrayList<Integer> arr, Node node) {
             if (node != null) {
                 DFSInOrder(arr, node.left);

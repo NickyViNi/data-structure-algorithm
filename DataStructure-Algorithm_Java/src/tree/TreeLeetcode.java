@@ -25,4 +25,16 @@ public class TreeLeetcode {
         root.left = invertTree(temp);
         return root;
     }
+
+    //98 medium -> validate BST
+    private boolean isValidBST(TreeNode currentNode, double low, double high) {
+        if (currentNode == null) return true;
+        if (currentNode.val <= low || currentNode.val >= high) return false;
+        return isValidBST(currentNode.left, (double) low, (double) currentNode.val) &&
+            isValidBST(currentNode.right,(double) currentNode.val, (double) high);
+    }
+
+    public boolean isValidBST(TreeNode root) {
+        return isValidBST(root, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+    }
 }
