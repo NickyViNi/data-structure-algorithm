@@ -204,4 +204,22 @@ public class HTleetcode {
         return new int[]{};
     }
 
+    //560 medium: Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k.
+    public int subarraySumK(int[] nums, int k) {
+        Map<Integer, Integer> mapIdx = new HashMap<>();
+        int currSum = 0;
+        int subarrayCount = 0;
+        mapIdx.put(0, 1);
+
+        for (int i = 0; i < nums.length; i++) {
+            currSum += nums[i];
+            if (mapIdx.containsKey(currSum - k)) {
+                subarrayCount += mapIdx.get(currSum - k);
+            }
+            mapIdx.put(currSum, mapIdx.getOrDefault(currSum, 0) + 1);
+        }
+
+        return subarrayCount;
+    }
+
 }
