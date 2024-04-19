@@ -246,4 +246,34 @@ public class BinarySearchTree {
            new Traverse(this.root);
            return results;
         }
+
+        //   +===================================================+
+    //   |              WRITE YOUR CODE HERE                 |
+    //   | Description:                                      |
+    //   | - Inverts a binary tree by swapping the left and  |
+    //   |   right children of all nodes in the tree.        |
+    //   | - This method is private and intended for internal|
+    //   |   use within the class.                           |
+    //   | - It operates recursively, visiting each node and |
+    //   |   swapping its children.                          |
+    //   |                                                   |
+    //   | Parameters:                                       |
+    //   | - node: The current node to process.              |
+    //   |                                                   |
+    //   | Return:                                           |
+    //   | - The node after its subtree has been inverted.   |
+    //   |                                                   |
+    //   | Tips:                                             |
+    //   | - The base case for the recursion is when the     |
+    //   |   method encounters a null node.                  |
+    //   | - A temporary node is used to facilitate the swap |
+    //   |   of the left and right children.                 |
+    //   +===================================================+
+    public Node invertTree(Node node) {
+        if (node == null) return null;
+        Node temp = node.left;
+        node.left = invertTree(node.right);
+        node.right = invertTree(temp);
+        return node;
+    }
 }
