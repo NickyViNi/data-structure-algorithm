@@ -16,4 +16,13 @@ public class TreeLeetcode {
         root.right = createNode(nums, medium + 1, right);
         return root;
     }
+
+    //226 easy: invert binary tree
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
+        TreeNode temp = root.right;
+        root.right = invertTree(root.left);
+        root.left = invertTree(temp);
+        return root;
+    }
 }
