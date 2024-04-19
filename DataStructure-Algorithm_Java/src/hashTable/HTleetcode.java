@@ -187,4 +187,21 @@ public class HTleetcode {
         return values;
     }
 
+    //udemy question57: subarray sum
+    public static int[] subarraySum(int[] nums, int target) {
+        Map<Integer, Integer> mapIdx = new HashMap<>();
+        int sum = 0;
+        mapIdx.put(0, -1);
+
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (mapIdx.containsKey(sum - target)) {
+                return new int[] { mapIdx.get(sum - target) + 1, i };
+            }
+            mapIdx.put(sum, i);
+        }
+
+        return new int[]{};
+    }
+
 }
