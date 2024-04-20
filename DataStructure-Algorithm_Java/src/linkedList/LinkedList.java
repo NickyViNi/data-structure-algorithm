@@ -258,7 +258,7 @@ public class LinkedList {
         // this.tail = current;
     }
 
-    public void insertionSort() {
+    public void insertionSort1() {
         // If the list has less than 2 elements, it is already sorted
         if (length < 2) return;
 
@@ -301,6 +301,24 @@ public class LinkedList {
             temp = temp.next;
         }
         tail = temp;
+    }
+
+    //easy solution for inserction sort
+    public void insertionSort() {
+        if (this.length < 2) return;
+        Node unsorted = this.head.next;
+        while (unsorted != null) {
+            Node innercurr = head;
+            while (innercurr != unsorted) {
+                if (unsorted.value < innercurr.value) {
+                    int temp = unsorted.value;
+                    unsorted.value = innercurr.value;
+                    innercurr.value = temp;
+                }
+                innercurr = innercurr.next;
+            }
+            unsorted = unsorted.next;
+        }
     }
 
 }
