@@ -226,4 +226,36 @@ public class LinkedList {
         }
     }
 
+    void selectionSort() {
+        // If list length is less than 2, no need to sort
+        if (this.length < 2) return;
+        // Initialize current node as head
+        Node current = this.head;
+        // Iterate over the list until the second last element
+        while (current.next != null) {
+            // Assume current node is the smallest
+            Node smallest = current;
+            // Start checking from the next node
+            Node innerCurrent = current.next;
+            // Inner loop to find smallest node in unsorted part
+            while (innerCurrent != null) {
+                // If a smaller node is found, update smallest
+                if (innerCurrent.value < smallest.value) {
+                    smallest = innerCurrent;
+                }
+                // Move to the next node
+                innerCurrent = innerCurrent.next;
+            }
+            // Swap current node and smallest node if they're not the same
+            if (smallest != current) {
+                int temp = current.value;
+                current.value = smallest.value;
+                smallest.value = temp;
+            }
+            // Move to next node in the list
+            current = current.next;
+        }
+        // this.tail = current;
+    }
+
 }
