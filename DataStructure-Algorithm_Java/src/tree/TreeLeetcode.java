@@ -1,5 +1,7 @@
 package tree;
 
+import java.util.ArrayList;
+
 public class TreeLeetcode {
 
     //108 easy: convert sorted array into BST
@@ -37,4 +39,32 @@ public class TreeLeetcode {
     public boolean isValidBST(TreeNode root) {
         return isValidBST(root, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
     }
+
+    //230 medium -> Kth smallest element in BST => solution1
+    private ArrayList<Integer> DFSInOrder(TreeNode node) {
+        ArrayList<Integer> result = new ArrayList<>();
+
+        class Traverse {
+            Traverse(TreeNode curr) {
+                if (curr.left != null) {
+                    new Traverse(curr.left);
+                }
+                result.add(curr.val);
+                if (curr.right != null) {
+                    new Traverse(curr.right);
+                }
+            }
+        }
+
+        new Traverse(node);
+        return result;
+    }
+
+    public int kthSmallest(TreeNode root, int k) {
+        ArrayList<Integer> arr = DFSInOrder(root);
+        return arr.get(k - 1);
+    }
+
+    //230 medium -> Kth smallest element in BST => solution2
+
 }
