@@ -197,4 +197,33 @@ public class LinkedList {
         }
     }
 
+    public void bubbleSort() {
+        // If list length is less than 2, no need to sort
+        if (this.length < 2) return;
+
+        // Initialize sortedUntil as null (nothing is sorted initially)
+        Node sortedUntil = null;
+        // Outer loop continues until sorted part reaches the second node
+        while (sortedUntil != this.head.next) {
+            // Start with the head node
+            Node current = this.head;
+            // Inner loop for each pass
+            while (current.next != sortedUntil) {
+                // Compare current node with next node
+                Node nextNode = current.next;
+                // If current node is greater, swap values
+                if (current.value > nextNode.value) {
+                    int temp = current.value;
+                    current.value = nextNode.value;
+                    nextNode.value = temp;
+                }
+                // Move to the next node
+                current = current.next;
+            }
+            // After each pass, the largest element is bubbled to the end
+            // Thus, update sortedUntil to point to the last sorted element
+            sortedUntil = current;
+        }
+    }
+
 }
