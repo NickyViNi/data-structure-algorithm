@@ -1,6 +1,7 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class TreeLeetcode {
 
@@ -76,4 +77,25 @@ public class TreeLeetcode {
         kthSmallest2(root.right, k);
         return ksmall;
     }
+
+    //230 medium -> Kth smallest element in BST => solution3
+    public Integer kthSmallest3(TreeNode node, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        // TreeNode node = this.root;
+
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            node = stack.pop();
+            k -= 1;
+            if (k == 0) {
+                return node.val;
+            }
+            node = node.right;
+        }
+        return null;
+    }
+
 }
