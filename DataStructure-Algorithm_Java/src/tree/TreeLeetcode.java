@@ -66,5 +66,14 @@ public class TreeLeetcode {
     }
 
     //230 medium -> Kth smallest element in BST => solution2
-
+    int count = 1;
+    int ksmall = Integer.MAX_VALUE;
+    public int kthSmallest2(TreeNode root, int k) {
+        if (root == null) return -1;
+        kthSmallest2(root.left, k);
+        if (k == count) ksmall = root.val;
+        count++;
+        kthSmallest2(root.right, k);
+        return ksmall;
+    }
 }
