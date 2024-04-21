@@ -49,4 +49,17 @@ public class ArrayLeetcode {
         }
         return longest;
     }
+
+    //removes all duplicate occurrences of integers from a sorted array in-place such that each unique element appears only once.
+    public static int removeDuplicates(int[] nums) {
+        if (nums.length == 0) return 0;
+        int moveIdx = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[i-1]) {
+                nums[moveIdx] = nums[i];
+                moveIdx++;
+            }
+        }
+        return moveIdx;
+    }
 }
