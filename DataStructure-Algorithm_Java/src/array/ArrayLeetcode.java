@@ -38,4 +38,15 @@ public class ArrayLeetcode {
         }
         return i;
     }
+
+    //find a first longest string in a string array
+    public static String findLongestString(String[] stringList) {
+        String longest = "";
+        for ( String str : stringList) {
+            if (str.length() > longest.length()) {
+                longest = str;
+            }
+        }
+        return longest;
+    }
 }
