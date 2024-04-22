@@ -117,7 +117,7 @@ public class ArrayLeetcode {
     //O(n)
     public void rotate(int[] nums, int k) {
         k = k%nums.length;
-        // reverse complete arrya
+        // reverse complete array
         reverseArray(nums, 0, nums.length-1);
         // reverse left part of array excluding kth element
         reverseArray(nums, 0, k-1);
@@ -126,7 +126,7 @@ public class ArrayLeetcode {
 
     }
     public void reverseArray(int[] a, int l, int r){
-        while(l <= r){
+        while(l < r){
             int t = a[l];
             a[l] = a[r];
             a[r] = t;
@@ -144,6 +144,18 @@ public class ArrayLeetcode {
             }
             nums[0] = last;
         }
+    }
+
+    //53 medium -> maximum subarray
+    public static int maxSubarray(int[] nums) {
+        if (nums.length == 0) return 0;
+        int maxSum = nums[0];
+        int currSum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            currSum = Math.max(nums[i], currSum + nums[i]);
+            maxSum = Math.max(currSum, maxSum);
+        }
+        return maxSum;
     }
 
 }
