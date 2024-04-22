@@ -78,4 +78,16 @@ public class ArrayLeetcode {
 
         return maxEarn;
     }
+
+    public static int maxProfit(int[] prices) {
+        int buy = Integer.MAX_VALUE;
+        int profit = 0;
+        for (int price : prices) {
+            buy = Math.min(buy, price);
+            int tempProfit = price - buy;
+            profit = Math.max(tempProfit, profit);
+        }
+
+        return profit;
+    }
 }
