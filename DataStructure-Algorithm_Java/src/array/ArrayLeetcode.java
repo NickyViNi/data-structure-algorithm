@@ -62,4 +62,20 @@ public class ArrayLeetcode {
         }
         return moveIdx;
     }
+
+    // 121 easy: best time to sell and buy stock
+    public static int maxProfit1(int[] prices) {
+        if (prices.length == 0) return 0;
+        int buy = prices[0];
+        int maxEarn = 0;
+        for (int price : prices) {
+            if (price < buy) {
+                buy = price;
+            } else if (price - buy > maxEarn) {
+                maxEarn = price - buy;
+            }
+        }
+
+        return maxEarn;
+    }
 }
