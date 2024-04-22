@@ -92,7 +92,8 @@ public class ArrayLeetcode {
     }
 
     //189 medium: rotate an array by k steps:
-    public static void rotate(int[] nums, int k) {
+    // O(n)
+    public static void rotate2(int[] nums, int k) {
         k = k % nums.length;
         // Reverse the first part
         for (int start = 0, end = nums.length - k - 1; start < end; start++, end--) {
@@ -111,6 +112,37 @@ public class ArrayLeetcode {
             int temp = nums[start];
             nums[start] = nums[end];
             nums[end] = temp;
+        }
+    }
+    //O(n)
+    public void rotate(int[] nums, int k) {
+        k = k%nums.length;
+        // reverse complete arrya
+        reverseArray(nums, 0, nums.length-1);
+        // reverse left part of array excluding kth element
+        reverseArray(nums, 0, k-1);
+        // reverse right part of array starting with kth element
+        reverseArray(nums, k, nums.length-1);
+
+    }
+    public void reverseArray(int[] a, int l, int r){
+        while(l <= r){
+            int t = a[l];
+            a[l] = a[r];
+            a[r] = t;
+            l++; r--;
+        }
+    }
+    //O(n^2)
+    public static void rotate1(int[] nums, int k) {
+        if (k == nums.length) return;
+        int steps = k % nums.length;
+        for (int i = 0; i < steps; i++) {
+            int last = nums[nums.length - 1];
+            for (int j = nums.length - 1; j > 0; j--) {
+                nums[j] = nums[j - 1];
+            }
+            nums[0] = last;
         }
     }
 
