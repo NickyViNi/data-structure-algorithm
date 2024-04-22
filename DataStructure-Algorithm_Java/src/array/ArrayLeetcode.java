@@ -90,4 +90,28 @@ public class ArrayLeetcode {
 
         return profit;
     }
+
+    //189 medium: rotate an array by k steps:
+    public static void rotate(int[] nums, int k) {
+        k = k % nums.length;
+        // Reverse the first part
+        for (int start = 0, end = nums.length - k - 1; start < end; start++, end--) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+        }
+        // Reverse the second part
+        for (int start = nums.length - k, end = nums.length - 1; start < end; start++, end--) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+        }
+        // Reverse the whole array
+        for (int start = 0, end = nums.length - 1; start < end; start++, end--) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+        }
+    }
+
 }
