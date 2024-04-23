@@ -291,4 +291,17 @@ public class LLleetcode {
         head = dummy.next;
         return head;
     }
+
+    //160 easy -> get interestion node of two linkedList
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+        ListNode pointA = headA;
+        ListNode pointB = headB;
+
+        while (pointA != pointB) {
+            pointA = (pointA == null) ? headB : pointA.next;
+            pointB =  (pointB == null) ? headA : pointB.next;
+        }
+        return pointA;
+    }
 }
