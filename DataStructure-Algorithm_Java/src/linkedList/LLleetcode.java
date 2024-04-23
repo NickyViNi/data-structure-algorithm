@@ -2,6 +2,7 @@ package linkedList;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.PriorityQueue;
 
 public class LLleetcode {
     //definition for singly-linked list.
@@ -303,5 +304,24 @@ public class LLleetcode {
             pointB =  (pointB == null) ? headA : pointB.next;
         }
         return pointA;
+    }
+
+    //23 hard -> Merge K sorted list
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+        for (ListNode list : lists) {
+            while (list != null) {
+                minHeap.add(list.val);
+                list = list.next;
+            }
+        }
+
+        while (minHeap.size() != 0) {
+            curr.next = new ListNode(minHeap.poll());
+            curr = curr.next;
+        }
+        return dummy.next;
     }
 }
