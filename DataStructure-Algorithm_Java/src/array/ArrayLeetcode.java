@@ -210,5 +210,29 @@ public class ArrayLeetcode {
         }
        return -1;
     }
+    //time: O(n), space: O(1)
+    public int majorityElement2(int[] nums) {
+        //boyer-moore voting algorithm
+        int count = 0;
+        Integer candidate = null;
+        //find an element that appears more frequently
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            if (candidate == num) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+        //check the element is majority element, if not, return -1;
+        int times = 0;
+        for (int num : nums) {
+            if (num == candidate) times++;
+        }
+        if (times > nums.length / 2) return candidate;
+        return -1;
+    }
 
 }
