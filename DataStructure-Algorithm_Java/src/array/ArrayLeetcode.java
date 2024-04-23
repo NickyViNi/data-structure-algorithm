@@ -1,5 +1,8 @@
 package array;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ArrayLeetcode {
 
     public static int[] findMaxMin(int[] myList) {
@@ -191,4 +194,21 @@ public class ArrayLeetcode {
         }
         return k;
     }
+
+    //169 easy -> majority element
+    // time: O(n), space: O(n)
+    public int majorityElement(int[] nums) {
+        Map<Integer, Integer> hash = new HashMap<>();
+        for (int num : nums) {
+            hash.put(num, hash.getOrDefault(num, 0) + 1);
+        }
+        int n = nums.length / 2;
+        for (Map.Entry<Integer, Integer> entry : hash.entrySet()) {
+            if (entry.getValue() > n) {
+                return entry.getKey();
+            }
+        }
+       return -1;
+    }
+
 }
