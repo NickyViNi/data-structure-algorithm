@@ -314,4 +314,15 @@ public class ArrayLeetcode {
         }
         return maxLen;
     }
+    //3 medium -> solution2
+    public int lengthOfLongestSubstring2(String s) {
+        int maxLen = 0, left = 0;
+        for (int right = 0; right < s.length(); right++) {
+            while (right != s.indexOf(s.charAt(right), left)) {
+                left++;
+            }
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+        return maxLen;
+    }
 }
