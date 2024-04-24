@@ -256,4 +256,18 @@ public class ArrayLeetcode {
         return number + hash.get(s.charAt(s.length() - 1));
     }
 
+    //122 medium -> best time to sell and buy stock II
+    public int maxProfitII(int[] prices) {
+        int buy = Integer.MAX_VALUE;
+        int profit = 0;
+        for (int price : prices) {
+            buy = Math.min(buy, price);
+            if (price > buy) {
+                profit += price - buy;
+                buy = price;
+            }
+        }
+        return profit;
+    }
+
 }
