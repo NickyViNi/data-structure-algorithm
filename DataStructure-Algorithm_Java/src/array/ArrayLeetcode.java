@@ -269,5 +269,35 @@ public class ArrayLeetcode {
         }
         return profit;
     }
+    //122
+    public int maxProfitII2(int[] prices) {
+        int profit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1]) {
+                profit += prices[i] - prices[i - 1];
+            }
+        }
+        return profit;
+    }
+
+    //209 medium -> Minumum size subarray sum
+    /*Given an array of positive integers nums and a positive integer target, return the minimal length of a
+    subarray whose sum is greater than or equal to target. If there is no such subarray, return 0 instead. */
+    public int minSubArrayLen(int target, int[] nums) {
+
+        int left = 0, right = 0, currSum = 0, minLen = Integer.MAX_VALUE;
+
+        while (right < nums.length) {
+            currSum += nums[right];
+            right++;
+            while (currSum >= target) {
+                currSum -= nums[left];
+                minLen = Math.min(minLen, right - left );
+                left++;
+            }
+        }
+        minLen = minLen == Integer.MAX_VALUE ? 0 : minLen;
+        return minLen;
+    }
 
 }
