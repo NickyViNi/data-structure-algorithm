@@ -1,7 +1,9 @@
 package array;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class ArrayLeetcode {
 
@@ -300,4 +302,27 @@ public class ArrayLeetcode {
         return minLen;
     }
 
+    //3 medium -> Given a string s, find the length of the longest substring without repeating characters.
+    public int lengthOfLongestSubstring(String s) {
+        Set<Character> set = new HashSet<>();
+        int maxLen = 0, left = 0;
+        for (int right = 0; right < s.length(); right++) {
+            while(!set.add(s.charAt(right))) {
+                set.remove(s.charAt(right));
+            }
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+        return maxLen;
+    }
+    //3 medium -> solution2
+    public int lengthOfLongestSubstring2(String s) {
+        int maxLen = 0, left = 0;
+        for (int right = 0; right < s.length(); right++) {
+            while (right != s.indexOf(s.charAt(right), left)) {
+                left++;
+            }
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+        return maxLen;
+    }
 }
