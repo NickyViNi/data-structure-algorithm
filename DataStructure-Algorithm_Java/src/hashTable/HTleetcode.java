@@ -277,4 +277,25 @@ public class HTleetcode {
         return true;
     }
 
+    //202 easy -> happy number
+    public boolean isHappy(int n) {
+        int fast = n;
+        int slow = n;
+        do {
+            slow = getSquareVal(slow);
+            fast = getSquareVal(getSquareVal(fast));
+        }
+        while (fast != slow && fast != 1);
+        return fast == 1;
+    }
+
+    private static int getSquareVal(int num) {
+        int sum = 0;
+        while (num != 0) {
+            sum += (num % 10) * (num % 10);
+            num /= 10;
+        }
+        return sum;
+    }
+
 }
