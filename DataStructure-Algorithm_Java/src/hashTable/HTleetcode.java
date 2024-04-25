@@ -246,4 +246,35 @@ public class HTleetcode {
         return maxLen;
     }
 
+    //383 easy -> random note
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) return false;
+        Map<Character, Integer> mag = new HashMap<>();
+
+        for (int i = 0; i < magazine.length(); i++) {
+            mag.put(magazine.charAt(i), mag.getOrDefault(magazine.charAt(i), 0) + 1);
+        }
+
+        for (char ran : ransomNote.toCharArray()) {
+            if (mag.get(ran) == null || mag.get(ran) <= 0) return false;
+            mag.put(ran, mag.get(ran)-1);
+        }
+
+        return true;
+    }
+    public boolean canConstruct2(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) return false;
+        int[] maga = new int[26];
+        for (char ch : magazine.toCharArray()) {
+            maga[ch - 'a']++;
+        }
+
+        for (char ra : ransomNote.toCharArray()) {
+            if (maga[ra - 'a'] < 1) return false;
+            maga[ra - 'a']--;
+        }
+
+        return true;
+    }
+
 }
