@@ -262,5 +262,19 @@ public class HTleetcode {
 
         return true;
     }
+    public boolean canConstruct2(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) return false;
+        int[] maga = new int[26];
+        for (char ch : magazine.toCharArray()) {
+            maga[ch - 'a']++;
+        }
+
+        for (char ra : ransomNote.toCharArray()) {
+            if (maga[ra - 'a'] < 1) return false;
+            maga[ra - 'a']--;
+        }
+
+        return true;
+    }
 
 }
