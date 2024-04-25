@@ -1,6 +1,8 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class TreeLeetcode {
@@ -96,6 +98,38 @@ public class TreeLeetcode {
             node = node.right;
         }
         return null;
+    }
+
+    //100 easy -> same tree
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) return true;
+        if ((p == null || q == null)) return false;
+        return p.val == q.val ? isSameTree(p.left, q.left) && isSameTree(p.right, q.right) : false;
+    }
+    public boolean isSameTree2(TreeNode p, TreeNode q) {
+        if (p == null && q == null) return true;
+        if ((p == null || q == null)) return false;
+        TreeNode currp = p;
+        TreeNode currq = q;
+        Queue<TreeNode> queueP = new LinkedList<>();
+        Queue<TreeNode> queueQ = new LinkedList<>();
+        queueP.add(currp);
+        queueQ.add(currq);
+        while (queueP.size() > 0 && queueQ.size() > 0) {
+            currp = queueP.remove();
+            currq = queueQ.remove();
+            if (currp.val != currq.val || (currp.left == null && currq.left != null) ||
+                (currp.left != null && currq.left == null) ||
+                (currp.right == null && currq.right != null) ||
+                (currp.right != null && currq.right == null) ||
+                (currp.left != null && currq.left != null && currp.left.val != currq.left.val) ||
+                (currp.right != null && currq.right != null && currp.right.val != currq.right.val)) return false;
+            if (currp.left != null) queueP.add(currp.left);
+            if (currp.right != null) queueP.add(currp.right);
+            if (currq.left != null) queueQ.add(currq.left);
+            if (currq.right != null) queueQ.add(currq.right);
+        }
+        return true;
     }
 
 }
