@@ -511,4 +511,16 @@ public class ArrayLeetcode {
         String[] words = s.split(" ");
         return words[words.length - 1].length();
     }
+
+    //11 medium -> cotainer with most water
+    public int maxArea(int[] height) {
+        int left = 0, right = height.length - 1, maxArea = 0;
+        while (left < right) {
+            int curr = (right - left) * Math.min(height[left], height[right]);
+            maxArea = Math.max(curr, maxArea);
+            if (height[left] > height[right]) right--;
+            else left++;
+        }
+        return maxArea;
+    }
 }

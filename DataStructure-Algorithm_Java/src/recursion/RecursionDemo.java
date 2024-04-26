@@ -23,7 +23,7 @@ public class RecursionDemo {
     }
 
     static Integer[] memoization = new Integer[30];
-    //efficient O(2n - 1) => time: O(n)
+    //efficient O(2n - 1) => time: O(n) Memoization
     public static int fibonacci2(int n) {
         count++; // compare test => when n = 15, count = 29
         if(memoization[n] != null) return memoization[n];
@@ -32,7 +32,7 @@ public class RecursionDemo {
         // return memoization[n];
     }
 
-    //time: O(n - 1)
+    //time: O(n - 1) Bottom Up
     public static int fibonacci3(int n) {
         int[] fib = new int[n + 1];
         fib[0] = 0;
