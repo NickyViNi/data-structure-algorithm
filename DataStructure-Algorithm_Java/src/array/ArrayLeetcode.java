@@ -441,4 +441,45 @@ public class ArrayLeetcode {
         }
         return result;
     }
+
+    //75 medium -> sort color
+    public void sortColors(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (map.getOrDefault(0, 0) > 0) {
+                nums[i] = 0;
+                map.put(0, map.get(0) - 1);
+            } else if (map.getOrDefault(1, 0) > 0) {
+                nums[i] = 1;
+                map.put(1, map.get(1) - 1);
+            } else if (map.getOrDefault(2, 0) > 0) {
+                nums[i] = 2;
+                map.put(2, map.get(2) - 1);
+            }
+        }
+    }
+    //The Dutch National Flag algorithm
+    public void sortColors2(int[] nums) {
+        int low = 0, mid = 0, high = nums.length -1;
+        while (mid <= high) {
+             if (nums[mid] == 0) {
+                 if (nums[low] != 0) swap(nums, low, mid);
+                 low++;
+                 mid++;
+             } else if (nums[mid] == 1) {
+                 mid++;
+             } else {
+                 if (nums[high] != 2) swap(nums, mid, high);
+                 high--;
+             }
+        }
+     }
+     private void swap(int[] nums, int idx1, int idx2) {
+         int temp = nums[idx1];
+         nums[idx1] = nums[idx2];
+         nums[idx2] = temp;
+     }
 }
