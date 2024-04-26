@@ -482,4 +482,33 @@ public class ArrayLeetcode {
          nums[idx1] = nums[idx2];
          nums[idx2] = temp;
      }
+
+     //96 medium -> unique binary search tree, dynamic programming, catalan numbers: Cn = 1/(n+1) * (2n)!/(n!n!)
+     public int numTrees(int n) {
+        int[] bstCount = new int[n + 1];
+        bstCount[0] = 1;
+        bstCount[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                bstCount[i] += bstCount[j - 1] * bstCount[i - j];
+            }
+        }
+        return bstCount[n];
+    }
+
+    //58 super easy ->length of last word
+    public int lengthOfLastWord(String s) {
+        int lastLen = 0;
+        int currLen = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != ' ') currLen++;
+            else currLen = 0;
+            lastLen = currLen > 0 ? currLen : lastLen;
+        }
+        return lastLen;
+    }
+    public int lengthOfLastWord2(String s) {
+        String[] words = s.split(" ");
+        return words[words.length - 1].length();
+    }
 }
