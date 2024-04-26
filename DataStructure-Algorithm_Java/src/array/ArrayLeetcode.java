@@ -495,4 +495,20 @@ public class ArrayLeetcode {
         }
         return bstCount[n];
     }
+
+    //58 super easy ->length of last word
+    public int lengthOfLastWord(String s) {
+        int lastLen = 0;
+        int currLen = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != ' ') currLen++;
+            else currLen = 0;
+            lastLen = currLen > 0 ? currLen : lastLen;
+        }
+        return lastLen;
+    }
+    public int lengthOfLastWord2(String s) {
+        String[] words = s.split(" ");
+        return words[words.length - 1].length();
+    }
 }
