@@ -482,4 +482,17 @@ public class ArrayLeetcode {
          nums[idx1] = nums[idx2];
          nums[idx2] = temp;
      }
+
+     //96 medium -> unique binary search tree, dynamic programming, catalan numbers: Cn = 1/(n+1) * (2n)!/(n!n!)
+     public int numTrees(int n) {
+        int[] bstCount = new int[n + 1];
+        bstCount[0] = 1;
+        bstCount[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                bstCount[i] += bstCount[j - 1] * bstCount[i - j];
+            }
+        }
+        return bstCount[n];
+    }
 }
