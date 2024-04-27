@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Set;
 
 public class ArrayLeetcode {
@@ -511,4 +512,33 @@ public class ArrayLeetcode {
         String[] words = s.split(" ");
         return words[words.length - 1].length();
     }
+
+    //11 medium -> cotainer with most water : two pointers
+    public int maxArea(int[] height) {
+        int left = 0, right = height.length - 1, maxArea = 0;
+        while (left < right) {
+            int curr = (right - left) * Math.min(height[left], height[right]);
+            maxArea = Math.max(curr, maxArea);
+            if (height[left] > height[right]) right--;
+            else left++;
+        }
+        return maxArea;
+    }
+
+    //215 medium -> Kth largest element in an array
+    public int findKthLargest(int[] nums, int k) {
+        if (nums.length == 1) return nums[0];
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
+        for (int num : nums) {
+            maxHeap.add(num);
+        }
+        int count = 0;
+        while (maxHeap.size() > 0) {
+            int knum = maxHeap.poll();
+            count++;
+            if (count == k) return knum;
+        }
+        return -1;
+    }
+
 }
