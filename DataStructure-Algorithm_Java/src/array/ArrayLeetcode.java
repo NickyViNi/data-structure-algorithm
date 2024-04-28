@@ -559,4 +559,35 @@ public class ArrayLeetcode {
         return start;
     }
 
+    //28 easy -> Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+    public int strStr(String haystack, String needle) {
+        if (needle.length() > haystack.length()) return -1;
+        int h = 0, n = 0;
+        while (h <= haystack.length() - needle.length()) {
+            while (haystack.charAt(h + n) == needle.charAt(n)) {
+                n++;
+                if (n == needle.length()) return h;
+            }
+            h++;
+            n = 0;
+        }
+        return -1;
+    }
+
+    public int strStr2(String haystack, String needle) {
+        return haystack.indexOf(needle);
+    }
+
+    public int strStr3(String haystack, String needle) {
+        int start = 0;
+        int end = needle.length();
+        while (end <= haystack.length()) {
+            String substr = haystack.substring(start, end);
+            if (substr.equals(needle)) return start;
+            start++;
+            end++;
+        }
+        return -1;
+    }
+
 }
