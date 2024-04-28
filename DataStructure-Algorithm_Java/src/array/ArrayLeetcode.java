@@ -590,4 +590,21 @@ public class ArrayLeetcode {
         return -1;
     }
 
+    //14 easy -> longest common prefix
+    public String longestCommonPrefix(String[] strs) {
+        String prefix = strs[0];
+        int len = prefix.length();
+        for (int i = 1; i < strs.length; i++) {
+            String str = strs[i];
+            len = str.length() < len ? str.length() : len;
+            prefix = prefix.substring(0, len);
+            while (!str.substring(0, len).equals(prefix)) {
+                len--;
+                if (len == 0) return "";
+                prefix = prefix.substring(0, len);
+            }
+        }
+        return prefix;
+    }
+
 }
