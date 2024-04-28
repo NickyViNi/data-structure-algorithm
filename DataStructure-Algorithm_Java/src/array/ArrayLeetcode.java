@@ -578,4 +578,16 @@ public class ArrayLeetcode {
         return haystack.indexOf(needle);
     }
 
+    public int strStr3(String haystack, String needle) {
+        int start = 0;
+        int end = needle.length();
+        while (end <= haystack.length()) {
+            String substr = haystack.substring(start, end);
+            if (substr.equals(needle)) return start;
+            start++;
+            end++;
+        }
+        return -1;
+    }
+
 }
