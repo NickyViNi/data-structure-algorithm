@@ -574,4 +574,8 @@ public class ArrayLeetcode {
         return -1;
     }
 
+    public int strStr2(String haystack, String needle) {
+        return haystack.indexOf(needle);
+    }
+
 }
