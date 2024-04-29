@@ -1,6 +1,7 @@
 package linkedList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
@@ -9,6 +10,7 @@ public class LLleetcode {
     public class ListNode {
         int val;
         ListNode next;
+        ListNode random;
         ListNode() {}
         ListNode(int val) { this.val = val; }
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
@@ -342,5 +344,22 @@ public class LLleetcode {
             l2 = l2 != null ? l2.next : null;
         }
         return dummy.next;
+    }
+
+    //138 medium -> copy list with random pointer
+    public ListNode copyRandomList(ListNode head) {
+        HashMap<ListNode, ListNode> nodeMap = new HashMap<>();
+        ListNode curr = head;
+        while (curr != null) {
+            nodeMap.put(curr, new ListNode(curr.val));
+            curr = curr.next;
+        }
+        curr = head;
+        while (curr != null) {
+            nodeMap.get(curr).next = nodeMap.get(curr.next);
+            nodeMap.get(curr).random = nodeMap.get(curr.random);
+            curr = curr.next;
+        }
+        return nodeMap.get(head);
     }
 }
