@@ -596,8 +596,12 @@ public class ArrayLeetcode {
         int len = prefix.length();
         for (int i = 1; i < strs.length; i++) {
             String str = strs[i];
-            len = str.length() < len ? str.length() : len;
-            prefix = prefix.substring(0, len);
+            // len = str.length() < len ? str.length() : len;
+            // prefix = prefix.substring(0, len);
+            if (str.length() < len) {
+                len = str.length();
+                prefix = prefix.substring(0, len);
+            }
             while (!str.substring(0, len).equals(prefix)) {
                 len--;
                 if (len == 0) return "";
@@ -605,6 +609,17 @@ public class ArrayLeetcode {
             }
         }
         return prefix;
+    }
+    //2001 medium -> number of pairs of interchangeable rectangles
+    public long interchangeableRectangles(int[][] rectangles) {
+        long count = 0;
+        Map<Double, Long> hm = new HashMap<>();
+        for (int[] rec : rectangles) {
+            double ratio = (double) rec[0] / rec[1];
+            count += hm.getOrDefault(ratio, 0L);
+            hm.put(ratio, hm.getOrDefault(ratio, 0L) + 1);
+        }
+        return count;
     }
 
 }
