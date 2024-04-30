@@ -7,7 +7,7 @@ Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
 Output: [3,9,20,null,null,15,7]
  */
 
-public class BuildTree {
+public class BuildTreePreorder {
     //105 medium -> using preorder and inorder array to build a tree
     int rootIdx = 0;
     Map<Integer, Integer> map = new HashMap<>();
