@@ -392,4 +392,18 @@ public class HTleetcode {
         }
         return true;
     }
+    // 228 easy -> Summary Ranges
+    public List<String> summaryRanges(int[] nums) {
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            String s = Integer.toString(num);
+            while (i < nums.length - 1 && nums[i] + 1 == nums[i + 1]) {
+                i++;
+            }
+            s = num == nums[i] ? s :  (s + "->" + nums[i]);
+            result.add(s);
+        }
+        return result;
+    }
 }
