@@ -297,5 +297,63 @@ public class HTleetcode {
         }
         return sum;
     }
-
+    //205 easy -> isomorphic strings
+    public boolean isIsomorphic(String s, String t) {
+        if (s.length() != t.length()) return false;
+        Map<Character, Character> smap = new HashMap<>();
+        Map<Character, Character> tmap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char schar = s.charAt(i), tchar = t.charAt(i);
+            if (smap.containsKey(schar)) {
+                if (smap.get(schar) != tchar) return false;
+            } else {
+                if (tmap.containsKey(tchar)) return false;
+                smap.put(schar, tchar);
+                tmap.put(tchar, schar);
+            }
+        }
+        return true;
+    }
+    public boolean isIsomorphic2(String s, String t) {
+        if (s.length() != t.length()) return false;
+        Map<Character, Character> smap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char schar = s.charAt(i), tchar = t.charAt(i);
+            if (smap.containsKey(schar)) {
+                if (smap.get(schar) != tchar) return false;
+            } else {
+                if (smap.containsValue(tchar)) return false;
+                smap.put(schar, tchar);
+            }
+        }
+        return true;
+    }
+    //290 easy -> word pattern
+    public boolean wordPattern(String pattern, String s) {
+        String[] parr = pattern.split("");
+        String[] sarr = s.split(" ");
+        if (parr.length != sarr.length) return false;
+        Map<String, String> pmap = new HashMap<>();
+        Map<String, String> smap = new HashMap<>();
+        for (int i = 0; i < parr.length; i++) {
+            if (pmap.containsKey(parr[i]) && !pmap.get(parr[i]).equals(sarr[i])) return false;
+            if (smap.containsKey(sarr[i]) && !smap.get(sarr[i]).equals(parr[i])) return false;
+            pmap.put(parr[i], sarr[i]);
+            smap.put(sarr[i], parr[i]);
+        }
+        return true;
+    }
+    public boolean wordPattern2(String pattern, String s) {
+        String[] sarr = s.split(" ");
+        if (pattern.length() != sarr.length) return false;
+        Map<Character, String> pmap = new HashMap<>();
+        for (int i = 0; i < sarr.length; i++) {
+            char pchar = pattern.charAt(i);
+            if (pmap.containsKey(pchar)) {
+                if (!pmap.get(pchar).equals(sarr[i])) return false;
+            } else if (pmap.containsValue(sarr[i])) return false;
+            pmap.put(pchar, sarr[i]);
+        }
+        return true;
+    }
 }
