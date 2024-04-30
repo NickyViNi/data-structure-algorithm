@@ -356,4 +356,40 @@ public class HTleetcode {
         }
         return true;
     }
+    //242 easy -> valid anagram
+    public boolean isAnagram(String s, String t) {
+        char[] schar = s.toCharArray();
+        char[] tchar = t.toCharArray();
+        Arrays.sort(schar);
+        Arrays.sort(tchar);
+        return (new String(schar)).equals(new String(tchar));
+    }
+    public boolean isAnagram2(String s, String t) {
+        if (s.length() != t.length()) return false;
+        int[] letters = new int[26];
+        for (char schar : s.toCharArray()) {
+            letters[schar - 'a'] += 1;
+        }
+        for (char tchar : t.toCharArray()) {
+            letters[tchar - 'a'] -= 1;
+        }
+        for (int count : letters) {
+            if (count < 0) return false;
+        }
+        return true;
+    }
+    public boolean isAnagram3(String s, String t) {
+        if (s.length() != t.length()) return false;
+        HashMap<Character, Integer> hm = new HashMap<>();
+        for (char schar : s.toCharArray()) {
+            hm.put(schar, hm.getOrDefault(schar, 0) + 1);
+        }
+        for (char tchar : t.toCharArray()) {
+            hm.put(tchar, hm.getOrDefault(tchar, 0) - 1);
+        }
+        for (int val : hm.values()) {
+            if (val < 0) return false;
+        }
+        return true;
+    }
 }
