@@ -356,4 +356,12 @@ public class HTleetcode {
         }
         return true;
     }
+    //242 easy -> valid anagram
+    public boolean isAnagram(String s, String t) {
+        char[] schar = s.toCharArray();
+        char[] tchar = t.toCharArray();
+        Arrays.sort(schar);
+        Arrays.sort(tchar);
+        return (new String(schar)).equals(new String(tchar));
+    }
 }
