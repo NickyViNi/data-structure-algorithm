@@ -362,4 +362,21 @@ public class LLleetcode {
         }
         return nodeMap.get(head);
     }
+    //50 calculate pow(x, n)
+    public double myPow(double x, int n) {
+        double result = 1;
+        long n2 = n;
+        if (n2 < 0) n2 *= -1;
+        while (n2 > 0) {
+            if (n2 % 2 == 0) {
+                x *= x;
+                n2 = n2 / 2;
+            } else {
+                result *= x;
+                n2--;
+            }
+        }
+        if (n < 0) return (double) 1 / result;
+        return result;
+    }
 }
