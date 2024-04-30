@@ -362,7 +362,7 @@ public class LLleetcode {
         }
         return nodeMap.get(head);
     }
-    //50 calculate pow(x, n)
+    //50 medium -> calculate pow(x, n)
     public double myPow(double x, int n) {
         double result = 1;
         long n2 = n;
@@ -378,5 +378,21 @@ public class LLleetcode {
         }
         if (n < 0) return (double) 1 / result;
         return result;
+    }
+    //36 medium -> valid sudoku
+    public boolean isValidSudoku(char[][] board) {
+        HashSet<String> hs = new HashSet<>();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char boa = board[i][j];
+                if (boa != '.') {
+                    if (!hs.add(boa + "in row" + i) ||
+                        !hs.add(boa + "in col" + j) ||
+                        !hs.add(boa + "in block" + i/3 + "-" + j/3)
+                    ) return false;
+                }
+            }
+        }
+        return true;
     }
 }
