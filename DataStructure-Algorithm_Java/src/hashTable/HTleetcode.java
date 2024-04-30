@@ -314,4 +314,19 @@ public class HTleetcode {
         }
         return true;
     }
+    //290 easy -> word pattern
+    public boolean wordPattern(String pattern, String s) {
+        String[] parr = pattern.split("");
+        String[] sarr = s.split(" ");
+        if (parr.length != sarr.length) return false;
+        Map<String, String> pmap = new HashMap<>();
+        Map<String, String> smap = new HashMap<>();
+        for (int i = 0; i < parr.length; i++) {
+            if (pmap.containsKey(parr[i]) && !pmap.get(parr[i]).equals(sarr[i])) return false;
+            if (smap.containsKey(sarr[i]) && !smap.get(sarr[i]).equals(parr[i])) return false;
+            pmap.put(parr[i], sarr[i]);
+            smap.put(sarr[i], parr[i]);
+        }
+        return true;
+    }
 }
