@@ -329,4 +329,17 @@ public class HTleetcode {
         }
         return true;
     }
+    public boolean wordPattern2(String pattern, String s) {
+        String[] sarr = s.split(" ");
+        if (pattern.length() != sarr.length) return false;
+        Map<Character, String> pmap = new HashMap<>();
+        for (int i = 0; i < sarr.length; i++) {
+            char pchar = pattern.charAt(i);
+            if (pmap.containsKey(pchar)) {
+                if (!pmap.get(pchar).equals(sarr[i])) return false;
+            } else if (pmap.containsValue(sarr[i])) return false;
+            pmap.put(pchar, sarr[i]);
+        }
+        return true;
+    }
 }
