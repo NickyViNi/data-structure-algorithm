@@ -364,4 +364,18 @@ public class HTleetcode {
         Arrays.sort(tchar);
         return (new String(schar)).equals(new String(tchar));
     }
+    public boolean isAnagram2(String s, String t) {
+        if (s.length() != t.length()) return false;
+        int[] letters = new int[26];
+        for (char schar : s.toCharArray()) {
+            letters[schar - 'a'] += 1;
+        }
+        for (char tchar : t.toCharArray()) {
+            letters[tchar - 'a'] -= 1;
+        }
+        for (int count : letters) {
+            if (count < 0) return false;
+        }
+        return true;
+    }
 }
