@@ -314,6 +314,20 @@ public class HTleetcode {
         }
         return true;
     }
+    public boolean isIsomorphic2(String s, String t) {
+        if (s.length() != t.length()) return false;
+        Map<Character, Character> smap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char schar = s.charAt(i), tchar = t.charAt(i);
+            if (smap.containsKey(schar)) {
+                if (smap.get(schar) != tchar) return false;
+            } else {
+                if (smap.containsValue(tchar)) return false;
+                smap.put(schar, tchar);
+            }
+        }
+        return true;
+    }
     //290 easy -> word pattern
     public boolean wordPattern(String pattern, String s) {
         String[] parr = pattern.split("");
