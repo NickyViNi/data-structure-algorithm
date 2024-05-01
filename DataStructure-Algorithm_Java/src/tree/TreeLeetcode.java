@@ -143,4 +143,38 @@ public class TreeLeetcode {
         return a.val == b.val ? isMirror(a.left, b.right) && isMirror(a.right, b.left) : false;
     }
 
+    //114 medium -> Flatten Binary tree into linkedlist
+    public void flatten(TreeNode root) {
+        if (root == null || (root.left == null && root.right == null)) return;
+        TreeNode dummy = new TreeNode(0);
+        TreeNode pointer = dummy;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.empty()) {
+            TreeNode curr = stack.pop();
+            pointer.right = curr;
+            pointer = curr;
+            if (curr.right != null) stack.push(curr.right);
+            if (curr.left != null) stack.push(curr.left);
+            curr.left = null;
+        }
+
+        root = dummy.right;
+    }
+    public void flatten2(TreeNode root) { // O(1) space
+        if (root == null) return;
+
+        while (root != null) {
+            if (root.left != null) {
+                TreeNode rightMost = root.left;
+                while (rightMost.right != null) {
+                    rightMost = rightMost.right;
+                }
+                rightMost.right = root.right;
+                root.right = root.left;
+                root.left = null;
+            }
+            root = root.right;
+        }
+    }
 }
