@@ -622,4 +622,15 @@ public class ArrayLeetcode {
         return count;
     }
 
+    //55 medium -> Jump Game
+    public boolean canJump(int[] nums) {
+        if (nums.length <= 1) return true;
+        int run = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i > run) return false;
+            run = Math.max(run, i + nums[i]);
+        }
+        return true;
+    }
+
 }
