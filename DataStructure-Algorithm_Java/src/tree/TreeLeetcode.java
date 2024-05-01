@@ -177,4 +177,10 @@ public class TreeLeetcode {
             curr = curr.right;
         }
     }
+
+    //222 easy -> count complete tree nodes
+    public int countNodes(TreeNode root) {
+        if (root == null) return 0;
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
 }
