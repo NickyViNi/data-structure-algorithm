@@ -183,4 +183,18 @@ public class TreeLeetcode {
         if (root == null) return 0;
         return 1 + countNodes(root.left) + countNodes(root.right);
     }
+
+    public int countNodes2(TreeNode root) {
+        if (root == null) return 0;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        int count = 0;
+        while (!stack.empty()) {
+            TreeNode curr = stack.pop();
+            count++;
+            if(curr.left != null) stack.push(curr.left);
+            if(curr.right != null) stack.push(curr.right);
+        }
+        return count;
+    }
 }
