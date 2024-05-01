@@ -161,4 +161,20 @@ public class TreeLeetcode {
 
         root = dummy.right;
     }
+    public void flatten2(TreeNode root) { // O(1) space
+        if (root == null) return;
+
+        while (root != null) {
+            if (root.left != null) {
+                TreeNode rightMost = root.left;
+                while (rightMost.right != null) {
+                    rightMost = rightMost.right;
+                }
+                rightMost.right = root.right;
+                root.right = root.left;
+                root.left = null;
+            }
+            root = root.right;
+        }
+    }
 }
