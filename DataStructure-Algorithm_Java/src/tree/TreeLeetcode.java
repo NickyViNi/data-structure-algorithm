@@ -210,6 +210,22 @@ public class TreeLeetcode {
 
     //637 easy -> average of levels in binary tree
     public List<Double> averageOfLevels(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>(List.of(root));
+        List<Double> result = new ArrayList<>();
+        while(queue.size() > 0) {
+            int len = queue.size();
+            double sum = 0;
+            for (int i = 0; i < len; i++) {
+                TreeNode curr = queue.poll();
+                sum += curr.val;
+                if (curr.left != null) queue.add(curr.left);
+                if (curr.right != null) queue.add(curr.right);
+            }
+            result.add(sum / len);
+        }
+        return result;
+    }
+    public List<Double> averageOfLevels2(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
         List<Double> result = new ArrayList<>();
         queue.add(root);
