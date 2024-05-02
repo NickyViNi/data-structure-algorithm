@@ -245,4 +245,18 @@ public class TreeLeetcode {
         }
         return result;
     }
+
+    //530 easy -> Minimum Absolute Difference in BST
+    int minDif = Integer.MAX_VALUE;
+    int prevVal = Integer.MAX_VALUE;
+    public int getMinimumDifference(TreeNode root) {
+        inorder(root);
+        return minDif;
+    }
+    private void inorder(TreeNode root) {
+        if (root.left != null) inorder(root.left);
+        minDif = Math.min(minDif, Math.abs(root.val - prevVal));
+        prevVal = root.val;
+        if (root.right != null) inorder(root.right);
+    }
 }
