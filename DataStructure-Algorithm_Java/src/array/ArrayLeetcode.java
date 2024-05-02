@@ -632,5 +632,18 @@ public class ArrayLeetcode {
         }
         return true;
     }
-
+    //67 easy -> add binary
+    public String addBinary(String a, String b) {
+        int idxa = a.length() - 1;
+        int idxb = b.length() - 1;
+        int carry = 0;
+        String result = "";
+        while (idxa >= 0 || idxb >= 0 || carry == 1) {
+            if (idxa >= 0) carry += a.charAt(idxa--) - '0';
+            if (idxb >= 0) carry += b.charAt(idxb--) - '0';
+            result = String.valueOf(carry % 2) + result;
+            carry /= 2;
+        }
+        return result;
+    }
 }
