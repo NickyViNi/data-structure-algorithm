@@ -2,6 +2,7 @@ package tree;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -205,5 +206,27 @@ public class TreeLeetcode {
             return targetSum == root.val;
         }
         return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
+    }
+
+    //637 easy -> average of levels in binary tree
+    public List<Double> averageOfLevels(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<Double> result = new ArrayList<>();
+        queue.add(root);
+        queue.add(null);
+        while (queue.peek() != null) {
+            double sum = 0;
+            int count = 0;
+            while (queue.peek() != null) {
+                TreeNode node = queue.poll();
+                sum += node.val;
+                count++;
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+            }
+            queue.add(queue.poll());
+            result.add( sum / count);
+        }
+        return result;
     }
 }
