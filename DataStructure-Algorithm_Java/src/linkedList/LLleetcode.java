@@ -395,4 +395,31 @@ public class LLleetcode {
         }
         return true;
     }
+    //61 medium -> rotate list
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null || head.next == null) return head;
+        int len = getLength(head);
+        k = k % len;
+        if (k == 0) return head;
+        int i = 1;
+        ListNode curr = head, prev = null, target = null, tail = null;
+        while (curr != null) {
+            if (i == len - k) prev = curr;
+            if (i == len - k + 1) target = curr;
+            if (i == len) tail = curr;
+            curr = curr.next;
+            i++;
+        }
+        prev.next = null; tail.next = head; head = target;
+        return head;
+    }
+    private int getLength(ListNode head) {
+        ListNode curr = head;
+        int len = 0;
+        while (curr != null) {
+            curr = curr.next;
+            len++;
+        }
+        return len;
+    }
 }
