@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ArrayLeetcode {
 
@@ -654,5 +655,16 @@ public class ArrayLeetcode {
             if (!str.equals("")) reverse = str + " " + reverse;
         }
         return reverse.trim();
+        // return Arrays.asList(s.split(" ")).reversed().stream().filter(e -> !e.equals("")).collect(Collectors.joining(" "));
+    }
+
+    //274 medium -> H-index
+    public int hIndex(int[] citations) {
+        Arrays.sort(citations);
+        int count = 1;
+        for (int i = citations.length - 1; i >= 0; i--) {
+            if (citations[i] >= count) count++;
+        }
+        return count - 1;
     }
 }
