@@ -667,4 +667,16 @@ public class ArrayLeetcode {
         }
         return count - 1;
     }
+    //1768 easy ->Merge String Alternately
+    public String mergeAlternately(String word1, String word2) {
+        String merge = "";
+        int len1 = 0;
+        int len2 = 0;
+        while (len1 < word1.length() && len2 < word2.length()) {
+            merge += String.valueOf(word1.charAt(len1++)) + String.valueOf(word2.charAt(len2++));
+        }
+        if (len1 < word1.length()) merge += word1.substring(len1, word1.length());
+        if (len2 < word2.length()) merge += word2.substring(len2, word2.length());
+        return merge;
+    }
 }
