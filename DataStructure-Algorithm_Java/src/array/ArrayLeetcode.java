@@ -646,4 +646,13 @@ public class ArrayLeetcode {
         }
         return result;
     }
+    //151 medium -> reverse words in a string
+    public String reverseWords(String s) {
+        String[] strArr = s.trim().split(" ");
+        String reverse = "";
+        for (String str : strArr) {
+            if (!str.equals("")) reverse = str + " " + reverse;
+        }
+        return reverse.trim();
+    }
 }
