@@ -726,4 +726,16 @@ public class ArrayLeetcode {
         }
         return divisor;
     }
+    //1431 super easy -> kids with the greatesr number of candies
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        List<Boolean> result = new ArrayList<>();
+        int max = 0;
+        for (int candy : candies) {
+            max = Math.max(candy, max);
+        }
+        for (int num : candies) {
+            result.add(num + extraCandies >= max);
+        }
+        return result;
+    }
 }
