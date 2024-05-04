@@ -39,5 +39,24 @@ public class MatrixLeetcode {
         }
         return ll;
     }
-
+    //48 medium -> rotate matrix 90 degree
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        // Swap the elements on both sides of the diagonal of the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        // Swap columns
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n / 2; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][n-j-1];
+                matrix[i][n-j-1] = temp;
+            }
+        }
+    }
 }
