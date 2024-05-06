@@ -766,4 +766,18 @@ public class ArrayLeetcode {
         }
         return false;
     }
+    //69 sqrt(x)
+    public int mySqrt(int x) {
+        if (x == 0 || x == 1) return x;
+        //using binary search
+        int start = 1, mid = 1, end = x;
+        while (start <= end) {
+            mid = (end - start) / 2 + start;
+            long sq = (long) mid * mid;
+            if (sq == x) return mid;
+            else if (sq < x) start = mid + 1;
+            else end = mid - 1;
+        }
+        return end;
+    }
 }
