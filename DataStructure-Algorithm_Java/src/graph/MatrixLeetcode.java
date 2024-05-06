@@ -146,4 +146,41 @@ public class MatrixLeetcode {
             }
         }
     }
+
+    //289 medium -> game of life
+    public void gameOfLife(int[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] == 1) {
+                    int count = liveHelper(board, i, j);
+                    if (count == 2 || count == 3) {
+                        board[i][j] += 2;
+                    }
+                }
+                if (board[i][j] == 0) {
+                    int count = liveHelper(board, i, j);
+                    if (count == 3) {
+                        board[i][j] += 2;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                board[i][j] >>= 1;
+            }
+        }
+    }
+
+    private int liveHelper(int[][] board, int i, int j) {
+        int count = 0;
+        for (int r = Math.max(0, i - 1); r <= Math.min(i + 1, board.length - 1); r++) {
+            for (int c = Math.max(0, j - 1); c <= Math.min(j + 1, board[0].length - 1); c++) {
+                if (r == i && c == j) continue;
+                if ((board[r][c] & 1) == 1) count++;
+            }
+        }
+        return count;
+    }
 }
