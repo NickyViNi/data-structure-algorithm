@@ -59,6 +59,27 @@ public class MatrixLeetcode {
             }
         }
     }
+    public void rotate2(int[][] matrix) {
+        int n = matrix.length;
+        //step1: swap rows
+        int top = 0, buttom = n - 1;
+        while (top < buttom) {
+            int[] temp = matrix[top];
+            matrix[top] = matrix[buttom];
+            matrix[buttom] = temp;
+            top++;
+            buttom--;
+        }
+
+        //step2: swap the elements on both sides of the diagonal of the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
 
     //73 medium -> Set matrix zeroes
     public void setZeroes(int[][] matrix) {
