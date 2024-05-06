@@ -59,4 +59,26 @@ public class MatrixLeetcode {
             }
         }
     }
+
+    //73 medium -> Set matrix zeroes
+    public void setZeroes(int[][] matrix) {
+        List<int[]> list = new LinkedList<>();
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] == 0) {
+                    list.add(new int[] {i, j});
+                }
+            }
+        }
+        for (int[] arr : list) {
+            int i = arr[0];
+            int j = arr[1];
+            for (int col = 0; col < matrix[0].length; col++) {
+                matrix[i][col] = 0;
+            }
+            for (int row = 0; row < matrix.length; row++) {
+                matrix[row][j] = 0;
+            }
+        }
+    }
 }
