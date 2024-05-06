@@ -81,4 +81,48 @@ public class MatrixLeetcode {
             }
         }
     }
+    //73 O(1) speace
+    public void setZeroes2(int[][] matrix) {
+        boolean rowHasZero = false;
+        boolean colHasZero = false;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] == 0) {
+                    if (i == 0) rowHasZero = true;
+                    if (j == 0) colHasZero = true;
+
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        for (int r = 1; r < matrix.length; r++) {
+            if (matrix[r][0] == 0) {
+                for (int c = 1; c < matrix[0].length; c++) {
+                    matrix[r][c] = 0;
+                }
+            }
+        }
+
+        for (int c = 1; c < matrix[0].length; c++) {
+            if (matrix[0][c] == 0) {
+                for (int r = 1; r < matrix.length; r++) {
+                    matrix[r][c] = 0;
+                }
+            }
+        }
+
+        if (rowHasZero) {
+            for (int n = 0; n < matrix[0].length; n++) {
+                matrix[0][n] = 0;
+            }
+        }
+
+        if (colHasZero) {
+            for (int m = 0; m < matrix.length; m++) {
+                matrix[m][0] = 0;
+            }
+        }
+    }
 }
