@@ -178,6 +178,8 @@ public class MatrixLeetcode {
         for (int r = Math.max(0, i - 1); r <= Math.min(i + 1, board.length - 1); r++) {
             for (int c = Math.max(0, j - 1); c <= Math.min(j + 1, board[0].length - 1); c++) {
                 if (r == i && c == j) continue;
+                // 3 & 1 = 1 -> 11 & 01 = 01;
+                // 2 & 1 = 0 -> 10 & 01 = 00;
                 if ((board[r][c] & 1) == 1) count++;
             }
         }
