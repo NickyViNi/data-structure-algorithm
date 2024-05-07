@@ -1,6 +1,8 @@
 package stack;
 import java.util.Stack;
 
+//155 medium -> min stack
+//way1: using one stack
 public class MinStack155 {
     int min;
     Stack<Integer> stack;
@@ -29,5 +31,37 @@ public class MinStack155 {
 
     public int getMin() {
         return min;
+    }
+}
+
+////way2: using two stacks
+class MinStack {
+    Stack<Integer> stack;
+    Stack<Integer> minstack;
+    public MinStack() {
+        this.stack = new Stack<>();
+        this.minstack = new Stack<>();
+    }
+
+    public void push(int val) {
+        stack.push(val);
+        if (minstack.empty()) {
+            minstack.push(val);
+        } else {
+            if (val <= minstack.peek()) minstack.push(val);
+        }
+    }
+
+    public void pop() {
+        int removed = stack.pop();
+        if (removed == minstack.peek()) minstack.pop();
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int getMin() {
+        return minstack.peek();
     }
 }
