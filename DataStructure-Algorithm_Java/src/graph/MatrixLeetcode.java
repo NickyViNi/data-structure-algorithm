@@ -59,4 +59,91 @@ public class MatrixLeetcode {
             }
         }
     }
+    public void rotate2(int[][] matrix) {
+        int n = matrix.length;
+        //step1: swap rows
+        int top = 0, buttom = n - 1;
+        while (top < buttom) {
+            int[] temp = matrix[top];
+            matrix[top] = matrix[buttom];
+            matrix[buttom] = temp;
+            top++;
+            buttom--;
+        }
+
+        //step2: swap the elements on both sides of the diagonal of the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
+
+    //73 medium -> Set matrix zeroes
+    public void setZeroes(int[][] matrix) {
+        List<int[]> list = new LinkedList<>();
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] == 0) {
+                    list.add(new int[] {i, j});
+                }
+            }
+        }
+        for (int[] arr : list) {
+            int i = arr[0];
+            int j = arr[1];
+            for (int col = 0; col < matrix[0].length; col++) {
+                matrix[i][col] = 0;
+            }
+            for (int row = 0; row < matrix.length; row++) {
+                matrix[row][j] = 0;
+            }
+        }
+    }
+    //73 O(1) speace
+    public void setZeroes2(int[][] matrix) {
+        boolean rowHasZero = false;
+        boolean colHasZero = false;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] == 0) {
+                    if (i == 0) rowHasZero = true;
+                    if (j == 0) colHasZero = true;
+
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        for (int r = 1; r < matrix.length; r++) {
+            if (matrix[r][0] == 0) {
+                for (int c = 1; c < matrix[0].length; c++) {
+                    matrix[r][c] = 0;
+                }
+            }
+        }
+
+        for (int c = 1; c < matrix[0].length; c++) {
+            if (matrix[0][c] == 0) {
+                for (int r = 1; r < matrix.length; r++) {
+                    matrix[r][c] = 0;
+                }
+            }
+        }
+
+        if (rowHasZero) {
+            for (int n = 0; n < matrix[0].length; n++) {
+                matrix[0][n] = 0;
+            }
+        }
+
+        if (colHasZero) {
+            for (int m = 0; m < matrix.length; m++) {
+                matrix[m][0] = 0;
+            }
+        }
+    }
 }
