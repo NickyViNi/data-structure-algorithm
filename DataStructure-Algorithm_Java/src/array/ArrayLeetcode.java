@@ -833,4 +833,26 @@ public class ArrayLeetcode {
         }
         return result.toString();
     }
+
+    public String convert2(String s, int numRows) {
+        if (s.length() <= 1 || numRows == 1 || numRows >= s.length()) return s;
+        StringBuilder[] zags = new StringBuilder[numRows];
+        for (int i = 0; i < numRows; i++) {
+            zags[i] = new StringBuilder();
+        }
+        int row = 0;
+        boolean status = false;
+        for (int i = 0; i < s.length(); i++) {
+            zags[row].append(s.charAt(i));
+            row += status ? -1 : 1;
+            if (row == 0) status = false;
+            else if (row + 1 == numRows) status = true;
+        }
+
+        StringBuilder res = new StringBuilder();
+        for (StringBuilder str : zags) {
+            res.append(str);
+        }
+        return res.toString();
+    }
 }
