@@ -799,4 +799,60 @@ public class ArrayLeetcode {
         }
         return result;
     }
+    //134 medium -> gas station
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        if (gas == null || cost == null || gas.length == 0 || cost.length == 0) return -1;
+        int totalGasLeft = 0, currGasLeft = 0, startStation = 0;
+        for (int i = 0; i < gas.length; i++) {
+            totalGasLeft += gas[i] - cost[i];
+            currGasLeft += gas[i] - cost[i];
+            if (currGasLeft < 0) {
+                startStation = i + 1;
+                currGasLeft = 0;
+            }
+        }
+        return totalGasLeft >= 0 ? startStation : -1;
+    }
+    //6 medium -> zigZag conversion
+    public String convert(String s, int numRows) {
+        if (s.length() <= 1 || numRows >= s.length()) return s;
+        Map<Integer, String> map = new HashMap<>();
+        int row = 1;
+        boolean status = false;
+        for (int i = 0; i < s.length(); i++) {
+            String ch = String.valueOf(s.charAt(i));
+            map.put(row, map.getOrDefault(row, "") + ch);
+            row += status ? -1 : 1;
+            if (row == 1) status = false;
+            else if (row == numRows) status = true;
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (String str : map.values()) {
+          result.append(str);
+        }
+        return result.toString();
+    }
+
+    public String convert2(String s, int numRows) {
+        if (s.length() <= 1 || numRows == 1 || numRows >= s.length()) return s;
+        StringBuilder[] zags = new StringBuilder[numRows];
+        for (int i = 0; i < numRows; i++) {
+            zags[i] = new StringBuilder();
+        }
+        int row = 0;
+        boolean status = false;
+        for (int i = 0; i < s.length(); i++) {
+            zags[row].append(s.charAt(i));
+            row += status ? -1 : 1;
+            if (row == 0) status = false;
+            else if (row + 1 == numRows) status = true;
+        }
+
+        StringBuilder res = new StringBuilder();
+        for (StringBuilder str : zags) {
+            res.append(str);
+        }
+        return res.toString();
+    }
 }
