@@ -813,4 +813,24 @@ public class ArrayLeetcode {
         }
         return totalGasLeft >= 0 ? startStation : -1;
     }
+    //6 medium -> zigZag conversion
+    public String convert(String s, int numRows) {
+        if (s.length() <= 1 || numRows >= s.length()) return s;
+        Map<Integer, String> map = new HashMap<>();
+        int row = 1;
+        boolean status = false;
+        for (int i = 0; i < s.length(); i++) {
+            String ch = String.valueOf(s.charAt(i));
+            map.put(row, map.getOrDefault(row, "") + ch);
+            row += status ? -1 : 1;
+            if (row == 1) status = false;
+            else if (row == numRows) status = true;
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (String str : map.values()) {
+          result.append(str);
+        }
+        return result.toString();
+    }
 }
