@@ -799,4 +799,18 @@ public class ArrayLeetcode {
         }
         return result;
     }
+    //134 medium -> gas station
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        if (gas == null || cost == null || gas.length == 0 || cost.length == 0) return -1;
+        int totalGasLeft = 0, currGasLeft = 0, startStation = 0;
+        for (int i = 0; i < gas.length; i++) {
+            totalGasLeft += gas[i] - cost[i];
+            currGasLeft += gas[i] - cost[i];
+            if (currGasLeft < 0) {
+                startStation = i + 1;
+                currGasLeft = 0;
+            }
+        }
+        return totalGasLeft >= 0 ? startStation : -1;
+    }
 }
