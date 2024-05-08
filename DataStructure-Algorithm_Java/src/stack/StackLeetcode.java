@@ -20,4 +20,27 @@ public class StackLeetcode {
         }
         return result.length() == 0? "/" : result;
     }
+
+    //150 medium -> Evaluate reverse polish notation
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        for (String str : tokens) {
+            if (str.equals("+")) {
+                stack.push(stack.pop() + stack.pop());
+            } else if (str.equals("-")) {
+                int num2 = stack.pop();
+                int num1 = stack.pop();
+                stack.push(num1 - num2);
+            } else if (str.equals("*")) {
+                stack.push(stack.pop() * stack.pop());
+            } else if (str.equals("/")) {
+                int num2 = stack.pop();
+                int num1 = stack.pop();
+                stack.push(num1 / num2);
+            } else {
+                stack.push(Integer.parseInt(str));
+            }
+        }
+        return stack.pop();
+    }
 }
