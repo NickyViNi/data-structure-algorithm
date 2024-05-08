@@ -855,4 +855,21 @@ public class ArrayLeetcode {
         }
         return res.toString();
     }
+
+    //56 medium -> merge intervals
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> (a[0] - b[0]));
+        List<int[]> merges = new ArrayList<>();
+        int[] curr = intervals[0];
+        for (int i = 1; i < intervals.length; i++) {
+            if (curr[1] >= intervals[i][0]) {
+                curr[1] = Math.max(curr[1], intervals[i][1]);
+            } else {
+                merges.add(curr);
+                curr = intervals[i];
+            }
+        }
+        merges.add(curr);
+        return merges.toArray(new int[merges.size()][2]);
+    }
 }
