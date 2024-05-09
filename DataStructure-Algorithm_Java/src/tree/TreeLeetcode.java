@@ -276,4 +276,24 @@ public class TreeLeetcode {
         traversal(node.left, value * 10 + node.val);
         traversal(node.right, value * 10 + node.val);
     }
+
+    //116 medium -> Populating next right pointer in each node: perfect binary tree
+    public TreeNode connect(TreeNode root) {
+        if (root == null) return root;
+        TreeNode curr = root;
+        while (curr != null) {
+            TreeNode head = curr;
+            while (curr != null) {
+                if (curr.left != null) {
+                    curr.left.next = curr.right;
+                }
+                if (curr.right != null && curr.next != null) {
+                    curr.right.next = curr.next.left;
+                }
+                curr = curr.next;
+            }
+            curr = head.left;
+        }
+        return root;
+    }
 }
