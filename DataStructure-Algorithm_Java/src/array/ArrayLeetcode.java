@@ -855,4 +855,56 @@ public class ArrayLeetcode {
         }
         return res.toString();
     }
+
+    //56 medium -> merge intervals
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> (a[0] - b[0]));
+        List<int[]> merges = new ArrayList<>();
+        int[] curr = intervals[0];
+        for (int i = 1; i < intervals.length; i++) {
+            if (curr[1] >= intervals[i][0]) {
+                curr[1] = Math.max(curr[1], intervals[i][1]);
+            } else {
+                merges.add(curr);
+                curr = intervals[i];
+            }
+        }
+        merges.add(curr);
+        return merges.toArray(new int[merges.size()][2]);
+    }
+
+    //57 medium -> Insert Interval
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        if (intervals.length == 0) return new int[][]{newInterval};
+
+        int[][] temp = new int[intervals.length + 1][2];
+        List<int[]> res = new ArrayList<>();
+
+        //insert newInterval into temp matrix:
+        boolean add = true;
+        int idx = 0;
+        for (int i = 0; i < temp.length; i++) {
+            if (add && idx < intervals.length && newInterval[0] <= intervals[idx][0]) {
+                temp[i] = newInterval;
+                add = false;
+            } else if (idx < intervals.length){
+                temp[i] = intervals[idx++];
+            }
+        }
+        if(temp[temp.length - 1][0] == 0) temp[temp.length - 1] = newInterval;
+
+        //merge overlap array:
+        int[] curr = temp[0];
+        for (int j = 1; j < temp.length; j++) {
+            if (curr[1] < temp[j][0]) {
+                res.add(curr);
+                curr = temp[j];
+            } else {
+                curr[1] = Math.max(curr[1], temp[j][1]);
+            }
+        }
+        res.add(curr);
+
+        return res.toArray(new int[res.size()][2]);
+    }
 }
