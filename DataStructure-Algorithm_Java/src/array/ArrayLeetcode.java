@@ -933,6 +933,19 @@ public class ArrayLeetcode {
     //452 medium -> Minimum number of arrows to burst balloons
     public int findMinArrowShots(int[][] points) {
         Arrays.sort(points, (a, b) -> Integer.compare(a[0], b[0]));
+        int xend = points[0][1];
+        int arrows = 1;
+        for (int i = 1; i < points.length; i++) {
+            if (xend < points[i][0]) {
+                arrows++;
+                xend = points[i][1];
+            }
+            xend = Math.min(xend, points[i][1]);
+        }
+        return arrows;
+    }
+    public int findMinArrowShots2(int[][] points) {
+        Arrays.sort(points, (a, b) -> Integer.compare(a[0], b[0]));
         int[] curr = points[0];
         int arrows = 1;
         for (int i = 1; i < points.length; i++) {
