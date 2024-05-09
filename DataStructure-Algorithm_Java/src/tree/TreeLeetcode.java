@@ -259,4 +259,21 @@ public class TreeLeetcode {
         prevVal = root.val;
         if (root.right != null) inorder(root.right);
     }
+
+    //129 medium -> Sum root to leaf numbers
+    int sum = 0;
+    public int sumNumbers(TreeNode root) {
+        if (root.left == null && root.right == null) return root.val;
+        traversal(root, 0);
+        return sum;
+    }
+    private void traversal(TreeNode node, int value) {
+        if (node == null) return;
+        if (node.left == null && node.right == null) {
+            sum += value * 10 + node.val;
+            return;
+        }
+        traversal(node.left, value * 10 + node.val);
+        traversal(node.right, value * 10 + node.val);
+    }
 }
