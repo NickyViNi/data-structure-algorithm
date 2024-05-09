@@ -907,4 +907,26 @@ public class ArrayLeetcode {
 
         return res.toArray(new int[res.size()][2]);
     }
+
+    public int[][] insert2(int[][] intervals, int[] newInterval) {
+        if (intervals.length == 0) return new int[][]{newInterval};
+        List<int[]> res = new ArrayList<>();
+        boolean added = false;
+        for (int i = 0; i < intervals.length; i++) {
+            int maxStart = Math.max(intervals[i][0], newInterval[0]);
+            int minEnd = Math.min(intervals[i][1], newInterval[1]);
+            if (maxStart > minEnd) {
+                if (newInterval[1] < intervals[i][1] && added == false) {
+                    res.add(newInterval);
+                    added = true;
+                }
+                res.add(intervals[i]);
+            } else { //maxStart > minEnd, has overlap
+                newInterval[0] = Math.min(intervals[i][0], newInterval[0]);
+                newInterval[1] = Math.max(intervals[i][1], newInterval[1]);
+            }
+        }
+        if (added == false) res.add(newInterval);
+        return res.toArray(new int[res.size()][2]);
+    }
 }
