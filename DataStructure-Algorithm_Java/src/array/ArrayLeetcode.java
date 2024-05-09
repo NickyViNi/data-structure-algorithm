@@ -929,4 +929,21 @@ public class ArrayLeetcode {
         if (added == false) res.add(newInterval);
         return res.toArray(new int[res.size()][2]);
     }
+
+    //452 medium -> Minimum number of arrows to burst balloons
+    public int findMinArrowShots(int[][] points) {
+        Arrays.sort(points, (a, b) -> Integer.compare(a[0], b[0]));
+        int[] curr = points[0];
+        int arrows = 1;
+        for (int i = 1; i < points.length; i++) {
+            if (curr[1] >= points[i][0]) {
+                curr[0] = Math.max(curr[0], points[i][0]);
+                curr[1] = Math.min(curr[1], points[i][1]);
+            } else {
+                arrows++;
+                curr = points[i];
+            }
+        }
+        return arrows;
+    }
 }
