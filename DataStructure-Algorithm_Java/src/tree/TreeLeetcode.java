@@ -259,4 +259,49 @@ public class TreeLeetcode {
         prevVal = root.val;
         if (root.right != null) inorder(root.right);
     }
+
+    //129 medium -> Sum root to leaf numbers
+    int sum = 0;
+    public int sumNumbers(TreeNode root) {
+        if (root.left == null && root.right == null) return root.val;
+        traversal(root, 0);
+        return sum;
+    }
+    private void traversal(TreeNode node, int value) {
+        if (node == null) return;
+        if (node.left == null && node.right == null) {
+            sum += value * 10 + node.val;
+            return;
+        }
+        traversal(node.left, value * 10 + node.val);
+        traversal(node.right, value * 10 + node.val);
+    }
+
+    //116 medium -> Populating next right pointer in each node: perfect binary tree
+    public TreeNode connect(TreeNode root) {
+        if (root == null) return root;
+        TreeNode curr = root;
+        while (curr != null) {
+            TreeNode head = curr;
+            while (curr != null) {
+                if (curr.left != null) {
+                    curr.left.next = curr.right;
+                }
+                if (curr.right != null && curr.next != null) {
+                    curr.right.next = curr.next.left;
+                }
+                curr = curr.next;
+            }
+            curr = head.left;
+        }
+        return root;
+    }
+    public TreeNode connect2 (TreeNode root) {
+        if (root == null) return root;
+        if (root.left != null) root.left.next = root.right;
+        if (root.right != null && root.next != null) root.right.next = root.next.left;
+        connect(root.left);
+        connect(root.right);
+        return root;
+    }
 }
