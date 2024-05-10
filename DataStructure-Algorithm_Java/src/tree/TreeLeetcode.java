@@ -356,4 +356,30 @@ public class TreeLeetcode {
         }
         return root;
     }
+
+    //173 medium -> binary search tree iterator
+    class BSTIterator {
+        Stack<TreeNode> stack;
+        TreeNode curr;
+        public BSTIterator(TreeNode root) {
+            this.stack = new Stack<>();
+            this.curr = root;
+        }
+
+        public int next() {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            int value = curr.val;
+            curr = curr.right;
+            return value;
+        }
+
+        public boolean hasNext() {
+            if (stack.empty() && curr == null) return false;
+            return true;
+        }
+    }
 }
