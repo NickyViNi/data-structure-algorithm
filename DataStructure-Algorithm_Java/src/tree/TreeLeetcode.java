@@ -391,4 +391,22 @@ public class TreeLeetcode {
         if (left != null && right != null) return root;
         return left == null ? right : left;
     }
+
+    //199 medium -> Binary Tree right side view
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root == null) return result;
+        queue.offer(root);
+        while (queue.size() > 0) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (i == 0) result.add(node.val);
+                if (node.right != null) queue.offer(node.right);
+                if (node.left != null) queue.offer(node.left);
+            }
+        }
+        return result;
+    }
 }
