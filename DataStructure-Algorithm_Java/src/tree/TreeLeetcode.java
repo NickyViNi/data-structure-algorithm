@@ -1,5 +1,6 @@
 package tree;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -302,6 +303,57 @@ public class TreeLeetcode {
         if (root.right != null && root.next != null) root.right.next = root.next.left;
         connect(root.left);
         connect(root.right);
+        return root;
+    }
+
+    //117 medium -> Populating next right pointer in each node: general binary tree
+    public TreeNode connectII(TreeNode root) { // O(1) space
+        if (root == null) return root;
+        TreeNode head = null;
+        TreeNode pre = null;
+        TreeNode curr = root;
+        while (curr != null) {
+            while (curr != null) {
+                if (curr.left != null) {
+                    if (head == null) {
+                        head = curr.left;
+                        pre = curr.left;
+                    } else {
+                        pre.next = curr.left;
+                        pre = curr.left;
+                    }
+                }
+                if (curr.right != null) {
+                    if (head == null) {
+                        head = curr.right;
+                        pre = curr.right;
+                    } else {
+                        pre.next = curr.right;
+                        pre = curr.right;
+                    }
+                }
+                curr = curr.next;
+            }
+            curr = head;
+            head = null;
+            pre = null;
+        }
+        return root;
+    }
+    public TreeNode connectII2(TreeNode root) { // O(n) space
+        if (root == null) return root;
+        // Queue<Node> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+        while (queue.size() != 0) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (i < size - 1) node.next = queue.peek();
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+            }
+        }
         return root;
     }
 }
