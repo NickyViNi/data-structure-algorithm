@@ -1,5 +1,6 @@
 package tree;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -336,6 +337,22 @@ public class TreeLeetcode {
             curr = head;
             head = null;
             pre = null;
+        }
+        return root;
+    }
+    public TreeNode connectII2(TreeNode root) { // O(n) space
+        if (root == null) return root;
+        // Queue<Node> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+        while (queue.size() != 0) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (i < size - 1) node.next = queue.peek();
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+            }
         }
         return root;
     }
