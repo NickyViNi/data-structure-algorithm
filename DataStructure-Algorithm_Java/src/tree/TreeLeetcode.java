@@ -304,4 +304,39 @@ public class TreeLeetcode {
         connect(root.right);
         return root;
     }
+
+    //117 medium -> Populating next right pointer in each node: general binary tree
+    public TreeNode connectII(TreeNode root) { // O(1) space
+        if (root == null) return root;
+        TreeNode head = null;
+        TreeNode pre = null;
+        TreeNode curr = root;
+        while (curr != null) {
+            while (curr != null) {
+                if (curr.left != null) {
+                    if (head == null) {
+                        head = curr.left;
+                        pre = curr.left;
+                    } else {
+                        pre.next = curr.left;
+                        pre = curr.left;
+                    }
+                }
+                if (curr.right != null) {
+                    if (head == null) {
+                        head = curr.right;
+                        pre = curr.right;
+                    } else {
+                        pre.next = curr.right;
+                        pre = curr.right;
+                    }
+                }
+                curr = curr.next;
+            }
+            curr = head;
+            head = null;
+            pre = null;
+        }
+        return root;
+    }
 }
