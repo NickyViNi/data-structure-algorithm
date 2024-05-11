@@ -383,6 +383,17 @@ public class TreeLeetcode {
         }
     }
 
+    //235 medium -> Lowest Common Ancestor of Binary Search Tree
+    public TreeNode lowestCommonAncestorBST(TreeNode root, TreeNode p, TreeNode q) {
+        if (root.val > p.val && root.val > q.val) {
+            return lowestCommonAncestor(root.left, p, q);
+        } else if (root.val < p.val && root.val < q.val) {
+            return lowestCommonAncestor(root.right, p, q);
+        } else {
+            return root;
+        }
+    }
+
     //236 medium -> Lowest Common Ancestor of Binary Tree
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) return root;
@@ -410,7 +421,7 @@ public class TreeLeetcode {
         return result;
     }
 
-    //102 medium -> Binary Tree level order travelal
+    //102 medium -> Binary Tree level order traversal
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;
