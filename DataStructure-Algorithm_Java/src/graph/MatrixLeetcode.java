@@ -185,4 +185,33 @@ public class MatrixLeetcode {
         }
         return count;
     }
+
+    //200 medium -> number of islands
+    class Solution {
+        private int row;
+        private int col;
+        public int numIslands(char[][] grid) {
+            row = grid.length;
+            if (row == 0 ) return 0;
+            col = grid[0].length;
+            int islandNum = 0;
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    if (grid[i][j] == '1') {
+                        dfs(grid, i, j);
+                        islandNum++;
+                    }
+                }
+            }
+            return islandNum;
+        }
+        private void dfs(char[][] matrix, int r, int c) {
+            if (r < 0 || r >= row || c < 0 || c >= col || matrix[r][c] == '0') return;
+            matrix[r][c] = '0';
+            dfs(matrix, r + 1, c);
+            dfs(matrix, r - 1, c);
+            dfs(matrix, r, c + 1);
+            dfs(matrix, r, c - 1);
+        }
+    }
 }
