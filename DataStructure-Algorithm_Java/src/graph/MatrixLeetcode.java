@@ -214,4 +214,36 @@ public class MatrixLeetcode {
             dfs(matrix, r, c - 1);
         }
     }
+
+    //130 medium -> surrounded regions
+    public void solve(char[][] board) {
+        if (board == null || board.length == 0) return;
+        int r = board.length - 1;
+        int c = board[0].length - 1;
+        //top and bottom border
+        for (int i = 0; i <= c; i++) {
+            if (board[0][i] == 'O') dfs(board, 0, i);
+            if (board[r][i] == 'O') dfs(board, r, i);
+        }
+        //left and right border
+        for (int j = 0; j <= r; j++) {
+            if (board[j][0] == 'O') dfs(board, j, 0);
+            if (board[j][c] == 'O') dfs(board, j, c);
+        }
+        //let 'O' = 'X', 'A' = 'O'
+        for (int n = 0; n <= r; n++) {
+            for (int m = 0; m <= c; m++) {
+                if (board[n][m] == 'O') board[n][m] = 'X';
+                else if (board[n][m] == 'A') board[n][m] = 'O';
+            }
+        }
+    }
+    private void dfs(char[][] board, int i, int j) {
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] != 'O') return;
+        board[i][j] = 'A';
+        dfs(board, i+1, j);
+        dfs(board, i-1, j);
+        dfs(board, i, j+1);
+        dfs(board, i, j-1);
+    }
 }
