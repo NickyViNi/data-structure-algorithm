@@ -1085,4 +1085,23 @@ public class ArrayLeetcode {
         }
         return result;
     }
+    // way2: recursive
+    List<String> combination = new ArrayList<>();
+    public List<String> letterCombinations2(String digits) {
+        String[] letterCombs = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        if (digits.length() > 0) combinationHelper(letterCombs, digits, 0, "");
+        return combination;
+    }
+    private void combinationHelper(String[] letterCombs, String digits, int idx, String str) {
+        if (str.length() == digits.length()) {
+            combination.add(str);
+            return;
+        }
+        int digit = digits.charAt(idx) - '0';
+        String letters = letterCombs[digit];
+        for (int i = 0; i < letters.length(); i++) {
+            combinationHelper(letterCombs, digits, idx + 1, str + letters.charAt(i));
+        }
+    }
+
 }
