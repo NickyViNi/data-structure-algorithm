@@ -959,4 +959,23 @@ public class ArrayLeetcode {
         }
         return arrows;
     }
+    //678 medium -> valid parenthesis string
+    public boolean checkValidString(String s) {
+        int min = 0; //The minimum demand of ')'
+        int max = 0; //The maximum demand of ')'
+        for (char ch : s.toCharArray()) {
+            if (ch == '(') {
+                min++;
+                max++;
+            } else if (ch == ')') {
+                if (min > 0) min--;
+                max--;
+            } else if (ch == '*') {
+                if (min > 0) min--; // let '*' as ')'
+                max++; // let '*' as '('
+            }
+            if (max < 0) return false;
+        }
+        return min == 0;
+    }
 }
