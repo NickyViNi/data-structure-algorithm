@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -1059,5 +1061,28 @@ public class ArrayLeetcode {
             else if (after > curr) start = mid + 1;
         }
         return -1;
+    }
+
+    //17 letters combination of phone number
+    public List<String> letterCombinations(String digits) {
+        if (digits.length() == 0) return new ArrayList<>();
+        String[] letterCombs = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        Queue<String> queue = new LinkedList<>();
+        queue.offer("");
+        for(int i = 0; i < digits.length(); i++) {
+            int digit = digits.charAt(i) - '0';
+            while (queue.peek().length() == i) {
+                String letters = letterCombs[digit];
+                String str = queue.poll();
+                for (char letter : letters.toCharArray()) {
+                    queue.offer(str + letter);
+                }
+            }
+        }
+        List<String> result = new ArrayList<>();
+        while(!queue.isEmpty()) {
+            result.add(queue.poll());
+        }
+        return result;
     }
 }
