@@ -2,6 +2,7 @@ package graph;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class MatrixLeetcode {
     //54 medium -> Spiral Matrix
@@ -213,5 +214,111 @@ public class MatrixLeetcode {
             dfs(matrix, r, c + 1);
             dfs(matrix, r, c - 1);
         }
+    }
+
+    //130 medium -> surrounded regions
+    public void solve(char[][] board) {
+        if (board == null || board.length == 0) return;
+        int r = board.length - 1;
+        int c = board[0].length - 1;
+        //top and bottom border
+        for (int i = 0; i <= c; i++) {
+            if (board[0][i] == 'O') dfs(board, 0, i);
+            if (board[r][i] == 'O') dfs(board, r, i);
+        }
+        //left and right border
+        for (int j = 0; j <= r; j++) {
+            if (board[j][0] == 'O') dfs(board, j, 0);
+            if (board[j][c] == 'O') dfs(board, j, c);
+        }
+        //let 'O' = 'X', 'A' = 'O'
+        for (int n = 0; n <= r; n++) {
+            for (int m = 0; m <= c; m++) {
+                if (board[n][m] == 'O') board[n][m] = 'X';
+                else if (board[n][m] == 'A') board[n][m] = 'O';
+            }
+        }
+    }
+    private void dfs(char[][] board, int i, int j) {
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] != 'O') return;
+        board[i][j] = 'A';
+        dfs(board, i+1, j);
+        dfs(board, i-1, j);
+        dfs(board, i, j+1);
+        dfs(board, i, j-1);
+    }
+
+    //207 medium -> courses schedule
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        //calculate each course has how many prerequisites
+        int[] courses = new int[numCourses];
+        for (int[] pre : prerequisites) {
+            courses[pre[0]]++;
+        }
+
+        //add the courses which don't need prerequisites
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (courses[i] == 0) queue.offer(i);
+        }
+
+        //iterate the prerequisites, queue and courses
+        while (!queue.isEmpty()) {
+            int course = queue.poll();
+            for (int[] re : prerequisites) {
+                if (courses[re[0]] == 0) continue;
+                if (re[1] == course) courses[re[0]]--;
+                if (courses[re[0]] == 0) queue.offer(re[0]);
+            }
+        }
+
+        //check whether the courses element greater than 0
+        for (int course : courses) {
+            if (course != 0) return false;
+        }
+        return true;
+    }
+
+    //210 medium -> courses scheduleII
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        int[] res = new int[numCourses];
+        int count = 0;
+        //calculate each course has how many prerequisites
+        int[] courses = new int[numCourses];
+        for (int[] pre : prerequisites) {
+            courses[pre[0]]++;
+        }
+
+        //add the courses which don't need prerequisites
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (courses[i] == 0)  {
+                queue.offer(i);
+                res[count++] = i;
+            }
+        }
+
+        //iterate the prerequisites, queue, if the precourse is in the queue, decrease the courses
+        while (!queue.isEmpty()) {
+            int course = queue.poll();
+            for (int[] re : prerequisites) {
+                if (re[1] == course) {
+                    courses[re[0]]--;
+                    if (courses[re[0]] == 0) {
+                    queue.offer(re[0]);
+                    res[count++] = re[0];
+                    }
+                }
+            }
+        }
+
+        return count == numCourses ? res : new int[0];
+
+        //check whether the courses element greater than 0
+        // for (int course : courses) {
+        //     if (course != 0) return new int[0];
+        // }
+
+        // return res;
     }
 }

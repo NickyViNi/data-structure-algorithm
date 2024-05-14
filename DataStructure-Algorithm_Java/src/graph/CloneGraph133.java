@@ -23,8 +23,24 @@ public class CloneGraph133 {
         }
     }
 
-    //way 1:
-    public Node cloneGraph1(Node node) {
+    //way1:
+    HashMap<Node, Node> oldNewMap = new HashMap<>();
+    public Node cloneGraph(Node node) {
+        if (node == null) return node;
+        Node copy = new Node(node.val);
+        oldNewMap.put(node, copy);
+        for (Node nei : node.neighbors) {
+            if (oldNewMap.containsKey(nei)) {
+                copy.neighbors.add(oldNewMap.get(nei));
+            } else {
+                copy.neighbors.add(cloneGraph(nei));
+            }
+        }
+        return copy;
+    }
+
+    //way 2:
+    public Node cloneGraph2(Node node) {
         if (node == null) return node;
         HashMap<Node, Node> oldToNewMap = new HashMap<>();
         return copyGraph(node, oldToNewMap);
@@ -43,8 +59,8 @@ public class CloneGraph133 {
         return copy;
     }
 
-    //way 2:
-    public Node cloneGraph2(Node node) {
+    //way 3:
+    public Node cloneGraph3(Node node) {
         if (node == null) return node;
         HashMap<Node, Node> oldToNewMap = new HashMap<>();
         copyNode(node, oldToNewMap);
