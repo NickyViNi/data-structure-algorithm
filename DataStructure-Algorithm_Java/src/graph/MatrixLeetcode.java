@@ -2,6 +2,7 @@ package graph;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class MatrixLeetcode {
     //54 medium -> Spiral Matrix
@@ -245,5 +246,36 @@ public class MatrixLeetcode {
         dfs(board, i-1, j);
         dfs(board, i, j+1);
         dfs(board, i, j-1);
+    }
+
+    //207 medium -> courses schedule
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        //calculate each course has how many prerequisites
+        int[] courses = new int[numCourses];
+        for (int[] pre : prerequisites) {
+            courses[pre[0]]++;
+        }
+
+        //add the courses which don't need prerequisites
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (courses[i] == 0) queue.offer(i);
+        }
+
+        //iterate the prerequisites, queue and courses
+        while (!queue.isEmpty()) {
+            int course = queue.poll();
+            for (int[] re : prerequisites) {
+                if (courses[re[0]] == 0) continue;
+                if (re[1] == course) courses[re[0]]--;
+                if (courses[re[0]] == 0) queue.offer(re[0]);
+            }
+        }
+
+        //check whether the courses element greater than 0
+        for (int course : courses) {
+            if (course != 0) return false;
+        }
+        return true;
     }
 }
