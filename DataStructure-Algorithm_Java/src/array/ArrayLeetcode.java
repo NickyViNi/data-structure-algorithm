@@ -959,4 +959,51 @@ public class ArrayLeetcode {
         }
         return arrows;
     }
+    //678 medium -> valid parenthesis string
+    public boolean checkValidString(String s) {
+        int min = 0; //The minimum demand of ')'
+        int max = 0; //The maximum demand of ')'
+        for (char ch : s.toCharArray()) {
+            if (ch == '(') {
+                min++;
+                max++;
+            } else if (ch == ')') {
+                if (min > 0) min--;
+                max--;
+            } else if (ch == '*') {
+                if (min > 0) min--; // let '*' as ')'
+                max++; // let '*' as '('
+            }
+            if (max < 0) return false;
+        }
+        return min == 0;
+    }
+
+    public boolean checkValidString2(String s) {
+        int stars = 0, opens = 0, closes = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == '(') opens++;
+            else if (ch == ')') closes++;
+            else stars++;
+            if (closes > opens) {
+                if (stars == 0) return false;
+                stars--;
+                closes--;
+            }
+        }
+        stars = opens = closes = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            char ch = s.charAt(i);
+            if (ch == '(') opens++;
+            else if (ch == ')') closes++;
+            else stars++;
+            if (opens > closes) {
+                if (stars == 0) return false;
+                stars--;
+                opens--;
+            }
+        }
+        return true;
+    }
 }
