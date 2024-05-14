@@ -978,4 +978,32 @@ public class ArrayLeetcode {
         }
         return min == 0;
     }
+
+    public boolean checkValidString2(String s) {
+        int stars = 0, opens = 0, closes = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == '(') opens++;
+            else if (ch == ')') closes++;
+            else stars++;
+            if (closes > opens) {
+                if (stars == 0) return false;
+                stars--;
+                closes--;
+            }
+        }
+        stars = opens = closes = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            char ch = s.charAt(i);
+            if (ch == '(') opens++;
+            else if (ch == ')') closes++;
+            else stars++;
+            if (opens > closes) {
+                if (stars == 0) return false;
+                stars--;
+                opens--;
+            }
+        }
+        return true;
+    }
 }
