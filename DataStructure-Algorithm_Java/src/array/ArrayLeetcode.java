@@ -1006,4 +1006,24 @@ public class ArrayLeetcode {
         }
         return true;
     }
+
+    //918 medium -> maximum sum circular subarray
+    //Kadane's algorithm
+    public int maxSubarraySumCircular(int[] nums) {
+        if (nums.length == 0) return 0;
+        int maxGlobalSum = nums[0];
+        int maxCurrSum = nums[0];
+        int minGlobalSum = nums[0];
+        int minCurrSum = nums[0];
+        int sum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            maxCurrSum = Math.max(nums[i], nums[i] + maxCurrSum);
+            maxGlobalSum = Math.max(maxCurrSum, maxGlobalSum);
+            minCurrSum = Math.min(nums[i], nums[i] + minCurrSum);
+            minGlobalSum = Math.min(minCurrSum, minGlobalSum);
+            sum += nums[i];
+        }
+        if (sum == minGlobalSum) return maxGlobalSum;
+        return Math.max(maxGlobalSum, sum - minGlobalSum);
+    }
 }
