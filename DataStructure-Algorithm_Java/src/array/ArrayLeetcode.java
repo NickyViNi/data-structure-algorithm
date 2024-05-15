@@ -1143,4 +1143,29 @@ public class ArrayLeetcode {
         }
         return finaMax;
     }
+
+    //34 medium -> binary search: find first and last element position in sorted array
+    public int[] searchRange(int[] nums, int target) {
+        if (nums == null || nums.length == 0) return new int[] {-1, -1};
+        int left = findPosition(nums, target, true);
+        int right = findPosition(nums, target, false);
+        return new int[] {left, right};
+    }
+    private int findPosition(int[] nums, int target, boolean isFindLeft) {
+        int l = 0, r = nums.length -1, idx = -1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+            if (nums[m] > target) r = m - 1;
+            else if (nums[m] < target) l = m + 1;
+            else {
+                idx = m;
+                if (isFindLeft) {
+                    r = m - 1;
+                } else {
+                    l = m + 1;
+                }
+            }
+        }
+        return idx;
+    }
 }
