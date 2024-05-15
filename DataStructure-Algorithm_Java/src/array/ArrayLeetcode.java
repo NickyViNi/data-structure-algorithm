@@ -1104,4 +1104,17 @@ public class ArrayLeetcode {
         }
     }
 
+    //172 medium -> Factorial trailing zeroes
+    public int trailingZeroes(int n) { //T: O(logn)
+        // int zero = 0;
+        // while (n > 0) {
+        //     n /= 5;
+        //     zero += n;
+        // }
+        // return zero;
+        return n == 0 ? 0 : n / 5 + trailingZeroes(n / 5);
+    }
+    /*trailing zeroes in the factorial of a number are caused by the multiplication of 2 and 5,
+    and since there are usually more factors of 2 than 5,
+    the number of factors of 5 determines the number of trailing zeroes. */
 }
