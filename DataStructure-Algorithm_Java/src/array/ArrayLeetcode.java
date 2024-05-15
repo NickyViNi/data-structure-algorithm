@@ -1104,4 +1104,43 @@ public class ArrayLeetcode {
         }
     }
 
+    //172 medium -> Factorial trailing zeroes
+    public int trailingZeroes(int n) { //T: O(logn)
+        // int zero = 0;
+        // while (n > 0) {
+        //     n /= 5;
+        //     zero += n;
+        // }
+        // return zero;
+        return n == 0 ? 0 : n / 5 + trailingZeroes(n / 5);
+    }
+    /*trailing zeroes in the factorial of a number are caused by the multiplication of 2 and 5,
+    and since there are usually more factors of 2 than 5,
+    the number of factors of 5 determines the number of trailing zeroes. */
+
+    //149 hard -> Max points on a line
+    public int maxPoints(int[][] points) {
+        int len = points.length;
+        if (len <= 2) return len;
+        int finaMax = 1;
+
+        for (int i = 0; i < len; i++) {
+            HashMap<Double, Integer> slopeMap = new HashMap<>();
+            int samePoints = 0;
+            int currMax = 0;
+            for (int j = i + 1; j < len; j++) {
+                int x1 = points[i][0], y1 = points[i][1];
+                int x2 = points[j][0], y2 = points[j][1];
+                if (x1 == x2 && y1 == y2) {
+                    samePoints++;
+                    continue;
+                }
+                double slope = x1 == x2 ? Double.POSITIVE_INFINITY : y1 == y2 ? 0 : ((double) (y2 - y1)) / (x2 - x1);
+                slopeMap.put(slope, slopeMap.getOrDefault(slope, 0) + 1);
+                currMax = Math.max(currMax, slopeMap.get(slope));
+            }
+            finaMax = Math.max(finaMax, currMax + samePoints + 1);
+        }
+        return finaMax;
+    }
 }
