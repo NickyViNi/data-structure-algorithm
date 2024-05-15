@@ -1,5 +1,6 @@
 package graph;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -336,5 +337,64 @@ public class MatrixLeetcode {
             else end = mid - 1;
         }
         return false;
+    }
+
+    //433 medium -> minimum genetic mutation
+    //BFS
+    public int minMutation(String startGene, String endGene, String[] bank) {
+        if (startGene.equals(endGene)) return 0;
+        HashSet<String> bankSet = new HashSet<>();
+        for (String str : bank) {
+            bankSet.add(str);
+        }
+
+        if (!bankSet.contains(endGene)) return -1;
+        char[] choices = {'A', 'C', 'G', 'T'};
+        Queue<String> queue = new LinkedList<>();
+        HashSet<String> visited = new HashSet<>();
+        queue.offer(startGene);
+        visited.add(startGene);
+        int step = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                String curr = queue.poll();
+                for (int j = 0; j < curr.length(); j++) {
+                    char[] currArray = curr.toCharArray();
+                    for (char gene : choices) {
+                        if (gene == currArray[j]) continue; // Skip if it's the same gene
+                        currArray[j] = gene;
+                        String nextGene = new String(currArray);
+                        if (nextGene.equals(endGene)) return step + 1;
+                        if (bankSet.contains(nextGene) && !visited.contains(nextGene)) {
+                            queue.offer(nextGene);
+                            visited.add(nextGene);
+                        }
+                    }
+                }
+            }
+            step++;
+        }
+        return -1;
+    //     while (!queue.isEmpty()) {
+    //         int size = queue.size();
+    //         for (int i = 0; i < size; i++) {
+    //             String curr = queue.poll();
+    //             for (int j = 0; j < 8; j++) {
+    //                 StringBuilder str = new StringBuilder(curr);
+    //                 for (char gene : choices) {
+    //                     str.setCharAt(j, gene);
+    //                     String nextGene = str.toString();
+    //                     if (nextGene.equals(endGene)) return step + 1;
+    //                     if (bankSet.contains(nextGene) && !visited.contains(nextGene)) {
+    //                         queue.offer(nextGene);
+    //                         visited.add(nextGene);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //         step++; //count a set of mutations as one step. This would require keeping track of all possible mutations at each step and incrementing the step count accordingly.
+    //     }
+    //     return -1;
     }
 }
