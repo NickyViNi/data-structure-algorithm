@@ -1143,4 +1143,64 @@ public class ArrayLeetcode {
         }
         return finaMax;
     }
+
+    //34 medium -> binary search: find first and last element position in sorted array
+    public int[] searchRange(int[] nums, int target) {
+        if (nums == null || nums.length == 0) return new int[] {-1, -1};
+        int left = findPosition(nums, target, true);
+        int right = findPosition(nums, target, false);
+        return new int[] {left, right};
+    }
+    private int findPosition(int[] nums, int target, boolean isFindLeft) {
+        int l = 0, r = nums.length -1, idx = -1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+            if (nums[m] > target) r = m - 1;
+            else if (nums[m] < target) l = m + 1;
+            else {
+                idx = m;
+                if (isFindLeft) {
+                    r = m - 1;
+                } else {
+                    l = m + 1;
+                }
+            }
+        }
+        return idx;
+    }
+
+    //153 medium -> binary search:find minimum in rotated sorted array
+    public int findMin(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        if (nums[left] <= nums[right]) return nums[left];
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] > nums[left]) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+        return nums[left] <= nums[right] ? nums[left] : nums[right];
+    }
+
+    public int findMin2(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        if (nums[left] <= nums[right]) return nums[left];
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[left] > nums[mid]) {
+                if (nums[mid] > nums[mid - 1]) {
+                    right = mid - 1;
+                } else {
+                    return nums[mid];
+                }
+            }  else {
+                left = mid + 1;
+                if (nums[mid] > nums[left]) return nums[left];
+            }
+        }
+        return -1;
+    }
 }
