@@ -1184,5 +1184,23 @@ public class ArrayLeetcode {
         return nums[left] <= nums[right] ? nums[left] : nums[right];
     }
 
-
+    public int findMin2(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        if (nums[left] <= nums[right]) return nums[left];
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[left] > nums[mid]) {
+                if (nums[mid] > nums[mid - 1]) {
+                    right = mid - 1;
+                } else {
+                    return nums[mid];
+                }
+            }  else {
+                left = mid + 1;
+                if (nums[mid] > nums[left]) return nums[left];
+            }
+        }
+        return -1;
+    }
 }
