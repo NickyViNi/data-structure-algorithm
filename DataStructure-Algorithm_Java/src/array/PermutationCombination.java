@@ -24,4 +24,24 @@ public class PermutationCombination {
             arr.remove(arr.size() - 1);
         }
     }
+
+    //46 medium -> permutation
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        backTracking(result, nums, new ArrayList<Integer>());
+        return result;
+    }
+
+    private void backTracking(List<List<Integer>> result, int[] nums, List<Integer> arr) {
+        if (arr.size() == nums.length) {
+            result.add(new ArrayList<Integer>(arr));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (arr.contains(nums[i])) continue;
+            arr.add(nums[i]);
+            backTracking(result, nums, arr);
+            arr.remove(arr.size() - 1);
+        }
+    }
 }
