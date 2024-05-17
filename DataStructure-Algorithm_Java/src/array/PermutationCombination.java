@@ -60,4 +60,19 @@ public class PermutationCombination {
             arr.remove(arr.size() - 1);
         }
     }
+
+    //22 medium -> generate parenthesis
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        parenthesisHelper("", n, n, result);
+        return result;
+    }
+    private void parenthesisHelper(String str, int left, int right, List<String> result) {
+        if (left == 0 && right == 0) { // if (str.length() == 2*n)
+            result.add(str);
+            return;
+        }
+        if (left > 0) parenthesisHelper(str + "(", left - 1, right, result);
+        if (right > left) parenthesisHelper(str + ")", left, right - 1, result);
+    }
 }
