@@ -12,7 +12,6 @@ public class PermutationCombination {
         combineHelper(result, nums, k, 0, new ArrayList<Integer>());
         return result;
     }
-
     private void combineHelper(List<List<Integer>> result, int[] nums, int k, int idx, List<Integer> arr) {
         if (k == 0) {
             result.add(new ArrayList<>(arr)); //have to create a new arraylist, arr is mutable
@@ -31,7 +30,6 @@ public class PermutationCombination {
         backTracking(result, nums, new ArrayList<Integer>());
         return result;
     }
-
     private void backTracking(List<List<Integer>> result, int[] nums, List<Integer> arr) {
         if (arr.size() == nums.length) {
             result.add(new ArrayList<Integer>(arr));
@@ -41,6 +39,24 @@ public class PermutationCombination {
             if (arr.contains(nums[i])) continue;
             arr.add(nums[i]);
             backTracking(result, nums, arr);
+            arr.remove(arr.size() - 1);
+        }
+    }
+
+    //39 medium -> combination sum
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        combinationBackTracking(candidates, target, result, 0, new ArrayList<Integer>());
+        return result;
+    }
+    private void combinationBackTracking(int[] candidates, int target, List<List<Integer>> result, int start, List<Integer> arr) {
+        if (target < 0) return;
+        if (target == 0) {
+            result.add(new ArrayList<>(arr));
+        }
+        for (int i = start; i < candidates.length; i++) {
+            arr.add(candidates[i]);
+            combinationBackTracking(candidates, target - candidates[i], result, i, arr);
             arr.remove(arr.size() - 1);
         }
     }
