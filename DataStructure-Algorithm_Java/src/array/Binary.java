@@ -55,4 +55,38 @@ public class Binary {
     //     }
     //     return res;
     // }
+
+    //137 medium -> single number
+    public int singleNumber(int[] nums) {
+        int res = 0;
+        for (int i = 0; i < 32; i++) {
+            int sum = 0;
+            for (int num : nums) {
+                sum += num >> i & 1;
+            }
+            sum %= 3;
+            res |= sum << i;
+        }
+        return res;
+    }
+
+    public int singleNumber2(int[] nums) {
+        int a = 0, b = 0;
+        for (int num : nums) {
+            a ^= (num & ~b);
+            b ^= (num & ~a);
+        }
+        return a;
+    }
+
+    //201 medium -> Bitwise and of numbers range
+    public int rangeBitwiseAnd(int left, int right) {
+        int count = 0;
+        while (left != right) {
+            left = left >> 1;
+            right = right >> 1;
+            count++;
+        }
+        return left << count;
+    }
 }
