@@ -1,5 +1,9 @@
 package dynamicProgramming;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class DynamicProgramming {
     //70 easy -> Climbing Stairs
     /*You are climbing a staircase. It takes n steps to reach the top.
@@ -38,4 +42,21 @@ public class DynamicProgramming {
         return dp[dp.length - 1];
     }
     // sums: [2,7,9,3,1], dp: [2,7,11,11,12]
+
+    //139 medium -> word break
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> wordSet = new HashSet<>(wordDict);
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        for (int i = 1; i <= s.length(); i++) { // from i = 1 and i == s.length() due to s.substring()
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && wordSet.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+
 }
