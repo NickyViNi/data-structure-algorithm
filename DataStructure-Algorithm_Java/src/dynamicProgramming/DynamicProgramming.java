@@ -1,5 +1,6 @@
 package dynamicProgramming;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,7 +60,7 @@ public class DynamicProgramming {
         return dp[s.length()];
     }
 
-    //120 medium -> trangle
+    //120 medium -> triangle
     //way 1:
     public int minimumTotal1(List<List<Integer>> triangle) {
         for (int i = triangle.size() - 2; i >= 0 ; i--) {
@@ -122,4 +123,62 @@ public class DynamicProgramming {
         return minPath;
     }
 
+    //322 medium -> coin change
+    public int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) { //i means amount, keep minimum number of coins to make up each amout
+            for (int coin : coins) {
+                if (i - coin >= 0 && dp[i - coin] != Integer.MAX_VALUE) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
+    }
+
+    //300 medium -> Longest increasing subsequence
+    //way1: binary search
+    public int lengthOfLIS(int[] nums) {
+        int[] sequence = new int[nums.length + 1]; // plus 1 bc sequence[0] will always be MAX_VALUE;
+        Arrays.fill(sequence, Integer.MAX_VALUE);
+        for (int num : nums) {
+            int idx = binarySearch(sequence, num);
+            sequence[idx] = num;
+        }
+        int len = 0;
+        for (int e : sequence) {
+            if (e != Integer.MAX_VALUE) len++;
+        }
+        return len;
+    }
+    private int binarySearch(int[] sequence, int target) {
+        int start = 0, end = sequence.length - 1;
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (sequence[mid] == target) {
+                return mid;
+            } else if (sequence[mid] > target) {
+                end = mid;
+            } else {
+                start = mid;
+            }
+        }
+        return end;
+    }
+    //way2: dp
+    public int lengthOfLIS2(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, 1);
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        return Arrays.stream(dp).max().orElse(0);
+    }
 }
