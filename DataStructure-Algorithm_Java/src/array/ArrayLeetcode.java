@@ -1242,4 +1242,46 @@ public class ArrayLeetcode {
         }
         throw new IllegalArgumentException();
     }
+
+    //345 easy -> reverse vowels in a string
+    public String reverseVowels(String s) {
+        char[] charStr = s.toCharArray();
+        String vowels = "aeiouAEIOU";
+        int left = 0, right = s.length() - 1;
+        while (left < right) {
+            while (left < right && vowels.indexOf(charStr[left]) == -1) {
+                left++;
+            }
+            while (left < right &&vowels.indexOf(charStr[right]) == -1) {
+                right--;
+            }
+            char temp = charStr[left];
+            charStr[left] = charStr[right];
+            charStr[right] = temp;
+            left++;
+            right--;
+        }
+        return new String(charStr);
+    }
+
+    public String reverseVowels2(String s) {
+        char[] charStr = s.toCharArray();
+        // Set<Character> set = new HashSet<>(Arrays.asList('a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U'));
+        Set<Character> set = Set.of('a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U');
+        int left = 0, right = s.length() - 1;
+        while (left < right) {
+            while (left < right && !set.contains(charStr[left])) {
+                left++;
+            }
+            while (left < right && !set.contains(charStr[right])) {
+                right--;
+            }
+            char temp = charStr[left];
+            charStr[left] = charStr[right];
+            charStr[right] = temp;
+            left++;
+            right--;
+        }
+        return new String(charStr);
+    }
 }
