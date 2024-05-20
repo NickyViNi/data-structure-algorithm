@@ -1,5 +1,6 @@
 package dynamicProgramming;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -135,5 +136,34 @@ public class DynamicProgramming {
             }
         }
         return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
+    }
+
+    //300 medium -> Longest increasing subsequence
+    public int lengthOfLIS(int[] nums) {
+        int[] sequence = new int[nums.length + 1]; // plus 1 bc sequence[0] will always be MAX_VALUE;
+        Arrays.fill(sequence, Integer.MAX_VALUE);
+        for (int num : nums) {
+            int idx = binarySearch(sequence, num);
+            sequence[idx] = num;
+        }
+        int len = 0;
+        for (int e : sequence) {
+            if (e != Integer.MAX_VALUE) len++;
+        }
+        return len;
+    }
+    private int binarySearch(int[] sequence, int target) {
+        int start = 0, end = sequence.length - 1;
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (sequence[mid] == target) {
+                return mid;
+            } else if (sequence[mid] > target) {
+                end = mid;
+            } else {
+                start = mid;
+            }
+        }
+        return end;
     }
 }
