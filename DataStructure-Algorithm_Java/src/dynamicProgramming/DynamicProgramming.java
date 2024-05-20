@@ -139,6 +139,7 @@ public class DynamicProgramming {
     }
 
     //300 medium -> Longest increasing subsequence
+    //way1: binary search
     public int lengthOfLIS(int[] nums) {
         int[] sequence = new int[nums.length + 1]; // plus 1 bc sequence[0] will always be MAX_VALUE;
         Arrays.fill(sequence, Integer.MAX_VALUE);
@@ -165,5 +166,19 @@ public class DynamicProgramming {
             }
         }
         return end;
+    }
+    //way2: dp
+    public int lengthOfLIS2(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, 1);
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        return Arrays.stream(dp).max().orElse(0);
     }
 }
