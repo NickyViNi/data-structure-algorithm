@@ -59,4 +59,67 @@ public class DynamicProgramming {
         return dp[s.length()];
     }
 
+    //120 medium -> trangle
+    //way 1:
+    public int minimumTotal1(List<List<Integer>> triangle) {
+        for (int i = triangle.size() - 2; i >= 0 ; i--) {
+            List<Integer> curr = triangle.get(i);
+            for (int j = 0; j <= i; j++) {
+                int left = triangle.get(i + 1).get(j);
+                int right = triangle.get(i + 1).get(j + 1);
+                curr.set(j, Math.min(left, right) + curr.get(j));
+            }
+        }
+        return triangle.get(0).get(0);
+    }
+
+    //way 2: Memoization - best runtime 99.32%
+    Integer memo[][];
+    public int minimumTotal(List<List<Integer>> triangle) {
+
+        int len = triangle.size();
+        memo = new Integer[len][len];
+        return FindMinimum(triangle, 0 , 0, len);
+
+    }
+    private int FindMinimum(List<List<Integer>> triangle, int row, int col, int len){
+        System.out.println(row + " - " + col);
+        if(row == len - 1) return triangle.get(row).get(col);
+
+        if(memo[row][col] != null) return memo[row][col];
+
+        int down = triangle.get(row).get(col) + FindMinimum(triangle, row + 1, col, len);
+        int downPlusOne = triangle.get(row).get(col) + FindMinimum(triangle, row + 1, col + 1, len);
+        System.out.println("memo: " + down + " - " + downPlusOne);
+        return memo[row][col] = Math.min(down, downPlusOne);
+    }
+
+    //way3: Tabulation
+    public int minimumTotal3(List<List<Integer>> triangle) {
+
+        int len = triangle.size();
+        Integer[][] dp_array = new Integer[len][len];
+
+        dp_array[0][0] = triangle.get(0).get(0);
+
+        for(int i = 1 ; i < len ; i++){
+            for(int j = 0 ; j <= i ; j++){
+
+                if(j == 0){
+                    dp_array[i][0] = triangle.get(i).get(0) + dp_array[i - 1][0]; // only up
+                }else if(j == i){
+                    dp_array[i][i] = triangle.get(i).get(i) + dp_array[i - 1][i - 1]; // only up - 1
+                }else {
+                    dp_array[i][j] = triangle.get(i).get(j) + Math.min(dp_array[i - 1][j], dp_array[i - 1][j - 1]); // min(up, up - 1);
+                }
+            }
+        }
+
+        int minPath = Integer.MAX_VALUE;
+        for(int i = 0 ; i < len ; i++)
+            minPath = Math.min(minPath, dp_array[len - 1][i]);
+
+        return minPath;
+    }
+
 }
