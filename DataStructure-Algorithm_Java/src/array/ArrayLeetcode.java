@@ -1299,4 +1299,32 @@ public class ArrayLeetcode {
         }
         return (double) sum / k;
     }
+
+    //520 easy -> detect capital
+    public boolean detectCapitalUse(String word) {
+        if (word.length() <= 1) return true;
+        boolean firIsUpper = Character.isUpperCase(word.charAt(0));
+        boolean secIsUpper = Character.isUpperCase(word.charAt(1));
+
+        if (word.length() == 2) {
+            if (!firIsUpper && secIsUpper) return false;
+        }
+
+        for (int i = 2; i < word.length(); i++) {
+            if ((firIsUpper && secIsUpper && Character.isLowerCase(word.charAt(i)))
+            || (firIsUpper && !secIsUpper && Character.isUpperCase(word.charAt(i)))
+            || (!firIsUpper && (secIsUpper || Character.isUpperCase(word.charAt(i))))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    /*Python solution:
+     * def detectCapitalUse(self, word: str) -> bool:
+        if word.isupper() or word.islower() or word.title() == word:
+            return True
+        else:
+            return False
+     */
 }
