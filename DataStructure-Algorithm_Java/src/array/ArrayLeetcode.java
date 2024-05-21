@@ -1284,4 +1284,19 @@ public class ArrayLeetcode {
         }
         return new String(charStr);
     }
+
+    //643 easy -> maximum average subarray I
+    public double findMaxAverage(int[] nums, int k) {
+        int sum = 0, currSum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i < k) {
+                sum += nums[i];
+                currSum = sum;
+            } else {
+                currSum += nums[i] - nums[i - k];
+                sum = Math.max(sum, currSum);
+            }
+        }
+        return (double) sum / k;
+    }
 }
