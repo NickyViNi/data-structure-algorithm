@@ -1327,4 +1327,20 @@ public class ArrayLeetcode {
         else:
             return False
      */
+
+    //334 medium -> Increasing Triplet Subsequence
+    public boolean increasingTriplet(int[] nums) {
+        int min = Integer.MAX_VALUE;
+        int secMin = Integer.MAX_VALUE;
+        for (int num : nums) {
+            if (num <= min) {
+                min = num;
+            } else if (num <= secMin) {
+                secMin = num;
+            } else if (num > secMin) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
