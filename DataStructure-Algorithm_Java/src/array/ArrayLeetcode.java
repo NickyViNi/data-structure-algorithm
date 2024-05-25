@@ -1284,4 +1284,63 @@ public class ArrayLeetcode {
         }
         return new String(charStr);
     }
+
+    //643 easy -> maximum average subarray I
+    public double findMaxAverage(int[] nums, int k) {
+        int sum = 0, currSum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i < k) {
+                sum += nums[i];
+                currSum = sum;
+            } else {
+                currSum += nums[i] - nums[i - k];
+                sum = Math.max(sum, currSum);
+            }
+        }
+        return (double) sum / k;
+    }
+
+    //520 easy -> detect capital
+    public boolean detectCapitalUse(String word) {
+        if (word.length() <= 1) return true;
+        boolean firIsUpper = Character.isUpperCase(word.charAt(0));
+        boolean secIsUpper = Character.isUpperCase(word.charAt(1));
+
+        if (word.length() == 2) {
+            if (!firIsUpper && secIsUpper) return false;
+        }
+
+        for (int i = 2; i < word.length(); i++) {
+            if ((firIsUpper && secIsUpper && Character.isLowerCase(word.charAt(i)))
+            || (firIsUpper && !secIsUpper && Character.isUpperCase(word.charAt(i)))
+            || (!firIsUpper && (secIsUpper || Character.isUpperCase(word.charAt(i))))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    /*Python solution:
+     * def detectCapitalUse(self, word: str) -> bool:
+        if word.isupper() or word.islower() or word.title() == word:
+            return True
+        else:
+            return False
+     */
+
+    //334 medium -> Increasing Triplet Subsequence
+    public boolean increasingTriplet(int[] nums) {
+        int min = Integer.MAX_VALUE;
+        int secMin = Integer.MAX_VALUE;
+        for (int num : nums) {
+            if (num <= min) {
+                min = num;
+            } else if (num <= secMin) {
+                secMin = num;
+            } else if (num > secMin) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
