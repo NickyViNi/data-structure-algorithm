@@ -1343,4 +1343,32 @@ public class ArrayLeetcode {
         }
         return false;
     }
+    //443 medium -> String Compression
+    public int compress(char[] chars) {
+        char curr = chars[0];
+        int idx = 0, count = 1;
+        for (int i = 1; i < chars.length; i++) {
+            if (chars[i] == curr) {
+                count++;
+            } else {
+                chars[idx++] = curr;
+                if (count != 1) {
+                    char[] counts = Integer.toString(count).toCharArray();
+                    for (char ch : counts) {
+                        chars[idx++] = ch;
+                    }
+                }
+                curr = chars[i];
+                count = 1;
+            }
+        }
+        chars[idx++] = curr;
+        if (count != 1) {
+            char[] counts = Integer.toString(count).toCharArray();
+            for (char ch : counts) {
+                chars[idx++] = ch;
+            }
+        }
+        return idx;
+    }
 }
