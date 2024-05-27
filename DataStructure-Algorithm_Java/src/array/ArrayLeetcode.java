@@ -1455,10 +1455,23 @@ public class ArrayLeetcode {
         int zeroes = 0, max = 0;
         for (int i = 0, j = 0; j < arr.length; j++){
             if (arr[j] == 0) zeroes++;
-            while (zeroes > k && i <= j){
+            while (zeroes > k){
                 if (arr[i++] == 0) zeroes--;
             }
             max=Math.max(max, j - i + 1);
+        }
+        return max;
+    }
+
+    //1493 medium -> Longest Subarray of 1's After Deleting One Element
+    public int longestSubarray(int[] nums) {
+        int zeroes = 0, max = 0;
+        for (int start = 0, end = 0; end < nums.length; end++) {
+            if (nums[end] == 0) zeroes++;
+            while (zeroes > 1) {
+                if (nums[start++] == 0) zeroes--;
+            }
+            max = Math.max(max, end - start);
         }
         return max;
     }
