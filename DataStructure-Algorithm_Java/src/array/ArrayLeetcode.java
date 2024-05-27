@@ -1371,4 +1371,22 @@ public class ArrayLeetcode {
         }
         return idx;
     }
+
+    //1679 medium -> max number of k-sum pairs
+    public int maxOperations(int[] nums, int k) {
+        int left = 0, right = nums.length - 1, count = 0;
+        Arrays.sort(nums);
+        while (left < right) {
+            if (nums[left] + nums[right] == k) {
+                left++;
+                right--;
+                count++;
+            } else if (nums[left] + nums[right] > k) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return count;
+    }
 }
