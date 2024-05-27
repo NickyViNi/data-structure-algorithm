@@ -1497,4 +1497,28 @@ public class ArrayLeetcode {
             nums[k++] = 0;
         }
     }
+
+    //2215 easy ->  Find the Difference of Two Arrays
+    public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+
+        // Set<Integer> set1 = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
+        // Set<Integer> set2 = Arrays.stream(nums2).boxed().collect(Collectors.toSet());
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
+        for (int num : nums1) set1.add(num);
+        for (int num : nums2) set2.add(num);
+
+        set1.forEach(e -> {
+            if (!set2.contains(e)) list1.add(e);
+        });
+        set2.forEach(e -> {
+            if (!set1.contains(e)) list2.add(e);
+        });
+        result.add(list1);
+        result.add(list2);
+        return result;
+    }
 }
