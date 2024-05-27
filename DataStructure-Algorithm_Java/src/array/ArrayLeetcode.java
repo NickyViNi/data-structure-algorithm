@@ -1437,4 +1437,29 @@ public class ArrayLeetcode {
         }
         return num;
     }
+
+    //1004 medium -> Max Consecutive Ones III
+    public int longestOnes2(int[] nums, int k) {
+        int s = 0, e = 0, zeroes = 0;
+        while ( e < nums.length) {
+            if (nums[e] == 0) zeroes++;
+            e++;
+            if (zeroes > k) {
+                if (nums[s] == 0) zeroes--;
+                s++;
+            }
+        }
+        return e - s;
+    }
+    public int longestOnes(int[] arr, int k) {
+        int zeroes = 0, max = 0;
+        for (int i = 0, j = 0; j < arr.length; j++){
+            if (arr[j] == 0) zeroes++;
+            while (zeroes > k && i <= j){
+                if (arr[i++] == 0) zeroes--;
+            }
+            max=Math.max(max, j - i + 1);
+        }
+        return max;
+    }
 }
