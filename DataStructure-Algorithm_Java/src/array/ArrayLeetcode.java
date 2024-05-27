@@ -1389,4 +1389,23 @@ public class ArrayLeetcode {
         }
         return count;
     }
+    //1732 easy -> find the hightest altitude
+    public int largestAltitude(int[] gain) {
+        int max = 0, altitude = 0;
+        for (int g : gain) {
+            altitude += g;
+            max = Math.max(max, altitude);
+        }
+        return max;
+    }
+    public int largestAltitude2(int[] gain) {
+        int max = 0, a1 = 0, a2 = 0;
+        for (int g : gain) {
+            a2 = g + a1;
+            int altitude = Math.max(a1, a2);
+            max = Math.max(max, altitude);
+            a1 = a2;
+        }
+        return max;
+    }
 }
