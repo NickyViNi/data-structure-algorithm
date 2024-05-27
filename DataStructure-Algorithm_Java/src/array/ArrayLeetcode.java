@@ -1408,4 +1408,33 @@ public class ArrayLeetcode {
         }
         return max;
     }
+
+    //724 easy -> find pivot index
+    public int pivotIndex(int[] nums) {
+        int sum = 0, leftSum = 0;
+        for (int num : nums) sum += num;
+        for (int i = 0; i < nums.length; i++) {
+            if (leftSum == sum - leftSum - nums[i]) return i;
+            leftSum += nums[i];
+        }
+        return -1;
+    }
+
+    //1456 medium -> Maximum Number of Vowels in a Substring of Given Length
+    public int maxVowels(String s, int k) {
+        String vowel = "aeiou";
+        int count = 0;
+        char[] str = s.toCharArray();
+        for (int i = 0; i < k; i++) {
+            if (vowel.indexOf(str[i]) != -1) count++;
+            if (count == k) return k;
+        }
+        int num = count;
+        for (int j = k; j < str.length; j++) {
+            if(vowel.indexOf(str[j - k]) != -1) count--;
+            if(vowel.indexOf(str[j]) != -1) count++;
+            num = Math.max(num, count);
+        }
+        return num;
+    }
 }
