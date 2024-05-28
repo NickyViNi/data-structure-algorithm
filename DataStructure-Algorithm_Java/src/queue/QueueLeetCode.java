@@ -17,4 +17,23 @@ public class QueueLeetCode {
         }
         return calls.size();
     }
+
+    //649 medium -> Dota2 Senate
+    public String predictPartyVictory(String senate) {
+        int len = senate.length();
+        Queue<Integer> queueR = new LinkedList<>();
+        Queue<Integer> queueD = new LinkedList<>();
+        for (int i = 0; i < len; i++) {
+            char ch = senate.charAt(i);
+            if (ch == 'R') queueR.offer(i);
+            if (ch == 'D') queueD.offer(i);
+        }
+        while (!queueD.isEmpty() && !queueR.isEmpty()) {
+            int r = queueR.poll();
+            int d = queueD.poll();
+            if (r < d) queueR.offer(len++);
+            else queueD.offer(len++);
+        }
+        return queueD.isEmpty() ? "Radiant" : "Dire";
+    }
 }
