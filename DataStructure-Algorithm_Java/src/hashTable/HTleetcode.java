@@ -419,4 +419,24 @@ public class HTleetcode {
         }
         return false;
     }
+
+    //2352 medium ->  Equal Row and Column Pairs
+    public int equalPairs(int[][] grid) {
+        int n = grid.length;
+        int count = 0;
+        List<int[]> cols = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int[] col = new int[n];
+            for (int j = 0; j < n; j++) {
+                col[j] = grid[j][i];
+            }
+            cols.add(col);
+        }
+        for (int[] row : grid) {
+            for (int[] column : cols) {
+                if (Arrays.equals(row, column)) count++;
+            }
+        }
+        return count;
+    }
 }
