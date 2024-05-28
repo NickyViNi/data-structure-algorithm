@@ -78,4 +78,28 @@ public class StackLeetcode {
         }
         return res;
     }
+
+    //735 medium -> asteroid collision
+    public int[] asteroidCollision(int[] asteroids) {
+        Stack<Integer> stack = new Stack<>();
+        for (int aster : asteroids) {
+            if (aster > 0) {
+                stack.push(aster);
+            } else {
+                while (!stack.empty() && stack.peek() > 0 && stack.peek() < -aster) {
+                    stack.pop();
+                }
+                if (stack.empty() || stack.peek() < 0) {
+                    stack.push(aster);
+                }
+                if (stack.peek() == -aster) {
+                    stack.pop();
+                }
+            }
+        }
+        int[] result = new int[stack.size()];
+        int idx = stack.size() - 1;
+        while (!stack.empty()) result[idx--] = stack.pop();
+        return result;
+    }
 }
