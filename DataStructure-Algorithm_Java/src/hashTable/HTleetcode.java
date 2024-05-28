@@ -462,5 +462,19 @@ public class HTleetcode {
         }
         return count;
     }
+    public int equalPairs3(int[][] grid) {
+        int count = 0;
+        int n = grid.length;
+        for (int i = 0; i < n; i++) {
+            int[] row = grid[i];
+            for (int k = 0; k < n; k++) {
+                for (int j = 0; j < n; j++) {
+                    if (row[j] != grid[j][k]) break;
+                    if (j == n - 1) count++;
+                }
+            }
+        }
+        return count;
+    }
 
 }
