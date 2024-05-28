@@ -476,6 +476,7 @@ public class LLleetcode {
     }
 
     //206 easy -> Reverse Linked List
+    //iterative approach
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) return head;
         ListNode prev = null;
@@ -487,5 +488,13 @@ public class LLleetcode {
             curr = nextNode;
         }
         return prev;
+    }
+    //recursive approach
+    public ListNode reverseList2(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode res = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return res;
     }
 }
