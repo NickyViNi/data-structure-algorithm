@@ -474,4 +474,27 @@ public class LLleetcode {
         curr.next = a == null ? b : a;
         return dummy.next;
     }
+
+    //206 easy -> Reverse Linked List
+    //iterative approach
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        return prev;
+    }
+    //recursive approach
+    public ListNode reverseList2(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode res = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return res;
+    }
 }
