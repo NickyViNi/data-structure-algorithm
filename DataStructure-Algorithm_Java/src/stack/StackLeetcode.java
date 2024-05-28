@@ -102,4 +102,37 @@ public class StackLeetcode {
         while (!stack.empty()) result[idx--] = stack.pop();
         return result;
     }
+
+    //394 medium -> Decode String
+    public String decodeString(String s) {
+        Stack<String> dict = new Stack<>();
+        Stack<Integer> nums = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (Character.isDigit(ch)) {
+                int num = ch - '0';
+                while(Character.isDigit(s.charAt(i + 1))) {
+                    num = num * 10 + (s.charAt(i + 1) - '0');
+                    i++;
+                }
+                nums.push(num);
+            } else if (ch == '[') {
+                dict.push("[");
+            } else if (Character.isLetter(ch)) {
+                dict.push(ch + "");
+            } else if (ch == ']') {
+                String temp = "";
+                while (dict.peek() != "[") {
+                    temp += dict.pop();
+                }
+                int re= nums.pop();
+                String letters = temp.repeat(re);
+                dict.pop();
+                dict.push(letters);
+            }
+        }
+        StringBuilder res = new StringBuilder();
+        while (!dict.empty()) res.append(dict.pop());
+        return res.reverse().toString();
+    }
 }
