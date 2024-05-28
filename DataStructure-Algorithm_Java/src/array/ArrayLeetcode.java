@@ -1521,4 +1521,34 @@ public class ArrayLeetcode {
         result.add(list2);
         return result;
     }
+    //1207 easy -> Unique Number of Occurrences
+    public boolean uniqueOccurrences(int[] arr) {
+        Map<Integer, Integer> map = new HashMap<>();
+        Set<Integer> set = new HashSet<>();
+        for (int num : arr) map.put(num, map.getOrDefault(num, 0) + 1);
+        for (int value : map.values()) {
+            if (set.contains(value)) return false;
+            else set.add(value);
+        }
+        return true;
+    }
+
+    //1657 medum -> Determine if Two Strings Are Close
+    public boolean closeStrings(String word1, String word2) {
+        if (word1.length() != word2.length()) return false;
+        if (word1.equals(word2)) return true;
+        int[] frequency1 = new int[26];
+        int[] frequency2 = new int[26];
+        for (char letter : word1.toCharArray()) frequency1[letter - 'a']++;
+        for (char letter : word2.toCharArray()) frequency2[letter - 'a']++;
+        for (int i = 0; i < 26; i++) {
+            if ((frequency1[i] == 0) != (frequency2[i] == 0)) return false;
+        }
+        Arrays.sort(frequency1);
+        Arrays.sort(frequency2);
+        for (int j = 0; j < 26; j++) {
+            if (frequency1[j] != frequency2[j]) return false;
+        }
+        return true;
+    }
 }
