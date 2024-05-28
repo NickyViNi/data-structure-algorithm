@@ -419,4 +419,62 @@ public class HTleetcode {
         }
         return false;
     }
+
+    //2352 medium ->  Equal Row and Column Pairs
+    public int equalPairs(int[][] grid) {
+        int n = grid.length;
+        int count = 0;
+        List<int[]> cols = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int[] col = new int[n];
+            for (int j = 0; j < n; j++) {
+                col[j] = grid[j][i];
+            }
+            cols.add(col);
+        }
+        for (int[] row : grid) {
+            for (int[] column : cols) {
+                if (Arrays.equals(row, column)) count++;
+            }
+        }
+        return count;
+    }
+
+    public int equalPairs2(int[][] grid) {
+        int n = grid.length;
+        int count = 0;
+        Map<String, Integer> rowMap = new HashMap<>();
+        // Convert each row to a string and count their occurrences
+        for (int i = 0; i < n; i++) {
+            StringBuilder row = new StringBuilder();
+            for (int j = 0; j < n; j++) {
+                row.append(grid[i][j]).append(",");
+            }
+            rowMap.put(row.toString(), rowMap.getOrDefault(row.toString(), 0) + 1);
+        }
+        // Convert each column to a string and compare with the row map
+        for (int r = 0; r < n; r++) {
+            StringBuilder col = new StringBuilder();
+            for (int c = 0; c < n; c++) {
+                col.append(grid[c][r]).append(",");
+            }
+            count += rowMap.getOrDefault(col.toString(), 0);
+        }
+        return count;
+    }
+    public int equalPairs3(int[][] grid) {
+        int count = 0;
+        int n = grid.length;
+        for (int i = 0; i < n; i++) {
+            int[] row = grid[i];
+            for (int k = 0; k < n; k++) {
+                for (int j = 0; j < n; j++) {
+                    if (row[j] != grid[j][k]) break;
+                    if (j == n - 1) count++;
+                }
+            }
+        }
+        return count;
+    }
+
 }
