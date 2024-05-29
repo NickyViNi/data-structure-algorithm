@@ -497,4 +497,17 @@ public class LLleetcode {
         head.next = null;
         return res;
     }
+
+    //2095 medium ->  Delete the Middle Node of a Linked List
+    public ListNode deleteMiddle(ListNode head) {
+        if (head == null || head.next == null) return null;
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        slow.next = slow.next.next;
+        return head;
+    }
 }
