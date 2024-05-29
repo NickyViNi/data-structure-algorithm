@@ -546,4 +546,36 @@ public class LLleetcode {
         }
         return head;
     }
+
+    //2130 medium -> Maximum Twin Sum of a Linked List
+    public int pairSum(ListNode head) {
+        //find the middle node and reverse from mid to end
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        slow = reverseLinkedList(slow);
+
+        //pair sum
+        int max = 0;
+        while (slow != null) {
+            max = Math.max(max, head.val + slow.val);
+            slow = slow.next;
+            head = head.next;
+        }
+        return max;
+    }
+    private ListNode reverseLinkedList(ListNode node) {
+        ListNode prev = null;
+        ListNode curr = node;
+        while (curr != null) {
+            ListNode nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        return prev;
+    }
 }
