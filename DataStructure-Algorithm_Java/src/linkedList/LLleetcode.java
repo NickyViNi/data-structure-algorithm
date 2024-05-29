@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 public class LLleetcode {
     //definition for singly-linked list.
@@ -545,5 +546,53 @@ public class LLleetcode {
             even.next = evenHead;
         }
         return head;
+    }
+
+    //2130 medium -> Maximum Twin Sum of a Linked List
+    public int pairSum(ListNode head) { // O(1) space
+        //find the middle node and reverse from mid to end
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        slow = reverseLinkedList(slow);
+
+        //pair sum
+        int max = 0;
+        while (slow != null) {
+            max = Math.max(max, head.val + slow.val);
+            slow = slow.next;
+            head = head.next;
+        }
+        return max;
+    }
+    private ListNode reverseLinkedList(ListNode node) {
+        ListNode prev = null;
+        ListNode curr = node;
+        while (curr != null) {
+            ListNode nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        return prev;
+    }
+
+    public int pairSum2(ListNode head) { // O(n) space
+        Stack<ListNode> stack = new Stack<>();
+        ListNode temp = head;
+        while (temp != null) {
+            stack.push(temp);
+            temp = temp.next;
+        }
+        int size = stack.size();
+        int max = 0;
+        while (stack.size() > size / 2) {
+            max = Math.max(max, head.val + stack.pop().val);
+            head = head.next;
+        }
+        return max;
     }
 }
