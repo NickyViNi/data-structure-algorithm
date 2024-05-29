@@ -465,4 +465,22 @@ public class TreeLeetcode {
         }
         return result;
     }
+
+    //872 easy -> Leaf-Similar Trees
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        getLeaf(root1, list1);
+        getLeaf(root2, list2);
+        return list1.equals(list2);
+    }
+    private void getLeaf(TreeNode root, List<Integer> list) {
+        if (root == null) return;
+        if (root.left == null && root.right == null) {
+            list.add(root.val);
+            return;
+        }
+        getLeaf(root.left, list);
+        getLeaf(root.right, list);
+    }
 }
