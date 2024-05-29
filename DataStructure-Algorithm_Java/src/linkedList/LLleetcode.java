@@ -510,4 +510,40 @@ public class LLleetcode {
         slow.next = slow.next.next;
         return head;
     }
+
+    //328 medium -> Odd Even Linked List
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenHead = even;
+        while (even != null && even.next != null) {
+            odd.next = even.next;
+            even.next = even.next.next;
+            odd = odd.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
+    }
+    public ListNode oddEvenList2(ListNode head) { // don't use this approach
+        if (head == null || head.next == null) return head;
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenHead = even;
+        int idx = 0;
+        while (even.next != null) {
+            odd.next = even.next;
+            odd = even;
+            even = even.next;
+            idx++;
+        }
+        if (idx % 2 == 0) {
+            odd.next = evenHead;
+        } else {
+            odd.next = null;
+            even.next = evenHead;
+        }
+        return head;
+    }
 }
