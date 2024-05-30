@@ -532,5 +532,26 @@ public class TreeLeetcode {
         return level;
     }
 
-
+    //recursive
+    public int maxLevelSum2(TreeNode root) {
+        if(root == null) return 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        findSum(root, map, 0);
+        int maxSum = Integer.MIN_VALUE;
+        int level = 0;
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            if(entry.getValue() > maxSum){
+                maxSum = entry.getValue();
+                level = entry.getKey();
+            }
+        }
+        return level+1;
+    }
+    private void findSum(TreeNode root,  HashMap<Integer, Integer>map, Integer level){
+        if(root == null) return;
+        int prev = map.getOrDefault(level, 0);
+        map.put(level, prev + root.val);
+        findSum(root.left, map, level + 1);
+        findSum(root.right, map, level + 1);
+    }
 }
