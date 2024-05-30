@@ -465,4 +465,44 @@ public class TreeLeetcode {
         }
         return result;
     }
+
+    //872 easy -> Leaf-Similar Trees
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        getLeaf(root1, list1);
+        getLeaf(root2, list2);
+        return list1.equals(list2);
+    }
+    private void getLeaf(TreeNode root, List<Integer> list) {
+        if (root == null) return;
+        if (root.left == null && root.right == null) {
+            list.add(root.val);
+            return;
+        }
+        getLeaf(root.left, list);
+        getLeaf(root.right, list);
+    }
+    //700 easy -> Search in a Binary Search Tree
+    //recursion
+    public TreeNode searchBST1(TreeNode root, int val) {
+        if (root == null) return null;
+        if (root.val == val) return root;
+        if (root.val > val) return searchBST(root.left, val);
+        else return searchBST(root.right, val);
+    }
+    //iterative
+    public TreeNode searchBST(TreeNode root, int val) {
+        if (root == null) return null;
+        while (root != null) {
+            if (root.val > val) {
+                root = root.left;
+            } else if (root.val < val) {
+                root = root.right;
+            } else {
+                return root;
+            }
+        }
+        return root;
+    }
 }
