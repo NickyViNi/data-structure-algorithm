@@ -2,8 +2,10 @@ package tree;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -505,4 +507,30 @@ public class TreeLeetcode {
         }
         return root;
     }
+
+    //1161 medium -> Maximum Level Sum of a Binary Tree
+    public int maxLevelSum(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>(List.of(root));
+        int maxSum = Integer.MIN_VALUE;
+        int level = 0;
+        int currLevel = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            int currSum = 0;
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                currSum += node.val;
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+            currLevel++;
+            if (currSum > maxSum) {
+                maxSum = currSum;
+                level = currLevel;
+            }
+        }
+        return level;
+    }
+
+
 }
