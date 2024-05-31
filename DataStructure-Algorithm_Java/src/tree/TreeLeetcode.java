@@ -2,8 +2,10 @@ package tree;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -504,5 +506,52 @@ public class TreeLeetcode {
             }
         }
         return root;
+    }
+
+    //1161 medium -> Maximum Level Sum of a Binary Tree
+    public int maxLevelSum(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>(List.of(root));
+        int maxSum = Integer.MIN_VALUE;
+        int level = 0;
+        int currLevel = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            int currSum = 0;
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                currSum += node.val;
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+            currLevel++;
+            if (currSum > maxSum) {
+                maxSum = currSum;
+                level = currLevel;
+            }
+        }
+        return level;
+    }
+
+    //recursive
+    public int maxLevelSum2(TreeNode root) {
+        if(root == null) return 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        findSum(root, map, 0);
+        int maxSum = Integer.MIN_VALUE;
+        int level = 0;
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            if(entry.getValue() > maxSum){
+                maxSum = entry.getValue();
+                level = entry.getKey();
+            }
+        }
+        return level+1;
+    }
+    private void findSum(TreeNode root,  HashMap<Integer, Integer>map, Integer level){
+        if(root == null) return;
+        int prev = map.getOrDefault(level, 0);
+        map.put(level, prev + root.val);
+        findSum(root.left, map, level + 1);
+        findSum(root.right, map, level + 1);
     }
 }
