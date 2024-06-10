@@ -1554,15 +1554,15 @@ public class ArrayLeetcode {
 
     //287 medium ->  Find the Duplicate Number
     //must solve it without modifying the array nums and uses only constant extra space.
-    public int findDuplicate(int[] nums) {
-        int slow = nums[0];
-        int fast = nums[0];
+    public int findDuplicate(int[] nums) { //This solution uses the Floyd's Cycle Finding Algorithm.
+        int slow = 0;
+        int fast = 0;
         do {
           slow = nums[slow];
           fast = nums[nums[fast]];
         } while (slow != fast);
 
-        fast = nums[0];
+        fast = 0;
         while (slow != fast) {
           slow = nums[slow];
           fast = nums[fast];
