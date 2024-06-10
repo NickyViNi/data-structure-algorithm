@@ -1553,7 +1553,23 @@ public class ArrayLeetcode {
     }
 
     //287 medium ->  Find the Duplicate Number
+    //must solve it without modifying the array nums and uses only constant extra space.
     public int findDuplicate(int[] nums) {
+        int slow = nums[0];
+        int fast = nums[0];
+        do {
+          slow = nums[slow];
+          fast = nums[nums[fast]];
+        } while (slow != fast);
+
+        fast = nums[0];
+        while (slow != fast) {
+          slow = nums[slow];
+          fast = nums[fast];
+        }
+        return slow;
+    }
+    public int findDuplicate2(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
             while (nums[i] != i + 1) {
                 int idx = nums[i] - 1;
@@ -1562,6 +1578,15 @@ public class ArrayLeetcode {
                 nums[idx] = nums[i];
                 nums[i] = temp;
             }
+        }
+        return -1;
+    }
+
+    public int findDuplicate3(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            int idx = Math.abs(nums[i]);
+            if (nums[idx] < 0) return idx;
+            nums[idx] = -nums[idx];
         }
         return -1;
     }
