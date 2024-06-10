@@ -595,4 +595,31 @@ public class LLleetcode {
         }
         return max;
     }
+
+    // 142 medium -> linked list cycle II
+    //Floyd's Cycle Finding Algorithm
+    /* why they will meet at the cycle begins?
+     * Explain: Fast's velocity is twice as fast as Slow, so distance of Fast = 2 * distance of Slow.
+       let the distance before the cycle = m, the distance of the cycle = n, in the first while loop, assume Fast and Slow
+       will meet at point z, the distance before the z in the cycle = y, after the z = x, so x + y = n.
+       because S(fast) = m + kn + y, k is how many n, S(slow) = m + y,
+       m + kn + y = 2 * (m + y) ==> m = (k - 1)n + x, so when we move pointer fast from the head step by step and move
+       the slow form z, they will be reached at the begin of the cycle
+     */
+    public ListNode detectCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) break;
+        }
+        if (fast == null || fast.next == null) return null;
+        fast = head;
+        while (fast != slow) { // why they will meet at the cycle begins?
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
 }
