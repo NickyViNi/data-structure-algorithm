@@ -1551,4 +1551,18 @@ public class ArrayLeetcode {
         }
         return true;
     }
+
+    //287 medium ->  Find the Duplicate Number
+    public int findDuplicate(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            while (nums[i] != i + 1) {
+                int idx = nums[i] - 1;
+                if (nums[i] == nums[idx]) return nums[i];
+                int temp = nums[idx];
+                nums[idx] = nums[i];
+                nums[i] = temp;
+            }
+        }
+        return -1;
+    }
 }
