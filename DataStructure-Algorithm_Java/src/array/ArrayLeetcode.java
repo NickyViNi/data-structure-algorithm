@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -1589,5 +1590,30 @@ public class ArrayLeetcode {
             nums[idx] = -nums[idx];
         }
         return -1;
+    }
+
+    //374 easy -> Guess Number Higher or Lower
+    public int guessNumber(int n) {
+        int low = 1, high = n;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int result = guess(mid);
+            if (result == -1) {
+                high = mid - 1;
+            } else if (result == 1) {
+                low = mid + 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
+    }
+    public int guess(int num) {
+        int pick = 9;
+        // Random ran = new Random();
+        // int pick = ran.nextInt(1000);
+        if (num > pick) return -1;
+        if (num < pick) return 1;
+        return 0;
     }
 }
