@@ -69,3 +69,24 @@ public class HeapLeetcode {
         return pairs;
     }
 }
+
+//2336 medium -> Smallest Number in Infinite Set
+class SmallestInfiniteSet {
+    PriorityQueue<Integer> smallestSet;
+    public SmallestInfiniteSet() {
+        this.smallestSet = new PriorityQueue<>();
+        for (int i = 1; i <= 1000; i++) {
+            smallestSet.add(i);
+        }
+    }
+
+    public int popSmallest() {
+        return smallestSet.poll();
+    }
+
+    public void addBack(int num) {
+        if (!smallestSet.contains(num)) {
+            smallestSet.add(num);
+        }
+    }
+}
