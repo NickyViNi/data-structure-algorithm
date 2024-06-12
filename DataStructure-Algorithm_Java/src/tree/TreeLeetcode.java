@@ -554,4 +554,28 @@ public class TreeLeetcode {
         findSum(root.left, map, level + 1);
         findSum(root.right, map, level + 1);
     }
+
+    //113 medium -> path sum II
+    List<List<Integer>> paths;
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        this.paths = new ArrayList<>();
+        pathSumHelper(root, targetSum, new ArrayList<>());
+        return paths;
+    }
+    private void pathSumHelper(TreeNode root, int targetSum, List<Integer> road) {
+        if (root == null) return;
+        if (root.left == null && root.right == null) {
+            if (root.val == targetSum) {
+                road.add(root.val);
+                paths.add(new ArrayList<>(road));
+                road.remove(road.size() - 1);
+            }
+            return;
+        }
+
+        road.add(root.val);
+        pathSumHelper(root.left, targetSum - root.val, road);
+        pathSumHelper(root.right, targetSum - root.val, road);
+        road.remove(road.size() - 1);
+    }
 }
