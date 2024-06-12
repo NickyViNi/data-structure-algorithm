@@ -578,4 +578,13 @@ public class TreeLeetcode {
         pathSumHelper(root.right, targetSum - root.val, road);
         road.remove(road.size() - 1);
     }
+    //437 medium -> path sum III, T: O(n^2), S: O(h)
+    public int pathSumIII(TreeNode root, int targetSum) {
+        if (root == null) return 0;
+        return (int)pathSumHelperIII(root, (long)targetSum) + pathSumIII(root.left, targetSum) + pathSumIII(root.right, targetSum);
+    }
+    private long pathSumHelperIII(TreeNode node, long sum) {
+        if (node == null) return 0;
+        return (node.val == sum ? 1 : 0) + pathSumHelperIII(node.left, sum - node.val) + pathSumHelperIII(node.right, sum - node.val);
+    }
 }
