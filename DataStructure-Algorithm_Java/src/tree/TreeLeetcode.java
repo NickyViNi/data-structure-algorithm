@@ -624,4 +624,45 @@ public class TreeLeetcode {
             dfsHelper(node.right, false, 1);
         }
     }
+    //non-recursion
+    public int longestZigZag2(TreeNode root) {
+        if (root == null) return 0;
+
+        Stack<NodeState> stack = new Stack<>();
+        stack.push(new NodeState(root, true, 0));
+        stack.push(new NodeState(root, false, 0));
+
+        while (!stack.isEmpty()) {
+            NodeState currentState = stack.pop();
+            TreeNode currentNode = currentState.node;
+            boolean rightDirection = currentState.rightDirection;
+            int steps = currentState.steps;
+
+            if (currentNode == null) continue;
+
+            longestPath = Math.max(longestPath, steps);
+
+            if (rightDirection) {
+                stack.push(new NodeState(currentNode.left, true, 1));
+                stack.push(new NodeState(currentNode.right, false, steps + 1));
+            } else {
+                stack.push(new NodeState(currentNode.left, true, steps + 1));
+                stack.push(new NodeState(currentNode.right, false, 1));
+            }
+        }
+
+        return longestPath;
+    }
+
+    class NodeState {
+        TreeNode node;
+        boolean rightDirection;
+        int steps;
+
+        NodeState(TreeNode node, boolean rightDirection, int steps) {
+            this.node = node;
+            this.rightDirection = rightDirection;
+            this.steps = steps;
+        }
+    }
 }
