@@ -605,4 +605,64 @@ public class TreeLeetcode {
         goodHelper(root.left, max);
         goodHelper(root.right, max);
     }
+
+    //1372 medium -> Longest ZigZag Path in a Binary Tree
+    int longestPath = 0;
+    public int longestZigZag(TreeNode root) {
+        dfsHelper(root, true, 0);
+        dfsHelper(root, false, 0);
+        return longestPath;
+    }
+    private void dfsHelper(TreeNode node, boolean rightDirection, int steps) {
+        if (node == null) return;
+        longestPath = Math.max(longestPath, steps);
+        if (rightDirection) {
+            dfsHelper(node.left, true, 1);
+            dfsHelper(node.right, false, steps + 1);
+        } else {
+            dfsHelper(node.left, true, steps + 1);
+            dfsHelper(node.right, false, 1);
+        }
+    }
+    //non-recursion
+    public int longestZigZag2(TreeNode root) {
+        if (root == null) return 0;
+
+        Stack<NodeState> stack = new Stack<>();
+        stack.push(new NodeState(root, true, 0));
+        stack.push(new NodeState(root, false, 0));
+
+        while (!stack.isEmpty()) {
+            NodeState currentState = stack.pop();
+            TreeNode currentNode = currentState.node;
+            boolean rightDirection = currentState.rightDirection;
+            int steps = currentState.steps;
+
+            if (currentNode == null) continue;
+
+            longestPath = Math.max(longestPath, steps);
+
+            if (rightDirection) {
+                stack.push(new NodeState(currentNode.left, true, 1));
+                stack.push(new NodeState(currentNode.right, false, steps + 1));
+            } else {
+                stack.push(new NodeState(currentNode.left, true, steps + 1));
+                stack.push(new NodeState(currentNode.right, false, 1));
+            }
+        }
+
+        return longestPath;
+    }
+
+    class NodeState {
+        TreeNode node;
+        boolean rightDirection;
+        int steps;
+
+        NodeState(TreeNode node, boolean rightDirection, int steps) {
+            this.node = node;
+            this.rightDirection = rightDirection;
+            this.steps = steps;
+        }
+    }
 }
