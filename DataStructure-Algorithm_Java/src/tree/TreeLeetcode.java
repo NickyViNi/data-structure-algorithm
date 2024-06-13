@@ -605,4 +605,23 @@ public class TreeLeetcode {
         goodHelper(root.left, max);
         goodHelper(root.right, max);
     }
+
+    //1372 medium -> Longest ZigZag Path in a Binary Tree
+    int longestPath = 0;
+    public int longestZigZag(TreeNode root) {
+        dfsHelper(root, true, 0);
+        dfsHelper(root, false, 0);
+        return longestPath;
+    }
+    private void dfsHelper(TreeNode node, boolean rightDirection, int steps) {
+        if (node == null) return;
+        longestPath = Math.max(longestPath, steps);
+        if (rightDirection) {
+            dfsHelper(node.left, true, 1);
+            dfsHelper(node.right, false, steps + 1);
+        } else {
+            dfsHelper(node.left, true, steps + 1);
+            dfsHelper(node.right, false, 1);
+        }
+    }
 }
