@@ -608,7 +608,19 @@ public class TreeLeetcode {
 
     //1372 medium -> Longest ZigZag Path in a Binary Tree
     int longestPath = 0;
+    //solution1:
     public int longestZigZag(TreeNode root) {
+        dfsZigZag(root, 0, 0);
+        return longestPath;
+    }
+    private void dfsZigZag(TreeNode node, int l, int r) {
+        if (node == null) return;
+        longestPath = Math.max(longestPath, Math.max(l, r));
+        if (node.left != null) dfsZigZag(node.left, r + 1, 0);
+        if (node.right != null) dfsZigZag(node.right, 0, l + 1);
+    }
+    //solution2:
+    public int longestZigZag2(TreeNode root) {
         dfsHelper(root, true, 0);
         dfsHelper(root, false, 0);
         return longestPath;
@@ -624,8 +636,8 @@ public class TreeLeetcode {
             dfsHelper(node.right, false, 1);
         }
     }
-    //non-recursion
-    public int longestZigZag2(TreeNode root) {
+    //solution3: non-recursion
+    public int longestZigZag3(TreeNode root) {
         if (root == null) return 0;
 
         Stack<NodeState> stack = new Stack<>();
@@ -653,7 +665,6 @@ public class TreeLeetcode {
 
         return longestPath;
     }
-
     class NodeState {
         TreeNode node;
         boolean rightDirection;

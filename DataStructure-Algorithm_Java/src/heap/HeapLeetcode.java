@@ -68,6 +68,31 @@ public class HeapLeetcode {
         }
         return pairs;
     }
+
+    //2542 medium ->  Maximum Subsequence Score
+    public long maxScore(int[] nums1, int[] nums2, int k) { // time: O(nlog(n)), space: O(n)
+        long max = 0, sum = 0;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        int[][] pairs = new int[nums1.length][2];
+        for (int i = 0; i < nums1.length; i++) {
+            pairs[i][0] = nums1[i];
+            pairs[i][1] = nums2[i];
+        }
+        Arrays.sort(pairs, (a, b) -> b[1] - a[1]);
+        for (int i = 0; i < nums1.length; i++) {
+            if (i >= k - 1) {
+                max = Math.max(max, (sum + pairs[i][0]) * pairs[i][1]);
+            }
+            if (i < k - 1) {
+                pq.add(pairs[i][0]);
+                sum += pairs[i][0];
+            } else if (!pq.isEmpty() && pairs[i][0] > pq.peek()) {
+                sum = sum - pq.poll() + pairs[i][0];
+                pq.add(pairs[i][0]);
+            }
+        }
+        return max;
+    }
 }
 
 //2336 medium -> Smallest Number in Infinite Set
