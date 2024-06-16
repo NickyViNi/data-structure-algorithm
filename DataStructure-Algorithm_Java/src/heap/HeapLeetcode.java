@@ -110,7 +110,7 @@ public class HeapLeetcode {
             int rightNum = rightPq.size() > 0 ? rightPq.peek() : Integer.MAX_VALUE;
             if (leftNum <= rightNum) {
                 hireCosts += leftNum;
-                leftPq.poll();
+                leftPq.poll(); // One removal from a priority queue:O(log(candidates))
             } else {
                 hireCosts += rightNum;
                 rightPq.poll();
@@ -134,9 +134,9 @@ class SmallestInfiniteSet {
         return smallestSet.poll();
     }
 
-    public void addBack(int num) {
-        if (!smallestSet.contains(num)) {
-            smallestSet.add(num);
+    public void addBack(int num) { //time: O(n)
+        if (!smallestSet.contains(num)) { // O(n)
+            smallestSet.add(num); // O(logN)
         }
     }
 }
