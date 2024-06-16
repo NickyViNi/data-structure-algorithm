@@ -93,6 +93,31 @@ public class HeapLeetcode {
         }
         return max;
     }
+    //2462 medium -> Total Cost to Hire K Workers
+    public long totalCost(int[] costs, int k, int candidates) { // time: O(nlog(n)), space: O(n)
+        int left = 0, right = costs.length - 1;
+        long hireCosts = 0;
+        PriorityQueue<Integer> leftPq = new PriorityQueue<>();
+        PriorityQueue<Integer> rightPq = new PriorityQueue<>();
+        while (k-- > 0) { //This loop runs k times.
+            while (leftPq.size() < candidates && left <= right) { // This loop run O(candidates*log(candidates))
+                leftPq.add(costs[left++]); // Adding an element to a priority queue (min-heap) has a time complexity of O(log(candidates)).
+            }
+            while (rightPq.size() < candidates && left <= right) {
+                rightPq.add(costs[right--]);
+            }
+            int leftNum = leftPq.size() > 0 ? leftPq.peek() : Integer.MAX_VALUE;
+            int rightNum = rightPq.size() > 0 ? rightPq.peek() : Integer.MAX_VALUE;
+            if (leftNum <= rightNum) {
+                hireCosts += leftNum;
+                leftPq.poll();
+            } else {
+                hireCosts += rightNum;
+                rightPq.poll();
+            }
+        }
+        return hireCosts;
+    }
 }
 
 //2336 medium -> Smallest Number in Infinite Set
