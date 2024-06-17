@@ -189,4 +189,49 @@ public class DynamicProgramming {
         }
         return Math.min(cost[0], cost[1]);
     }
+
+    public int minCostClimbingStairs2(int[] cost) {
+        int first = cost[0], second = cost[1];
+        for (int i = 2; i < cost.length; i++) {
+            int curr = cost[i] + Math.min(first, second);
+            first = second;
+            second = curr;
+        }
+        return Math.min(first, second);
+    }
+
+    public int minCostClimbingStairs3(int[] cost) {
+        int len = cost.length;
+        int[] stairsCost = new int[len];
+        stairsCost[0] = cost[0];
+        stairsCost[1] = cost[1];
+        for (int i = 2; i < cost.length; i++) {
+            stairsCost[i] = cost[i] + Math.min(stairsCost[i - 1], stairsCost[i - 2]);
+        }
+        return Math.min(stairsCost[len - 1], stairsCost[len - 2]);
+    }
+
+    //1137 easy -> N-th Tribonacci Number
+    public int tribonacci(int n) {
+        if (n == 0) return 0;
+        int first = 0, second = 1, third = 1;
+        for (int i = 3; i <= n; i++) {
+            int curr = first + second + third;
+            first = second;
+            second = third;
+            third = curr;
+        }
+        return third;
+    }
+    public int tribonacci2(int n) {
+        if (n == 0) return 0;
+        if (n <= 2) return 1;
+        int[] tribo = new int[n + 1];
+        tribo[1] = 1;
+        tribo[2] = 1;
+        for (int i = 3; i <= n; i++) {
+            tribo[i] = tribo[i - 1] + tribo[i - 2] + tribo[i - 3];
+        }
+        return tribo[n];
+    }
 }
