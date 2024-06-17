@@ -189,4 +189,25 @@ public class DynamicProgramming {
         }
         return Math.min(cost[0], cost[1]);
     }
+
+    public int minCostClimbingStairs2(int[] cost) {
+        int first = cost[0], second = cost[1];
+        for (int i = 2; i < cost.length; i++) {
+            int curr = cost[i] + Math.min(first, second);
+            first = second;
+            second = curr;
+        }
+        return Math.min(first, second);
+    }
+
+    public int minCostClimbingStairs3(int[] cost) {
+        int len = cost.length;
+        int[] stairsCost = new int[len];
+        stairsCost[0] = cost[0];
+        stairsCost[1] = cost[1];
+        for (int i = 2; i < cost.length; i++) {
+            stairsCost[i] = cost[i] + Math.min(stairsCost[i - 1], stairsCost[i - 2]);
+        }
+        return Math.min(stairsCost[len - 1], stairsCost[len - 2]);
+    }
 }
