@@ -1616,4 +1616,24 @@ public class ArrayLeetcode {
         if (num < pick) return 1;
         return 0;
     }
+
+    //Binary Search: 2300 medium -> Successful Pairs of Spells and Potions
+    //time: O(NlogN)
+    public int[] successfulPairs(int[] spells, int[] potions, long success) {
+        int[] pairsCount = new int[spells.length];
+        Arrays.sort(potions);
+        for (int i = 0; i < spells.length; i++) {
+            int start = 0, end = potions.length;
+            while (start < end) {
+                int mid = start + (end - start) / 2;
+                if ( 1l * spells[i] * potions[mid] >= success) {
+                    end = mid;
+                } else {
+                    start = mid + 1;
+                }
+            }
+            pairsCount[i] = potions.length - end;
+        }
+        return pairsCount;
+    }
 }
