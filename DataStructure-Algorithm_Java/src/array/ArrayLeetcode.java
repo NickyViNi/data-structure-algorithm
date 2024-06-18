@@ -1636,4 +1636,19 @@ public class ArrayLeetcode {
         }
         return pairsCount;
     }
+
+    //Binary Search: 875 medium ->  Koko Eating Bananas
+    public int minEatingSpeed(int[] piles, int h) {
+        int start = 1, end = Integer.MAX_VALUE;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            int hours = 0;
+            for (int i = 0; i < piles.length; i++) {
+                hours += ((piles[i] - 1) / mid + 1);
+            }
+            if (hours > h) start = mid + 1;
+            else end = mid;
+        }
+        return end;
+    }
 }
