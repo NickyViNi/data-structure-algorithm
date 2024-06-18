@@ -234,4 +234,41 @@ public class DynamicProgramming {
         }
         return tribo[n];
     }
+
+    //790 medium -> Domino and Tromino Tiling
+    public int numTilings(int n) {
+        long[] dp = new long[n + 3];
+        dp[0] = 1; dp[1] = 2; dp[2] = 5;
+        for (int i = 3; i < n; i++) {
+            dp[i] = (2 * dp[i - 1] + dp[i - 3]) % (1000000000 + 7);
+        }
+        return (int) dp[n - 1];
+    }
+
+    //338 medium -> Counting Bits
+    //solution 1:
+    //for even number, it's unit digit is 0; for odd number, it's unit digit is 1;
+    public int[] countBits(int n) {
+        int[] ans = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            ans[i] = ans[i >> 1] + (i & 1);
+        }
+        return ans;
+    }
+    //solution 2:
+    public int[] countBits3(int n) {
+        int[] ans = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            ans[i] = intToBit(i);
+        }
+        return ans;
+    }
+    private int intToBit(int num) {
+        int numberOfOne = 0;
+        while (num != 0) {
+            numberOfOne += num & 1;
+            num >>= 1;
+        }
+        return numberOfOne;
+    }
 }
