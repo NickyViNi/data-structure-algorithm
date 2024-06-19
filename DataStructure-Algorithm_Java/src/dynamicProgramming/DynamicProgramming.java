@@ -271,4 +271,25 @@ public class DynamicProgramming {
         }
         return numberOfOne;
     }
+
+    //62 medium -> unique paths
+    public int uniquePaths(int m, int n) {
+        int[] paths = new int[m];
+        for (int i = 0; i < m; i++) {
+            paths[i] = 1;
+        }
+        for (int col = 1; col < n; col++) {
+            for (int row = 1; row < m; row++) {
+                paths[row] += paths[row - 1];
+            }
+        }
+        return paths[m - 1];
+    }
+    //m = 4, n = 5, result = 45
+    /* edges only have one path
+    1  1  1  1  1
+    1  2  3  4  5
+    1  3  6  10 15
+    1  4  10 20 35
+    */
 }
