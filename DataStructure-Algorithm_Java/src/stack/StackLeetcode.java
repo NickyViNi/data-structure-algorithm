@@ -149,4 +149,32 @@ public class StackLeetcode {
         }
         return result;
     }
+
+    //901 medium -> Online Stock Span
+    class StockSpanner {
+        class Pair {
+            int price;
+            int span;
+            public Pair(int price, int span) {
+                this.price = price;
+                this.span = span;
+            }
+        }
+
+        Stack<Pair> stack;
+
+        public StockSpanner() {
+            this.stack = new Stack<>();
+        }
+
+        public int next(int price) { //time: O(1) amortize, O(N) worst case;
+            int span = 1;
+            while (!stack.empty() && stack.peek().price <= price) {
+                Pair stock = stack.pop();
+                span += stock.span;
+            }
+            stack.push(new Pair(price, span));
+            return span;
+        }
+    }
 }
