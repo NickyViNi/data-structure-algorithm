@@ -309,4 +309,14 @@ public class DynamicProgramming {
         }
         return dp[len1][len2];
     }
+
+    //714 medium -> Best Time to Buy and Sell Stock with Transaction Fee
+    public int maxProfit(int[] prices, int fee) {
+        int bought = -prices[0], profit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            bought = Math.max(bought, profit - prices[i]);
+            profit = Math.max(profit, prices[i] + bought - fee);
+        }
+        return profit;
+    }
 }
