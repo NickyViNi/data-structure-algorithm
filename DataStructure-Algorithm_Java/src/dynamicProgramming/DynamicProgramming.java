@@ -292,4 +292,21 @@ public class DynamicProgramming {
     1  3  6  10 15
     1  4  10 20 35
     */
+
+    //1143 medium -> Longest Common Subsequence
+    public int longestCommonSubsequence(String text1, String text2) {
+        int len1 = text1.length(), len2 = text2.length();
+        char[] char1 = text1.toCharArray(), char2 = text2.toCharArray();
+        int[][] dp = new int[len1 + 1][len2 + 1];
+        for (int i = 1; i <= len1; i++) {
+            for (int j = 1; j <= len2; j++) {
+                if (char1[i - 1] == char2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1; //diagonal value + 1
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]); // max value in left and above value
+                }
+            }
+        }
+        return dp[len1][len2];
+    }
 }
