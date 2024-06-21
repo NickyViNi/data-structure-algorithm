@@ -74,5 +74,23 @@ public class SearchSuggestion {
         return result;
     }
 
-
+    //Solution3: StringBuilder
+    public List<List<String>> suggestedProducts2(String[] products, String searchWord) {
+        Arrays.sort(products);
+        List<List<String>> result = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < searchWord.length(); i++) {
+            sb.append(searchWord.charAt(i));
+            String typeWord = sb.toString();
+            List<String> suggested = new ArrayList<>();
+            for (int j = 0; j < products.length; j++) {
+                if (products[j].startsWith(typeWord)) {
+                    suggested.add(products[j]);
+                }
+                if (suggested.size() >= 3) break;
+            }
+            result.add(suggested);
+        }
+        return result;
+    }
 }
