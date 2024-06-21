@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Set;
 
 public class MatrixLeetcode {
     //54 medium -> Spiral Matrix
@@ -396,5 +397,19 @@ public class MatrixLeetcode {
     //         step++; //count a set of mutations as one step. This would require keeping track of all possible mutations at each step and incrementing the step count accordingly.
     //     }
     //     return -1;
+    }
+
+    //841 medium -> Keys and Rooms
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        Set<Integer> set = new HashSet<>();
+        visitRoomHelper(rooms, set, 0);
+        return set.size() == rooms.size();
+    }
+    private void visitRoomHelper(List<List<Integer>> rooms, Set<Integer> set, int visit) {
+        if (set.contains(visit)) return;
+        set.add(visit);
+        for (int room : rooms.get(visit)) {
+            visitRoomHelper(rooms, set, room);
+        }
     }
 }
