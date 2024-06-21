@@ -400,7 +400,9 @@ public class MatrixLeetcode {
     }
 
     //841 medium -> Keys and Rooms
-    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+    //Time: O(Nkeys + Nrooms)
+    //way1: recursive
+    public boolean canVisitAllRooms1(List<List<Integer>> rooms) {
         Set<Integer> set = new HashSet<>();
         visitRoomHelper(rooms, set, 0);
         return set.size() == rooms.size();
@@ -408,8 +410,29 @@ public class MatrixLeetcode {
     private void visitRoomHelper(List<List<Integer>> rooms, Set<Integer> set, int visit) {
         if (set.contains(visit)) return;
         set.add(visit);
-        for (int room : rooms.get(visit)) {
-            visitRoomHelper(rooms, set, room);
+        for (int key : rooms.get(visit)) {
+            visitRoomHelper(rooms, set, key);
         }
+    }
+    //way2: iterative
+    public boolean canVisitAllRooms2(List<List<Integer>> rooms) {
+        boolean[] visited = new boolean[rooms.size()];
+        Queue<Integer> queue = new LinkedList<>();
+        visited[0] = true;
+        queue.add(0);
+        while (!queue.isEmpty()) {
+            int room = queue.poll();
+            for (int key : rooms.get(room)) {
+                if (visited[key] == false) {
+                    queue.add(key);
+                    visited[key] = true;
+                }
+            }
+        }
+
+        for (boolean vi : visited) {
+            if (vi == false) return false;
+        }
+        return true;
     }
 }
