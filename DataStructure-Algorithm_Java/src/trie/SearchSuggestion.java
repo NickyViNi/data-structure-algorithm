@@ -49,7 +49,7 @@ public class SearchSuggestion {
         return result;
     }
 
-    //Solution2: Two Pointers
+    //Solution2: Two Pointers, Time Complexity: O(NlogN + M*N)
     public List<List<String>> suggestedProducts1(String[] products, String searchWord) {
         int left = 0, right = products.length - 1;
         List<List<String>> result = new ArrayList<>();
