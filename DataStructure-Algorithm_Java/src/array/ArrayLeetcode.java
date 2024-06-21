@@ -1667,4 +1667,22 @@ public class ArrayLeetcode {
         }
         return number;
     }
+
+    //216 medium -> combination sumIII
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> result = new ArrayList<>();
+        combinationHelper(result, new ArrayList<Integer>(), k, n, 1);
+        return result;
+    }
+    private void combinationHelper(List<List<Integer>> result, List<Integer> list, int len, int sum, int start) {
+        if (len == 0 & sum == 0) {
+            result.add(new ArrayList<Integer>(list));
+            return;
+        }
+        for (int i = start; i <= 9; i++) {
+            list.add(i);
+            combinationHelper(result, list, len - 1, sum - i, i + 1);
+            list.remove(list.size() - 1);
+        }
+    }
 }
