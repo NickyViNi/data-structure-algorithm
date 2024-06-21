@@ -11,6 +11,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class ArrayLeetcode {
@@ -1669,6 +1670,7 @@ public class ArrayLeetcode {
     }
 
     //216 medium -> combination sumIII
+    //recursive - backtracking
     public List<List<Integer>> combinationSum3(int k, int n) {
         List<List<Integer>> result = new ArrayList<>();
         combinationHelper(result, new ArrayList<Integer>(), k, n, 1);
@@ -1684,5 +1686,34 @@ public class ArrayLeetcode {
             combinationHelper(result, list, len - 1, sum - i, i + 1);
             list.remove(list.size() - 1);
         }
+    }
+    //non-recursive
+    public static List<List<Integer>> combinationSum3II(int k, int n) {
+        List<List<Integer>> result = new ArrayList<>();
+        Stack<List<Integer>> stack = new Stack<>();
+        stack.push(new ArrayList<>());
+
+        while (!stack.isEmpty()) {
+            List<Integer> currentCombination = stack.pop();
+            int sum = currentCombination.stream().mapToInt(Integer::intValue).sum();
+            if (currentCombination.size() == k) {
+                if (sum == n) {
+                    result.add(new ArrayList<>(currentCombination));
+                }
+                continue;
+            }
+
+            int start = currentCombination.isEmpty() ? 1 : currentCombination.get(currentCombination.size() - 1) + 1;
+            for (int i = start; i <= 9; i++) {
+                if (sum + i > n) {
+                    break;
+                }
+                List<Integer> newCombination = new ArrayList<>(currentCombination);
+                newCombination.add(i);
+                stack.push(newCombination);
+            }
+        }
+
+        return result;
     }
 }
