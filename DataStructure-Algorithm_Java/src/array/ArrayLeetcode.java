@@ -1681,6 +1681,7 @@ public class ArrayLeetcode {
             result.add(new ArrayList<Integer>(list));
             return;
         }
+        if (len < 0 || sum < 0) return;
         for (int i = start; i <= 9; i++) {
             list.add(i);
             combinationHelper(result, list, len - 1, sum - i, i + 1);
