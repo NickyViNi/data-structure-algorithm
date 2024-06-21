@@ -7,6 +7,7 @@ import java.util.List;
 
 public class SearchSuggestion {
     //1268 medium -> Search Suggestions System
+    //solution1
     class TrieNode {
         TrieNode[] children;
         List<String> words;
@@ -47,4 +48,31 @@ public class SearchSuggestion {
 
         return result;
     }
+
+    //Solution2: Two Pointers
+    public List<List<String>> suggestedProducts1(String[] products, String searchWord) {
+        int left = 0, right = products.length - 1;
+        List<List<String>> result = new ArrayList<>();
+        Arrays.sort(products);
+        for (int i = 0; i < searchWord.length(); i++) {
+            while (left <= right && (i >= products[left].length() ||
+            products[left].charAt(i) != searchWord.charAt(i))) {
+                left++;
+            }
+
+            while (left <= right && (i >= products[right].length() ||
+            products[right].charAt(i) != searchWord.charAt(i))) {
+                right--;
+            }
+
+            List<String> suggested = new ArrayList<>();
+            for (int j = left; j <= Math.min(right, left + 2); j++) {
+                suggested.add(products[j]);
+            }
+            result.add(suggested);
+        }
+        return result;
+    }
+
+
 }
