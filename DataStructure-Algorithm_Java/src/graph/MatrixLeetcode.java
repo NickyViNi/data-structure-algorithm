@@ -435,4 +435,27 @@ public class MatrixLeetcode {
         }
         return true;
     }
+
+    //547 medium -> number of provinces
+    //dfs
+    public int findCircleNum1(int[][] isConnected) {
+        int size = isConnected.length;
+        int provinces = 0;
+        boolean[] visited = new boolean[size];
+        for (int i = 0; i < size; i++) {
+            if (!visited[i]) {
+                dfsProvinces(isConnected, visited, i);
+                provinces++;
+            }
+        }
+        return provinces;
+    }
+    private void dfsProvinces(int[][] isConnected, boolean[] visited, int row) {
+        for (int j = 0; j < isConnected.length; j++) {
+            if (isConnected[row][j] == 1 && !visited[j]) {
+                visited[j] = true;
+                dfsProvinces(isConnected, visited, j);
+            }
+        }
+    }
 }
