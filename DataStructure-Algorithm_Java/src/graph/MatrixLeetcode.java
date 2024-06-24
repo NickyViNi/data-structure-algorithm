@@ -1,5 +1,6 @@
 package graph;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -481,5 +482,54 @@ public class MatrixLeetcode {
             }
         }
         return provinces;
+    }
+
+    //994 medium -> rotting oranges
+    public int orangesRotting(int[][] grid) {
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int freshOranges = 0;
+        int minutes = 0;
+        List<int[]> rottenOranges = new ArrayList<>();
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] == 2) rottenOranges.add(new int[]{i, j});
+                if (grid[i][j] == 1) freshOranges++;
+            }
+        }
+
+        if (freshOranges == 0) return 0;
+
+        while (rottenOranges.size() > 0) {
+            List<int[]> newRotten = new ArrayList<>();
+            for (int[] rotten : rottenOranges) {
+                int i = rotten[0], j = rotten[1];
+                if (i - 1 >= 0 && grid[i - 1][j] == 1) {
+                    grid[i - 1][j] = 2;
+                    newRotten.add(new int[]{i - 1, j});
+                    freshOranges--;
+                }
+                if (i + 1 < rows && grid[i + 1][j] == 1) {
+                    grid[i + 1][j] = 2;
+                    newRotten.add(new int[]{i + 1, j});
+                    freshOranges--;
+                }
+                if (j - 1 >= 0 && grid[i][j - 1] == 1) {
+                    grid[i][j - 1] = 2;
+                    newRotten.add(new int[]{i, j - 1});
+                    freshOranges--;
+                }
+                if (j + 1 < cols && grid[i][j + 1] == 1) {
+                    grid[i][j + 1] = 2;
+                    newRotten.add(new int[]{i, j + 1});
+                    freshOranges--;
+                }
+            }
+            minutes++;
+            rottenOranges = newRotten;
+        }
+
+        return freshOranges == 0 ? minutes - 1 : -1;
     }
 }
