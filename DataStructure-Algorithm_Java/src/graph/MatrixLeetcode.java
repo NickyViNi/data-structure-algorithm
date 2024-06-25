@@ -532,4 +532,34 @@ public class MatrixLeetcode {
 
         return freshOranges == 0 ? minutes - 1 : -1;
     }
+
+    //1926 medium -> Nearest Exit from Entrance in Maze
+    //BFS
+    public int nearestExit(char[][] maze, int[] entrance) {
+        int rows = maze.length, cols = maze[0].length;
+        int steps = 0;
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(entrance);
+        maze[entrance[0]][entrance[1]] = '+';
+
+        int[][] directions = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+        while (!queue.isEmpty()) {
+            steps++;
+            int len = queue.size();
+            for (int x = 0; x < len; x++) {
+                int[] cell = queue.poll();
+                for (int[] dir : directions) {
+                    int i = cell[0] + dir[0];
+                    int j = cell[1] + dir[1];
+                    if (i < 0 || i >= rows || j < 0 || j >= cols || maze[i][j] == '+') continue;
+                    if (i == 0 || i == rows - 1 || j == 0 || j == cols - 1) return steps;
+                    maze[i][j] = '+';
+                    queue.offer(new int[]{i, j});
+                }
+            }
+        }
+
+        return -1;
+    }
 }
