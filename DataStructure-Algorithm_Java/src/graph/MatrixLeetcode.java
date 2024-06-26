@@ -1,5 +1,6 @@
 package graph;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -562,4 +563,58 @@ public class MatrixLeetcode {
 
         return -1;
     }
+
+    //1466 medium -> Reorder Routes to Make All Paths Lead to the City Zero
+    //dfs
+    public int minReorder1(int n, int[][] connections) {
+        List<List<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            list.add(new ArrayList<>());
+        }
+        for (int[] c : connections) {
+            list.get(c[0]).add(c[1]);
+            list.get(c[1]).add(-c[0]);
+        }
+        return reorderDfs(list, new boolean[n], 0);
+    }
+    private int reorderDfs(List<List<Integer>> list, boolean[] visited, int start) {
+        int reorder = 0;
+        visited[start] = true;
+        for (int li : list.get(start)) {
+            if (!visited[Math.abs(li)]) {
+                reorder += reorderDfs(list, visited, Math.abs(li)) + (li > 0 ? 1 : 0);
+            }
+        }
+        return reorder;
+    }
+    //bfs
+    public int minReorder(int n, int[][] connections) {
+        List<List<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < n; i++) list.add(new ArrayList<>());
+        for (int[] c : connections) {
+            list.get(c[0]).add(c[1]);
+            list.get(c[1]).add(-c[0]);
+        }
+
+        Queue<Integer> queue = new ArrayDeque<>();
+        boolean[] visited = new boolean[n];
+        queue.offer(0);
+        visited[0] = true;
+        int reorder = 0;
+        while (!queue.isEmpty()) {
+            // int size = queue.size();
+            // for (int i = 0; i < size; i++) {
+                int city = queue.poll();
+                for (int nei : list.get(Math.abs(city))) {
+                    if (!visited[Math.abs(nei)]) {
+                        queue.offer(nei);
+                        visited[Math.abs(nei)] = true;
+                        if (nei > 0) reorder++;
+                    }
+                }
+            // }
+        }
+        return reorder;
+    }
+
 }
