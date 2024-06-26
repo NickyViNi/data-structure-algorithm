@@ -2,6 +2,7 @@ package graph;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -615,6 +616,60 @@ public class MatrixLeetcode {
             // }
         }
         return reorder;
+    }
+
+    //399 medium -> Evaluate Division
+    class Node{
+        String str;
+        double val;
+        Node(String str, double val){
+            this.str = str;
+            this.val = val;
+        }
+    }
+    HashMap<String, List<Node>> map = new HashMap<>();
+    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        // a : [b, 2]
+        // b : [a, 0.5], [c, 3]
+        // c : [b, 1/3]
+        for(int i = 0; i < equations.size(); i++){
+            List<String> equation = equations.get(i);
+            if(!map.containsKey(equation.get(0))){
+                map.put(equation.get(0), new ArrayList<>());
+            }
+            map.get(equation.get(0)).add(new Node(equation.get(1), values[i]));
+            if(!map.containsKey(equation.get(1))){
+                map.put(equation.get(1), new ArrayList<>());
+            }
+            map.get(equation.get(1)).add(new Node(equation.get(0), 1 / values[i]));
+        }
+        double[] result = new double[queries.size()];
+        for(int i = 0; i < result.length; i++){
+            String str1 = queries.get(i).get(0);
+            String str2 = queries.get(i).get(1);
+            result[i] = dfs(str1, str2, 1, new HashSet<>());
+        }
+        return result;
+    }
+    private double dfs(String start, String end, double value, HashSet<String> visited){
+        if(!map.containsKey(start)){
+            return -1;
+        }
+        if(visited.contains(start)){
+            return -1;
+        }
+        if(start.equals(end)){
+            return value;
+        }
+        visited.add(start);
+        for(Node next : map.get(start)){
+            double sub = dfs(next.str, end, value * next.val, visited);
+            if(sub != -1.0){
+                return sub;
+            }
+        }
+        visited.remove(start);
+        return -1;
     }
 
 }
