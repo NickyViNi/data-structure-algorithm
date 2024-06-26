@@ -43,6 +43,18 @@ public class DynamicProgramming {
         return dp[dp.length - 1];
     }
     // sums: [2,7,9,3,1], dp: [2,7,11,11,12]
+    public int rob2(int[] nums) {
+        if (nums.length == 1) return nums[0];
+        int amount1 = nums[0];
+        int amount2 = Math.max(nums[0], nums[1]);
+        int result = amount2;
+        for (int i = 2; i < nums.length; i++) {
+            result = Math.max(amount1 + nums[i], amount2);
+            amount1 = amount2;
+            amount2 = result;
+        }
+        return result;
+    }
 
     //139 medium -> word break
     public boolean wordBreak(String s, List<String> wordDict) {
